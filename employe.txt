@@ -1,0 +1,1059 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| rgukt              |
+| sakila             |
+| sys                |
++--------------------+
+11 rows in set (0.20 sec)
+
+mysql> use rgukt
+Database changed
+mysql> use rgukt
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_rgukt |
++-----------------+
+| parents         |
+| students        |
++-----------------+
+2 rows in set (0.21 sec)
+
+mysql> create table employee(
+    -> ssn varchar(100) not null,
+    -> Lastname char(100) not null,
+    -> Firstname char(100) not null,
+    -> DOB varchar(10) not null,
+    -> gender char(10) not null,
+    -> salary varchar(5) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7
+mysql> create table employee(
+    -> ssn varchar(100) not null,
+    -> Lastname char(100) not null,
+    -> Firstname char(100) not null,
+    -> DOB varchar(10) not null,
+    -> gender char(10) not null,
+    -> salary varchar(5) ,
+    -> Address varchar(100) not null,
+    -> primary key(ssn)
+    -> );
+Query OK, 0 rows affected (1.99 sec)
+
+mysql> insert into employee values('S160001','Prasad','Addanki','31-01-1999','M','20K','krishna');
+Query OK, 1 row affected (0.27 sec)
+
+mysql> insert into employee values('S160002','Ramakrishna','Addanki','18-03-1995','M','25K','krishna');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> desc employee;;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| ssn       | varchar(100) | NO   | PRI | NULL    |       |
+| Lastname  | char(100)    | NO   |     | NULL    |       |
+| Firstname | char(100)    | NO   |     | NULL    |       |
+| DOB       | varchar(10)  | NO   |     | NULL    |       |
+| gender    | char(10)     | NO   |     | NULL    |       |
+| salary    | varchar(5)   | YES  |     | NULL    |       |
+| Address   | varchar(100) | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+ERROR: 
+No query specified
+
+mysql> select *from employee;
++---------+-------------+-----------+------------+--------+--------+---------+
+| ssn     | Lastname    | Firstname | DOB        | gender | salary | Address |
++---------+-------------+-----------+------------+--------+--------+---------+
+| S160001 | Prasad      | Addanki   | 31-01-1999 | M      | 20K    | krishna |
+| S160002 | Ramakrishna | Addanki   | 18-03-1995 | M      | 25K    | krishna |
++---------+-------------+-----------+------------+--------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> insert into employee values('S160003','Jagadeesh','Addanki','24-06-1995','M','21K','westgodavari');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into employee values('S160004','MohanKrishna','Addanki','27-07-1993','M','21K','eastgodavari');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into employee values('S160005','Mounika','Addanki','19-08-2001','F','15K','vizag');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values('S160006','Kalyani','Addanki','26-08-2004','F','27K','Hyd');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values('S160007','phanikumar','Jalla','25-05-1994','M','27K','Hyd');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values('S160008','PavanKalyan','Jalla','31-05-1994','M','28K','Hyd');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into employee values('S160009','Arjun','pILLI','28-08-1999','M','28K','SKLM');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values('S160010,'Alice','cullen','2-08-1900','F','38K','Mumbai');
+    '> insert into employee values('S160010',Alice','cullen','2-08-1900','F','38K','Mumbai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Alice','cullen','2-08-1900','F','38K','Mumbai');
+insert into employee values('S1' at line 1
+mysql> insert into employee values('S160010',Alice','cullen','2-08-1900','F','38K','Mumbai');
+    '> insert into employee values('S160010','Alice','cullen','2-08-1900','F','38K','Mumbai');
+    '> insert into employee values('S160010','Alice','cullen','2-08-1900','F','38K','Mumbai');
+    '> 
+    '> insert into employee values('S160010','Alice','cullen','2-08-1900','F','38K','Mumbai');
+    '> select * from employee;
+    '> select * from employee;
+    '> use rgukt
+    '> 
+    '> Terminal close -- exit!
+mysql> use rgukt
+Database changed
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Hyd          |
+| S160009 | Arjun        | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
++---------+--------------+-----------+------------+--------+--------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> update employee set Lastname='Lokesh' where Firstname='PILLI';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Hyd          |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
++---------+--------------+-----------+------------+--------+--------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> insert into employee values('S160010','Alice','cullen','02_09_1999','F','30K','Mumbai');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values('S160011','Bella','cullen','02_11_1999','F','30K','Assam');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Hyd          |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |
++---------+--------------+-----------+------------+--------+--------+--------------+
+11 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> use rgukt;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_rgukt |
++-----------------+
+| employee        |
+| parents         |
+| students        |
++-----------------+
+3 rows in set (0.05 sec)
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Hyd          |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |
++---------+--------------+-----------+------------+--------+--------+--------------+
+11 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> use rgukt;
+Database changed
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Hyd          |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |
++---------+--------------+-----------+------------+--------+--------+--------------+
+11 rows in set (0.04 sec)
+
+mysql> update employee set Address='Jaipur' where ssn='S160008';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      |
++---------+--------------+-----------+------------+--------+--------+--------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |
++---------+--------------+-----------+------------+--------+--------+--------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table employee add Age int ;
+Query OK, 0 rows affected (1.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  |
++---------+--------------+-----------+------------+--------+--------+--------------+------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      | NULL |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      | NULL |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari | NULL |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari | NULL |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        | NULL |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          | NULL |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          | NULL |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       | NULL |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         | NULL |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       | NULL |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        | NULL |
++---------+--------------+-----------+------------+--------+--------+--------------+------+
+11 rows in set (0.00 sec)
+
+mysql> update employee set Age=21 where ssn='S160001';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=26 where ssn='S160001';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=21 where ssn='S160001';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=26 where ssn='S160002';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=26 where ssn='S160003';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=24 where ssn='S160004';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=18 where ssn='S160005';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=15 where ssn='S160006';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=25 where ssn='S160007';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=25 where ssn='S160008';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=21 where ssn='S160009';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=21 where ssn='S160010';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Age=21 where ssn='S160011';
+Query OK, 1 row affected (0.23 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> alter table employee add Department char(10);
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | NULL       |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | NULL       |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | NULL       |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | NULL       |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | NULL       |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | NULL       |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | NULL       |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | NULL       |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | NULL       |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | NULL       |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | NULL       |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+11 rows in set (0.00 sec)
+
+mysql> update employee set Department='civil' where ssn='S160001';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='geology' where ssn='S160002';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='MECH' where ssn='S160003';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='ECE' where ssn='S160004';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='ECE' where ssn='S160005';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='CSE' where ssn='S160006';
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='mech' where ssn='S160007';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='CIVIL' where ssn='S160008';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='GEOLOGGY' where ssn='S160009';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='CSE' where ssn='S160010';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Department='CSE' where ssn='S160011';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table employee MobileNo int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MobileNo int' at line 1
+mysql> alter table employee MobileNo int(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MobileNo int(10)' at line 1
+mysql> alter table employee add  MobileNo int(10);
+Query OK, 0 rows affected (0.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee set MobileNo=9177953203 where ssn='S160001';
+ERROR 1264 (22003): Out of range value for column 'MobileNo' at row 1
+mysql> alter table employee drop MobileNo;
+Query OK, 0 rows affected (2.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add  MobileNo varchar(10);
+Query OK, 0 rows affected (0.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee set MobileNo='9177953203' where ssn='S160001';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9175643233' where ssn='S160002';
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9983243763' where ssn='S160003';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='6308278365' where ssn='S160004';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='7997280330' where ssn='S160005';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='7702725655' where ssn='S160006';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9676615299' where ssn='S160007';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9177594851' where ssn='S160008';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9177594851' where ssn='S160009';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='9676615299' where ssn='S160010';
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set MobileNo='7997280330' where ssn='S160011';
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from  employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table employee add Designation varchar(100);
+Query OK, 0 rows affected (0.43 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee set Designation='Manager' where ssn='S160001';
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='TeamLeader' where ssn='S160002';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='TeamLeader' where ssn='S160003';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Trainer' where ssn='S160004';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Intern' where ssn='S160005';
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='MD' where ssn='S160006';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Manager' where ssn='S160007';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Trainer' where ssn='S160008';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Intern' where ssn='S160009';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Director' where ssn='S160010';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set Designation='Director' where ssn='S160011';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select Lastname,Firstname,Address from employee where Department='CSE';
++----------+-----------+---------+
+| Lastname | Firstname | Address |
++----------+-----------+---------+
+| Kalyani  | Addanki   | Hyd     |
+| Alice    | cullen    | Mumbai  |
+| Bella    | cullen    | Assam   |
++----------+-----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select Firstname,Address,Lastname from employee where Department='CSE';
++-----------+---------+----------+
+| Firstname | Address | Lastname |
++-----------+---------+----------+
+| Addanki   | Hyd     | Kalyani  |
+| cullen    | Mumbai  | Alice    |
+| cullen    | Assam   | Bella    |
++-----------+---------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where Department='CSE';
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160006 | Kalyani  | Addanki   | 26-08-2004 | F      | 27K    | Hyd     |   15 | CSE        | 7702725655 | MD          |
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select Firstname,Lastname,ssn,salary,Department from employee;
++-----------+--------------+---------+--------+------------+
+| Firstname | Lastname     | ssn     | salary | Department |
++-----------+--------------+---------+--------+------------+
+| Addanki   | Prasad       | S160001 | 20K    | civil      |
+| Addanki   | Ramakrishna  | S160002 | 25K    | geology    |
+| Addanki   | Jagadeesh    | S160003 | 21K    | MECH       |
+| Addanki   | MohanKrishna | S160004 | 21K    | ECE        |
+| Addanki   | Mounika      | S160005 | 15K    | ECE        |
+| Addanki   | Kalyani      | S160006 | 27K    | CSE        |
+| Jalla     | phanikumar   | S160007 | 27K    | mech       |
+| Jalla     | PavanKalyan  | S160008 | 28K    | CIVIL      |
+| pILLI     | Lokesh       | S160009 | 28K    | GEOLOGGY   |
+| cullen    | Alice        | S160010 | 30K    | CSE        |
+| cullen    | Bella        | S160011 | 30K    | CSE        |
++-----------+--------------+---------+--------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select salary from employee;
++--------+
+| salary |
++--------+
+| 20K    |
+| 25K    |
+| 21K    |
+| 21K    |
+| 15K    |
+| 27K    |
+| 27K    |
+| 28K    |
+| 28K    |
+| 30K    |
+| 30K    |
++--------+
+11 rows in set (0.00 sec)
+
+mysql> select distinct salary from employee;
++--------+
+| salary |
++--------+
+| 20K    |
+| 25K    |
+| 21K    |
+| 15K    |
+| 27K    |
+| 28K    |
+| 30K    |
++--------+
+7 rows in set (0.06 sec)
+
+mysql> select distinct salary,distinct Department from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'distinct Department from employee' at line 1
+mysql> select distinct salary, Department from employee;
++--------+------------+
+| salary | Department |
++--------+------------+
+| 20K    | civil      |
+| 25K    | geology    |
+| 21K    | MECH       |
+| 21K    | ECE        |
+| 15K    | ECE        |
+| 27K    | CSE        |
+| 27K    | mech       |
+| 28K    | CIVIL      |
+| 28K    | GEOLOGGY   |
+| 30K    | CSE        |
++--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee where Lastname like "A%";
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+1 row in set (0.03 sec)
+
+mysql> select * from employee where Lastname like "M%";
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where Firstname like "M%";
+Empty set (0.00 sec)
+
+mysql> select * from employee where Firstname like "A%";
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where Firstname like "c%";
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> select * from employee where Firstname like "C%";
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select count(ssn) from employee;
++------------+
+| count(ssn) |
++------------+
+|         11 |
++------------+
+1 row in set (0.09 sec)
+
+mysql> select count(DOB) from employee;
++------------+
+| count(DOB) |
++------------+
+|         11 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(ssn) as no_of_employee from employee;
++----------------+
+| no_of_employee |
++----------------+
+|             11 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+| 30K         |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select max(Salary) from employee;
++-------------+
+| max(Salary) |
++-------------+
+| 30K         |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(Salary) from employee;
++-------------+
+| min(Salary) |
++-------------+
+| 15K         |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary=(select max(salary) from employee);
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where salary=(select min(salary) from employee);
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160005 | Mounika  | Addanki   | 19-08-2001 | F      | 15K    | vizag   |   18 | ECE        | 7997280330 | Intern      |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary between 20k and 30k;
+ERROR 1054 (42S22): Unknown column '20k' in 'where clause'
+mysql> select * from employee where salary between '20k' and '30k';
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee where salary between '10k' and '20k';
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160001 | Prasad   | Addanki   | 31-01-1999 | M      | 20K    | krishna |   21 | civil      | 9177953203 | Manager     |
+| S160005 | Mounika  | Addanki   | 19-08-2001 | F      | 15K    | vizag   |   18 | ECE        | 7997280330 | Intern      |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where salary between '1k' and '10k';
+Empty set (0.00 sec)
+
+mysql> select * from employee where salary between '1k' and '20k';
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160001 | Prasad   | Addanki   | 31-01-1999 | M      | 20K    | krishna |   21 | civil      | 9177953203 | Manager     |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employee where <>'cse';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '<>'cse'' at line 1
+mysql> select * from employee where <>"cse";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '<>"cse"' at line 1
+mysql> select * from employee where Department <>"cse";
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee where Department <>"cse","ECE";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',"ECE"' at line 1
+mysql> 
+mysql> select * from  employee order by Lastname desc;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from  employee order by Lastname asa;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'asa' at line 1
+mysql> select * from  employee order by Lastname asc;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from  employee order by Lastname asc limit 5;
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname  | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160010 | Alice     | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella     | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
+| S160003 | Jagadeesh | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160006 | Kalyani   | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160009 | Lokesh    | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from  employee order by Lastname asc limit 5;
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname  | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160010 | Alice     | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella     | cullen    | 02_11_1999 | F      | 30K    | Assam        |   21 | CSE        | 7997280330 | Director    |
+| S160003 | Jagadeesh | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160006 | Kalyani   | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160009 | Lokesh    | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
++---------+-----------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from  employee where department='cse' and age>20;
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from  employee where department='cse';
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| ssn     | Lastname | Firstname | DOB        | gender | salary | Address | Age  | Department | MobileNo   | Designation |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+| S160006 | Kalyani  | Addanki   | 26-08-2004 | F      | 27K    | Hyd     |   15 | CSE        | 7702725655 | MD          |
+| S160010 | Alice    | cullen    | 02_09_1999 | F      | 30K    | Mumbai  |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella    | cullen    | 02_11_1999 | F      | 30K    | Assam   |   21 | CSE        | 7997280330 | Director    |
++---------+----------+-----------+------------+--------+--------+---------+------+------------+------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from  employee where department='ece' and age>20;
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from  employee where department='ece';
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |   18 | ECE        | 7997280330 | Intern      |
++---------+--------------+-----------+------------+--------+--------+--------------+------+------------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table employee change age e_age;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee change Age e_age;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee change Age e_age int;
+Query OK, 0 rows affected (0.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from employee
+    -> select *from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select *from employee' at line 2
+mysql> select *from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | e_age | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |    21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |    26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |    26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |    24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |    18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |    15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |    25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |    25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |    21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |    21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |    21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select *from employee;
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | salary | Address      | e_age | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K    | krishna      |    21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K    | krishna      |    26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K    | westgodavari |    26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K    | eastgodavari |    24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K    | vizag        |    18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K    | Hyd          |    15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K    | Hyd          |    25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K    | Jaipur       |    25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K    | SKLM         |    21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K    | Mumbai       |    21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K    | Assam        |    21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+--------+--------------+-------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table employee change  e_age,Age int,change salary e_salary varchar(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',Age int,change salary e_salary varchar(5)' at line 1
+mysql> desc employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ssn         | varchar(100) | NO   | PRI | NULL    |       |
+| Lastname    | char(100)    | NO   |     | NULL    |       |
+| Firstname   | char(100)    | NO   |     | NULL    |       |
+| DOB         | varchar(10)  | NO   |     | NULL    |       |
+| gender      | char(10)     | NO   |     | NULL    |       |
+| salary      | varchar(5)   | YES  |     | NULL    |       |
+| Address     | varchar(100) | NO   |     | NULL    |       |
+| e_age       | int(11)      | YES  |     | NULL    |       |
+| Department  | char(10)     | YES  |     | NULL    |       |
+| MobileNo    | varchar(10)  | YES  |     | NULL    |       |
+| Designation | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+11 rows in set (0.11 sec)
+
+mysql> alter table employee change  e_age Age int,change salary e_salary varchar(5);
+Query OK, 0 rows affected (0.26 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++---------+--------------+-----------+------------+--------+----------+--------------+------+------------+------------+-------------+
+| ssn     | Lastname     | Firstname | DOB        | gender | e_salary | Address      | Age  | Department | MobileNo   | Designation |
++---------+--------------+-----------+------------+--------+----------+--------------+------+------------+------------+-------------+
+| S160001 | Prasad       | Addanki   | 31-01-1999 | M      | 20K      | krishna      |   21 | civil      | 9177953203 | Manager     |
+| S160002 | Ramakrishna  | Addanki   | 18-03-1995 | M      | 25K      | krishna      |   26 | geology    | 9175643233 | TeamLeader  |
+| S160003 | Jagadeesh    | Addanki   | 24-06-1995 | M      | 21K      | westgodavari |   26 | MECH       | 9983243763 | TeamLeader  |
+| S160004 | MohanKrishna | Addanki   | 27-07-1993 | M      | 21K      | eastgodavari |   24 | ECE        | 6308278365 | Trainer     |
+| S160005 | Mounika      | Addanki   | 19-08-2001 | F      | 15K      | vizag        |   18 | ECE        | 7997280330 | Intern      |
+| S160006 | Kalyani      | Addanki   | 26-08-2004 | F      | 27K      | Hyd          |   15 | CSE        | 7702725655 | MD          |
+| S160007 | phanikumar   | Jalla     | 25-05-1994 | M      | 27K      | Hyd          |   25 | mech       | 9676615299 | Manager     |
+| S160008 | PavanKalyan  | Jalla     | 31-05-1994 | M      | 28K      | Jaipur       |   25 | CIVIL      | 9177594851 | Trainer     |
+| S160009 | Lokesh       | pILLI     | 28-08-1999 | M      | 28K      | SKLM         |   21 | GEOLOGGY   | 9177594851 | Intern      |
+| S160010 | Alice        | cullen    | 02_09_1999 | F      | 30K      | Mumbai       |   21 | CSE        | 9676615299 | Director    |
+| S160011 | Bella        | cullen    | 02_11_1999 | F      | 30K      | Assam        |   21 | CSE        | 7997280330 | Director    |
++---------+--------------+-----------+------------+--------+----------+--------------+------+------------+------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

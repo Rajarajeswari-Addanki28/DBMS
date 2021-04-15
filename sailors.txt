@@ -1,0 +1,574 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| companies          |
+| company            |
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| internal           |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| practice           |
+| rajeswari5         |
+| rgukt              |
+| sailors            |
+| sakila             |
+| sys                |
++--------------------+
+17 rows in set (0.20 sec)
+
+mysql> use sailors;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_sailors |
++-------------------+
+| boats             |
+| reserves          |
+| sailors           |
++-------------------+
+3 rows in set (0.10 sec)
+
+mysql> select * from sailors;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  29 | Brotus  |      1 |   33 |
+|  31 | lubber  |      8 |   56 |
+|  32 | Andy    |      8 |   26 |
+|  58 | Rusty   |     10 |   35 |
+|  64 | Haratio |      7 |   35 |
+|  71 | Zorba   |     10 |   16 |
+|  74 | Haratio |      9 |   35 |
+|  85 | Art     |      3 |   26 |
+|  95 | Bob     |      3 |   64 |
++-----+---------+--------+------+
+10 rows in set (0.15 sec)
+
+mysql> select * from reserves;
++-----+------+-----------+
+| sid | bid  | day       |
++-----+------+-----------+
+|  22 |  101 | 10/10/98  |
+|  22 |  102 | 10/10/98  |
+|  22 |  103 | 10/08/98  |
+|  22 |  104 | 10/07/98  |
+|  31 |  102 | 11/10/98  |
+|  31 |  103 | 11/06/98  |
+|  31 |  104 | 11/012/98 |
+|  64 |  101 | 9/5/98    |
+|  64 |  102 | 9/8/98    |
+|  74 |  103 | 9/8/98    |
++-----+------+-----------+
+10 rows in set (0.04 sec)
+
+mysql> select * from boats;
++-----+-----------+-------+
+| bid | bname     | color |
++-----+-----------+-------+
+| 101 | Interlake | blue  |
+| 102 | Interlake | red   |
+| 103 | clipper   | green |
+| 104 | marine    | red   |
++-----+-----------+-------+
+4 rows in set (0.05 sec)
+
+mysql> select S.* from sailors S,reserves R where S.sid=R.sid and bid=103;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  31 | lubber  |      8 |   56 |
+|  74 | Haratio |      9 |   35 |
++-----+---------+--------+------+
+3 rows in set (0.03 sec)
+
+mysql> select min(age) as younger from sailors;
++---------+
+| younger |
++---------+
+|      16 |
++---------+
+1 row in set (0.02 sec)
+
+mysql> select fname,min(age) as younger from sailors;
+ERROR 1054 (42S22): Unknown column 'fname' in 'field list'
+mysql> select sname,min(age) as younger from sailors;
++--------+---------+
+| sname  | younger |
++--------+---------+
+| Dustin |      16 |
++--------+---------+
+1 row in set (0.00 sec)
+
+mysql> select distint color from boats;
+ERROR 1054 (42S22): Unknown column 'distint' in 'field list'
+mysql> select distinct color from boats;
++-------+
+| color |
++-------+
+| blue  |
+| red   |
+| green |
++-------+
+3 rows in set (0.05 sec)
+
+mysql> select sname,color from sailors S,reserves R,Boats B where S.sid=R.sid and B.bid=S.bid and sname="Zorba";
+ERROR 1054 (42S22): Unknown column 'S.bid' in 'where clause'
+mysql> select sname,color from sailors S,reserves R,Boats B where S.sid=R.sid and B.bid=R.bid and sname="Zorba";
+Empty set (0.03 sec)
+
+mysql> select sname,color from sailors S,reserves R,Boats B where S.sid=R.sid and B.bid=R.bid and sname="Dustin";
++--------+-------+
+| sname  | color |
++--------+-------+
+| Dustin | blue  |
+| Dustin | red   |
+| Dustin | green |
+| Dustin | red   |
++--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select sname,color from sailors S,reserves R,Boats B where S.sid=R.sid and B.bid=R.bid and sname='Dustin';
++--------+-------+
+| sname  | color |
++--------+-------+
+| Dustin | blue  |
+| Dustin | red   |
+| Dustin | green |
+| Dustin | red   |
++--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select sname,color from sailors S,reserves R,Boats B where S.sid=R.sid and B.bid=R.bid and sname='Dustin' group by color;
++--------+-------+
+| sname  | color |
++--------+-------+
+| Dustin | blue  |
+| Dustin | red   |
+| Dustin | green |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select sname,S.sid from sailors S,reserves R where rating>8 and (S.sid=R.sid and bid=103);
++---------+-----+
+| sname   | sid |
++---------+-----+
+| Haratio |  74 |
++---------+-----+
+1 row in set (0.03 sec)
+
+mysql> select sname,S.sid from sailors S,reserves R where rating>8 or (S.sid=R.sid and bid=103);
++---------+-----+
+| sname   | sid |
++---------+-----+
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Dustin  |  22 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| lubber  |  31 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
++---------+-----+
+32 rows in set (0.00 sec)
+
+mysql> select sname,S.sid from sailors S,reserves R where rating>8 or (S.sid=R.sid and bid=103) group by ssn;
+ERROR 1054 (42S22): Unknown column 'ssn' in 'group statement'
+mysql> select sname,S.sid from sailors S,reserves R where rating>8 or (S.sid=R.sid and bid=103) group by sid;
++---------+-----+
+| sname   | sid |
++---------+-----+
+| Rusty   |  58 |
+| Zorba   |  71 |
+| Haratio |  74 |
+| Dustin  |  22 |
+| lubber  |  31 |
++---------+-----+
+5 rows in set (0.00 sec)
+
+mysql> select sname from sailors S.reserves R where S.sid=R.sid and count(bid)>2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.reserves R where S.sid=R.sid and count(bid)>2' at line 1
+mysql> select sname from sailors S,reserves R where S.sid=R.sid and count(bid)>2;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select sname from sailors S,reserves R where S.sid=R.sid and group by sid having count(bid)>2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group by sid having count(bid)>2' at line 1
+mysql> select sname from sailors S,reserves R where S.sid=R.sid  group by sid having count(bid)>2;
+ERROR 1052 (23000): Column 'sid' in group statement is ambiguous
+mysql> select sname from sailors S,reserves R where S.sid=R.sid  group by S.sid having count(bid)>2;
++--------+
+| sname  |
++--------+
+| Dustin |
+| lubber |
++--------+
+2 rows in set (0.04 sec)
+
+mysql> select sname from sailor S,reserves R,boats B where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like "%er%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor S,reserves R,boats B where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor S where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor S where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor  where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor  where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "er";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailor  where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%") order by sid;
+ERROR 1146 (42S02): Table 'sailors.sailor' doesn't exist
+mysql> select sname from sailors  where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%") order by sid;
++--------+
+| sname  |
++--------+
+| Brotus |
+| Andy   |
+| Rusty  |
+| Zorba  |
+| Art    |
+| Bob    |
++--------+
+6 rows in set (0.05 sec)
+
+mysql> select sname from sailors  where sid not in(select S.sid from sailors S,reserves R,boats B where S.sid=R.sid and B.bid=R.bid and bname like  "%er%") order by sname Asc;
++--------+
+| sname  |
++--------+
+| Andy   |
+| Art    |
+| Bob    |
+| Brotus |
+| Rusty  |
+| Zorba  |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> select sname from sailors where sid not in(select S.sid from sailors
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sname from sailors where sid not in(select S.sid from sailors S,reserves R,boats B where bname like "%lake%" and S.sid=B.sid and R.bid=S.sid) and age>=35;
+ERROR 1054 (42S22): Unknown column 'B.sid' in 'where clause'
+mysql> select sname from sailors where sid not in(select S.sid from sailors S,reserves R,boats B where bname like "%lake%" and S.sid=R.sid and R.bid=S.sid) and age>=35;
++---------+
+| sname   |
++---------+
+| Dustin  |
+| lubber  |
+| Rusty   |
+| Haratio |
+| Haratio |
+| Bob     |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid; 
++---------+
+| sname   |
++---------+
+| Dustin  |
+| Haratio |
+| Dustin  |
+| lubber  |
+| Haratio |
+| Dustin  |
+| lubber  |
+| Haratio |
+| Dustin  |
+| lubber  |
++---------+
+10 rows in set (0.00 sec)
+
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid group by ssn; 
+ERROR 1054 (42S22): Unknown column 'ssn' in 'group statement'
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid group by sid; 
+ERROR 1052 (23000): Column 'sid' in group statement is ambiguous
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid group by S.sid; 
++---------+
+| sname   |
++---------+
+| Dustin  |
+| Haratio |
+| lubber  |
+| Haratio |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from boats;
++-----+-----------+-------+
+| bid | bname     | color |
++-----+-----------+-------+
+| 101 | Interlake | blue  |
+| 102 | Interlake | red   |
+| 103 | clipper   | green |
+| 104 | marine    | red   |
++-----+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from reserves
+    -> ;
++-----+------+-----------+
+| sid | bid  | day       |
++-----+------+-----------+
+|  22 |  101 | 10/10/98  |
+|  22 |  102 | 10/10/98  |
+|  22 |  103 | 10/08/98  |
+|  22 |  104 | 10/07/98  |
+|  31 |  102 | 11/10/98  |
+|  31 |  103 | 11/06/98  |
+|  31 |  104 | 11/012/98 |
+|  64 |  101 | 9/5/98    |
+|  64 |  102 | 9/8/98    |
+|  74 |  103 | 9/8/98    |
++-----+------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from reserves;
++-----+------+-----------+
+| sid | bid  | day       |
++-----+------+-----------+
+|  22 |  101 | 10/10/98  |
+|  22 |  102 | 10/10/98  |
+|  22 |  103 | 10/08/98  |
+|  22 |  104 | 10/07/98  |
+|  31 |  102 | 11/10/98  |
+|  31 |  103 | 11/06/98  |
+|  31 |  104 | 11/012/98 |
+|  64 |  101 | 9/5/98    |
+|  64 |  102 | 9/8/98    |
+|  74 |  103 | 9/8/98    |
++-----+------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from reserves;
++-----+------+-----------+
+| sid | bid  | day       |
++-----+------+-----------+
+|  22 |  101 | 10/10/98  |
+|  22 |  102 | 10/10/98  |
+|  22 |  103 | 10/08/98  |
+|  22 |  104 | 10/07/98  |
+|  31 |  102 | 11/10/98  |
+|  31 |  103 | 11/06/98  |
+|  31 |  104 | 11/012/98 |
+|  64 |  101 | 9/5/98    |
+|  64 |  102 | 9/8/98    |
+|  74 |  103 | 9/8/98    |
++-----+------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid group by S.sname; 
++---------+
+| sname   |
++---------+
+| Dustin  |
+| Haratio |
+| lubber  |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select sname from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid group by S.sname having count(R.bid)=4; 
++--------+
+| sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select sname ,color from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid and bname="red"; 
+Empty set (0.00 sec)
+
+mysql> select sname ,color from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid and bname="blue"; 
+Empty set (0.00 sec)
+
+mysql> select sname ,color from Sailors S,Boats B,reserves R where S.sid=R.sid and B.bid=R.bid and bname="green"; 
+Empty set (0.00 sec)
+
+mysql> select sname from sailors where rating>(select rating from sailors where sname="zorba");
+Empty set (0.00 sec)
+
+mysql> select sname from sailors where rating>(select rating from sailors where sname="Dustin");
++---------+
+| sname   |
++---------+
+| lubber  |
+| Andy    |
+| Rusty   |
+| Zorba   |
+| Haratio |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from sailors;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  29 | Brotus  |      1 |   33 |
+|  31 | lubber  |      8 |   56 |
+|  32 | Andy    |      8 |   26 |
+|  58 | Rusty   |     10 |   35 |
+|  64 | Haratio |      7 |   35 |
+|  71 | Zorba   |     10 |   16 |
+|  74 | Haratio |      9 |   35 |
+|  85 | Art     |      3 |   26 |
+|  95 | Bob     |      3 |   64 |
++-----+---------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select sid from saoilors where max(rating)>(select rating from sailors S,reserves R where S.sid=B.sid and bid=104);
+ERROR 1146 (42S02): Table 'sailors.saoilors' doesn't exist
+mysql> select sid from sailors where max(rating)>(select rating from sailors S,reserves R where S.sid=B.sid and bid=104);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select sid from sailors where max(rating)>(select rating from sailors S,reserves R where S.sid=B.sid and bid=104);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select sid from sailors where rating>(select max(rating) from sailors S,reserves R where S.sid=B.sid and bid=104);
+ERROR 1054 (42S22): Unknown column 'B.sid' in 'where clause'
+mysql> select sid from sailors where rating>(select max(rating) from sailors S,reserves R where S.sid=R.sid and bid=104);
++-----+
+| sid |
++-----+
+|  58 |
+|  71 |
+|  74 |
++-----+
+3 rows in set (0.00 sec)
+
+mysql> select rating,avg(age) from sailors group by rating;
++--------+----------+
+| rating | avg(age) |
++--------+----------+
+|      7 |  40.0000 |
+|      1 |  33.0000 |
+|      8 |  41.0000 |
+|     10 |  25.5000 |
+|      9 |  35.0000 |
+|      3 |  45.0000 |
++--------+----------+
+6 rows in set (0.03 sec)
+
+mysql> select B.bid ,avg(age) from sailors S,boats B,reserves R where S.sid=R.bid and  B.bid=R.bid group by bname having count(R.bid)>2;
+Empty set (0.00 sec)
+
+mysql> select B.bid ,avg(age) from sailors S,boats B,reserves R where S.sid=R.bid and  B.bid=R.bid group by B.bid having count(R.bid)>2;
+Empty set (0.00 sec)
+
+mysql> select B.bid ,avg(age) from sailors S,boats B,reserves R where S.sid=R.bid and  B.bid=R.bid group by R.bid having count(R.bid)>2;
+Empty set (0.00 sec)
+
+mysql> select B.bid ,avg(age) from sailors S,boats B,reserves R where S.sid=R.bid and  B.bid=R.bid group by R.bid having count(R.sid)>=2;
+Empty set (0.00 sec)
+
+mysql> select B.bid ,avg(age) from sailors S,boats B,reserves R where S.sid=R.sid and  B.bid=R.bid group by B.bid having count(R.sid)>=2;
++-----+----------+
+| bid | avg(age) |
++-----+----------+
+| 101 |  40.0000 |
+| 102 |  45.3333 |
+| 103 |  45.3333 |
+| 104 |  50.5000 |
++-----+----------+
+4 rows in set (0.00 sec)
+
+mysql> select sid,sname from sailors sid in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='red') and sid not  in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='green'); 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B' at line 1
+mysql> select sid,sname from sailors  where sid in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='red') and sid not  in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='green'); 
+Empty set (0.03 sec)
+
+mysql> select sid,sname from sailors  where sid in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='green') and sid not  in(select S.sid  from Sailors S,reserves R,boats B where S.sid=R.sid and R.bid=B.bid and bname='red'); 
+Empty set (0.00 sec)
+
+mysql> select * from boats;
++-----+-----------+-------+
+| bid | bname     | color |
++-----+-----------+-------+
+| 101 | Interlake | blue  |
+| 102 | Interlake | red   |
+| 103 | clipper   | green |
+| 104 | marine    | red   |
++-----+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select count(days) from reserves R,boats B where B.bid =R.bid and bname="marine";
+ERROR 1054 (42S22): Unknown column 'days' in 'field list'
+mysql> select * from reserves;
++-----+------+-----------+
+| sid | bid  | day       |
++-----+------+-----------+
+|  22 |  101 | 10/10/98  |
+|  22 |  102 | 10/10/98  |
+|  22 |  103 | 10/08/98  |
+|  22 |  104 | 10/07/98  |
+|  31 |  102 | 11/10/98  |
+|  31 |  103 | 11/06/98  |
+|  31 |  104 | 11/012/98 |
+|  64 |  101 | 9/5/98    |
+|  64 |  102 | 9/8/98    |
+|  74 |  103 | 9/8/98    |
++-----+------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select count(day) from reserves R,boats B where B.bid =R.bid and bname="marine";
++------------+
+| count(day) |
++------------+
+|          2 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from sailors;
++-----+---------+--------+------+
+| sid | sname   | rating | age  |
++-----+---------+--------+------+
+|  22 | Dustin  |      7 |   45 |
+|  29 | Brotus  |      1 |   33 |
+|  31 | lubber  |      8 |   56 |
+|  32 | Andy    |      8 |   26 |
+|  58 | Rusty   |     10 |   35 |
+|  64 | Haratio |      7 |   35 |
+|  71 | Zorba   |     10 |   16 |
+|  74 | Haratio |      9 |   35 |
+|  85 | Art     |      3 |   26 |
+|  95 | Bob     |      3 |   64 |
++-----+---------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select sname from sailors where  sname like "d%n";
++--------+
+| sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

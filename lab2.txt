@@ -1,0 +1,40 @@
+mysql> select * from food_items;
++-----------+-------+
+| item      | price |
++-----------+-------+
+| poori     |    20 |
+| idly      |    30 |
+| tea       |    10 |
+| coffee    |    25 |
+| green_tea |    50 |
+| black_tea |    50 |
++-----------+-------+
+6 rows in set (0.00 sec)
+
+mysql>  turncat table food_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncat table food_items' at line 1
+mysql>  turncate  table food_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncate  table food_items' at line 1
+mysql>  turncate  table food_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncate  table food_items' at line 1
+mysql> truncate table food_items;
+Query OK, 0 rows affected (1.20 sec)
+
+mysql> select * from food_items;
+Empty set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_food |
++----------------+
+| food_items     |
++----------------+
+1 row in set (0.13 sec)
+
+mysql> drop table food_items;
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> Terminal close -- exit!

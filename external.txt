@@ -1,0 +1,538 @@
+mysql> 11_09_2019
+    -> 11_09_2019;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11_09_2019
+11_09_2019' at line 1
+mysql> create database rajeswari5;
+Query OK, 1 row affected (0.24 sec)
+
+mysql> use rajeswari5;
+Database changed
+mysql> create table employee(
+    -> ssn int(10) not null,
+    -> fname varchar(10) not null,
+    -> lname varchar(10) not null,
+    -> Address varchar(10) not null,
+    -> age int(5) ,
+    -> salary int(10) not null,
+    -> gender varchar(3) ,
+    -> dnum int(6),
+    -> sssn int(10),
+    -> primary key(ssn)
+    -> );
+Query OK, 0 rows affected (0.61 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ssn     | int(10)     | NO   | PRI | NULL    |       |
+| fname   | varchar(10) | NO   |     | NULL    |       |
+| lname   | varchar(10) | NO   |     | NULL    |       |
+| Address | varchar(10) | NO   |     | NULL    |       |
+| age     | int(5)      | YES  |     | NULL    |       |
+| salary  | int(10)     | NO   |     | NULL    |       |
+| gender  | varchar(3)  | YES  |     | NULL    |       |
+| dnum    | int(6)      | YES  |     | NULL    |       |
+| sssn    | int(10)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)
+
+mysql> insert into employee values(160,'alice','adduin','hyd',19,100000,'f',102,165);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employee values(161,'arjun','jalla','hyd',19,120000,'m',102,167);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values(161,'arjun','jalla','hyd',19,120000,'m',102,167);
+ERROR 1062 (23000): Duplicate entry '161' for key 'PRIMARY'
+mysql> insert into employee values(162,'arun','moka','vijawada',20,190000,'m',104,168);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employee values(163,'james','swan','guntur',21,200000,'m',105,160);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values(164,'janu','meon','nuzvid',22,198000,'f',101,160);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(165,'sharuk','khan','mumbai',27,298000,'m',101,163);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values(166,'shahier','sheik','mumbai',23,298000,'m',103,162);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(167,'mistry','sheik','jaipur',23,698000,'f',107,169);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values(168,'murali','tirumani','gudivada',26,398000,'m',106,168);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values(169,'micky','tirumani','gudivada',26,398000,'f',106,168);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from employee;
++-----+---------+----------+----------+------+--------+--------+------+------+
+| ssn | fname   | lname    | Address  | age  | salary | gender | dnum | sssn |
++-----+---------+----------+----------+------+--------+--------+------+------+
+| 160 | alice   | adduin   | hyd      |   19 | 100000 | f      |  102 |  165 |
+| 161 | arjun   | jalla    | hyd      |   19 | 120000 | m      |  102 |  167 |
+| 162 | arun    | moka     | vijawada |   20 | 190000 | m      |  104 |  168 |
+| 163 | james   | swan     | guntur   |   21 | 200000 | m      |  105 |  160 |
+| 164 | janu    | meon     | nuzvid   |   22 | 198000 | f      |  101 |  160 |
+| 165 | sharuk  | khan     | mumbai   |   27 | 298000 | m      |  101 |  163 |
+| 166 | shahier | sheik    | mumbai   |   23 | 298000 | m      |  103 |  162 |
+| 167 | mistry  | sheik    | jaipur   |   23 | 698000 | f      |  107 |  169 |
+| 168 | murali  | tirumani | gudivada |   26 | 398000 | m      |  106 |  168 |
+| 169 | micky   | tirumani | gudivada |   26 | 398000 | f      |  106 |  168 |
++-----+---------+----------+----------+------+--------+--------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> create table department(
+    -> deptno int(11) not null,
+    -> deptname varchar(10) not null,
+    -> manager_ssn int(10),
+    -> starting_date varchar(10),
+    -> primary key(deptno)
+    -> );
+Query OK, 0 rows affected (0.93 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| deptno        | int(11)     | NO   | PRI | NULL    |       |
+| deptname      | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  |     | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> insert into department values(101,'cse',160,'28_09_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(102,'ece',162,'2_09_2019');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into department values(103,'mech',162,'2_09_2019');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into department values(104,'research',166,'7_06_2019');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into department values(105,'eee',166,'17_04_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(105,'mme',164,'11_04_2019');
+ERROR 1062 (23000): Duplicate entry '105' for key 'PRIMARY'
+mysql> insert into department values(106,'che',168,'11_04_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(107,'mme',164,'11_04_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(108,'geology',163,'12_03_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(109,'zoology',169,'2_03_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into department values(110,'civil',169,'2_03_2019');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from department;
++--------+----------+-------------+---------------+
+| deptno | deptname | manager_ssn | starting_date |
++--------+----------+-------------+---------------+
+|    101 | cse      |         160 | 28_09_2019    |
+|    102 | ece      |         162 | 2_09_2019     |
+|    103 | mech     |         162 | 2_09_2019     |
+|    104 | research |         166 | 7_06_2019     |
+|    105 | eee      |         166 | 17_04_2019    |
+|    106 | che      |         168 | 11_04_2019    |
+|    107 | mme      |         164 | 11_04_2019    |
+|    108 | geology  |         163 | 12_03_2019    |
+|    109 | zoology  |         169 | 2_03_2019     |
+|    110 | civil    |         169 | 2_03_2019     |
++--------+----------+-------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> create table project (
+    -> pid int(10) not null,
+    -> pname varchar(10) not null,
+    -> p_loc varchar(10),
+    -> deptno int(10),
+    -> primary key(pid)
+    -> );
+Query OK, 0 rows affected (0.50 sec)
+
+mysql> desc project;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| pid    | int(10)     | NO   | PRI | NULL    |       |
+| pname  | varchar(10) | NO   |     | NULL    |       |
+| p_loc  | varchar(10) | YES  |     | NULL    |       |
+| deptno | int(10)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into project values(11,'bigdata','hyd',101);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into project values(12,'robots','hyd',102);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into project values(13,'warter','kochi',102);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into project values(14,'smartmeterial','kochi',103);
+ERROR 1406 (22001): Data too long for column 'pname' at row 1
+mysql> insert into project values(14,'smartmet','kochi',103);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> 
+mysql> insert into project values(15,'NLP','kochi',104);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into project values(10,'cynide','pune',106);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into project values(16,'sensors','pune',106);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values(17,'mercury','kerala',105);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into project values(18,'mercury','kashmir',105);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values(19,'earth','hampi',108);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from project;
++-----+----------+---------+--------+
+| pid | pname    | p_loc   | deptno |
++-----+----------+---------+--------+
+|  10 | cynide   | pune    |    106 |
+|  11 | bigdata  | hyd     |    101 |
+|  12 | robots   | hyd     |    102 |
+|  13 | warter   | kochi   |    102 |
+|  14 | smartmet | kochi   |    103 |
+|  15 | NLP      | kochi   |    104 |
+|  16 | sensors  | pune    |    106 |
+|  17 | mercury  | kerala  |    105 |
+|  18 | mercury  | kashmir |    105 |
+|  19 | earth    | hampi   |    108 |
++-----+----------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> create table dependent(
+    -> did int(10) not null,
+    -> dname varchar(10) not null,
+    -> daddress varchar(10),
+    -> emp_ssn int(10)
+    -> );
+Query OK, 0 rows affected (0.46 sec)
+
+mysql> desc dependent;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| did      | int(10)     | NO   |     | NULL    |       |
+| dname    | varchar(10) | NO   |     | NULL    |       |
+| daddress | varchar(10) | YES  |     | NULL    |       |
+| emp_ssn  | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into dependent values(70,'janu','hyd',160);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values(71,'krishna','hyd',163);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into dependent values(72,'krishore','guntur',163);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(73,'keerthi','guntur',164);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into dependent values(74,'krupa','nuzvid',161);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into dependent values(75,'karan','elluru',162);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values(76,'lucky','elluru',162);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(77,'lussi','vempa',168);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into dependent values(78,'nandu','vizag',168);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(79,'veena','vizag',167);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from dependent;
++-----+----------+----------+---------+
+| did | dname    | daddress | emp_ssn |
++-----+----------+----------+---------+
+|  70 | janu     | hyd      |     160 |
+|  71 | krishna  | hyd      |     163 |
+|  72 | krishore | guntur   |     163 |
+|  73 | keerthi  | guntur   |     164 |
+|  74 | krupa    | nuzvid   |     161 |
+|  75 | karan    | elluru   |     162 |
+|  76 | lucky    | elluru   |     162 |
+|  77 | lussi    | vempa    |     168 |
+|  78 | nandu    | vizag    |     168 |
+|  79 | veena    | vizag    |     167 |
++-----+----------+----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table workson(
+    -> wssn int(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table workson(
+    -> wssn int(10),
+    -> prid int(10),
+    -> hours int(10)
+    -> );
+Query OK, 0 rows affected (0.43 sec)
+
+mysql> insert into workson values(160,10,9);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into workson values(161,14,9);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into workson values(164,14,9);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into workson values(163,12,9);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into workson values(165,12,11);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into workson values(168,18,11);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into workson values(167,17,11);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into workson values(167,19,11);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into workson values(163,19,11);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into workson values(167,12,11);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from workson;
++------+------+-------+
+| wssn | prid | hours |
++------+------+-------+
+|  160 |   10 |     9 |
+|  161 |   14 |     9 |
+|  164 |   14 |     9 |
+|  163 |   12 |     9 |
+|  165 |   12 |    11 |
+|  168 |   18 |    11 |
+|  167 |   17 |    11 |
+|  167 |   19 |    11 |
+|  163 |   19 |    11 |
+|  167 |   12 |    11 |
++------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> alter table  add employee foreign key(sssn) references employee(ssn);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add employee foreign key(sssn) references employee(ssn)' at line 1
+mysql> alter table   employee add foreign key(sssn) references employee(ssn);
+Query OK, 10 rows affected (1.56 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table   employee add foreign key(dnum) references department(deptno);
+Query OK, 10 rows affected (2.44 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table  project add foreign key(deptno) references department(deptno);
+Query OK, 10 rows affected (1.09 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table  dependent add foreign key(emp_ssn) references employee(ssn);
+Query OK, 10 rows affected (1.15 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table  workson add foreign key(wssn) references employee(ssn);
+Query OK, 10 rows affected (1.21 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table  workson add foreign key(prid) references project(pid);
+Query OK, 10 rows affected (1.14 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ssn     | int(10)     | NO   | PRI | NULL    |       |
+| fname   | varchar(10) | NO   |     | NULL    |       |
+| lname   | varchar(10) | NO   |     | NULL    |       |
+| Address | varchar(10) | NO   |     | NULL    |       |
+| age     | int(5)      | YES  |     | NULL    |       |
+| salary  | int(10)     | NO   |     | NULL    |       |
+| gender  | varchar(3)  | YES  |     | NULL    |       |
+| dnum    | int(6)      | YES  | MUL | NULL    |       |
+| sssn    | int(10)     | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+9 rows in set (0.06 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| deptno        | int(11)     | NO   | PRI | NULL    |       |
+| deptname      | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  |     | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table   department add foreign key(manager_ssn) references employee(ssn);
+Query OK, 10 rows affected (1.27 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| deptno        | int(11)     | NO   | PRI | NULL    |       |
+| deptname      | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  | MUL | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> desc project;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| pid    | int(10)     | NO   | PRI | NULL    |       |
+| pname  | varchar(10) | NO   |     | NULL    |       |
+| p_loc  | varchar(10) | YES  |     | NULL    |       |
+| deptno | int(10)     | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> desc dependent;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| did      | int(10)     | NO   |     | NULL    |       |
+| dname    | varchar(10) | NO   |     | NULL    |       |
+| daddress | varchar(10) | YES  |     | NULL    |       |
+| emp_ssn  | int(10)     | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc workson;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| wssn  | int(10) | YES  | MUL | NULL    |       |
+| prid  | int(10) | YES  | MUL | NULL    |       |
+| hours | int(10) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select distinct(salary) from employee;
++--------+
+| salary |
++--------+
+| 100000 |
+| 120000 |
+| 190000 |
+| 200000 |
+| 198000 |
+| 298000 |
+| 698000 |
+| 398000 |
++--------+
+8 rows in set (0.05 sec)
+
+mysql> select fname,lname,salary from employee where dnum=102 and salary between 100000 and 200000;
++-------+--------+--------+
+| fname | lname  | salary |
++-------+--------+--------+
+| alice | adduin | 100000 |
+| arjun | jalla  | 120000 |
++-------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,department D where E.deptno=D.deptno and department='research' and lname like "%in%";
+ERROR 1054 (42S22): Unknown column 'E.deptno' in 'where clause'
+mysql> select E.* from employee E,department D where E.dnum=D.deptno and department='research' and lname like "%in%";
+ERROR 1054 (42S22): Unknown column 'department' in 'where clause'
+mysql> select E.* from employee E,department D where E.dnum=D.deptno and deptname='research' and lname like "%in%";
+Empty set (0.00 sec)
+
+mysql> select * from department;
++--------+----------+-------------+---------------+
+| deptno | deptname | manager_ssn | starting_date |
++--------+----------+-------------+---------------+
+|    101 | cse      |         160 | 28_09_2019    |
+|    102 | ece      |         162 | 2_09_2019     |
+|    103 | mech     |         162 | 2_09_2019     |
+|    104 | research |         166 | 7_06_2019     |
+|    105 | eee      |         166 | 17_04_2019    |
+|    106 | che      |         168 | 11_04_2019    |
+|    107 | mme      |         164 | 11_04_2019    |
+|    108 | geology  |         163 | 12_03_2019    |
+|    109 | zoology  |         169 | 2_03_2019     |
+|    110 | civil    |         169 | 2_03_2019     |
++--------+----------+-------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+---------+----------+----------+------+--------+--------+------+------+
+| ssn | fname   | lname    | Address  | age  | salary | gender | dnum | sssn |
++-----+---------+----------+----------+------+--------+--------+------+------+
+| 160 | alice   | adduin   | hyd      |   19 | 100000 | f      |  102 |  165 |
+| 161 | arjun   | jalla    | hyd      |   19 | 120000 | m      |  102 |  167 |
+| 162 | arun    | moka     | vijawada |   20 | 190000 | m      |  104 |  168 |
+| 163 | james   | swan     | guntur   |   21 | 200000 | m      |  105 |  160 |
+| 164 | janu    | meon     | nuzvid   |   22 | 198000 | f      |  101 |  160 |
+| 165 | sharuk  | khan     | mumbai   |   27 | 298000 | m      |  101 |  163 |
+| 166 | shahier | sheik    | mumbai   |   23 | 298000 | m      |  103 |  162 |
+| 167 | mistry  | sheik    | jaipur   |   23 | 698000 | f      |  107 |  169 |
+| 168 | murali  | tirumani | gudivada |   26 | 398000 | m      |  106 |  168 |
+| 169 | micky   | tirumani | gudivada |   26 | 398000 | f      |  106 |  168 |
++-----+---------+----------+----------+------+--------+--------+------+------+
+10 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,department D where E.dnum=D.deptno and deptname='research' and lname like "%ka%";
++-----+-------+-------+----------+------+--------+--------+------+------+
+| ssn | fname | lname | Address  | age  | salary | gender | dnum | sssn |
++-----+-------+-------+----------+------+--------+--------+------+------+
+| 162 | arun  | moka  | vijawada |   20 | 190000 | m      |  104 |  168 |
++-----+-------+-------+----------+------+--------+--------+------+------+
+1 row in set (0.00 sec)
+
+mysql> select deptname,count(pid) as no_of_projects from department D,project P where D.deptno=P.deptno group by deptname;
++----------+----------------+
+| deptname | no_of_projects |
++----------+----------------+
+| cse      |              1 |
+| ece      |              2 |
+| mech     |              1 |
+| research |              1 |
+| eee      |              2 |
+| che      |              2 |
+| geology  |              1 |
++----------+----------------+
+7 rows in set (0.04 sec)
+
+mysql> Terminal close -- exit!

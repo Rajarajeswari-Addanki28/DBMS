@@ -1,0 +1,121 @@
+mysql> use data;
+Database changed
+mysql> create procedure employee_details()
+    -> select *from employee;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call employee_details();
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Fname     | Lname           | ssn     | Age  | DOB        | Gender | salary | PHNO       | address       | designation | Dnum | sssn    |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Tendela   | Suneetha kumari | S160001 |   25 | 1995-04-20 | F      |  63250 | 9177056721 | Srikakulam    | Manager     | 1122 | S160001 |
+| Tendela   | Mohan babu      | S160032 |   21 | 1999-03-02 | M      |  51750 | 9618602121 | Srikakulam    | Manager     | 1211 | S160001 |
+| Palla     | Gangadhar       | S160336 |   20 | 2000-08-30 | M      |  34500 | 9705753172 | Srikakulam    | Manager     | 1133 | S160001 |
+| Sake      | Santosh         | S160543 |   20 | 1998-09-09 | M      |  25000 | 9145235675 | west godavari | assistant   | 3311 | NULL    |
+| Polisetti | Pavani          | S160894 |   20 | 2000-07-26 | F      |  40250 | 7382381171 | East godavari | Assistant   | 1211 | S160001 |
+| Tendela   | Lokesh          | S160911 |   22 | 1998-09-11 | M      |  34500 | 8096929526 | Vijayawada    | Assmanager  | 1133 | S160911 |
+| Pilli     | Lokesh          | S161293 |   18 | 2002-11-26 | M      |  57500 | 9618602121 | Srikakulam    | Manager     | 1133 | S160911 |
+| Gubbala   | Sri satya       | S161500 |   19 | 2001-06-06 | F      |  30000 | 8074489245 | East godavari | Assistant   | 3311 | S160911 |
+| Akkapolu  | Bhavani         | S161965 |   19 | 2001-03-26 | F      |  35000 | 9705753172 | Vizag         | manager     | 2233 | S160911 |
+| Pilli     | Priyanka        | S161966 |   19 | 2001-07-04 | F      |  46000 | 8096929526 | Srikakulam    | Manager     | 1211 | S161966 |
+| Annepu    | Sandhya rani    | S162056 |   19 | 2001-08-21 | F      |  28750 | 8179296404 | Hyderabad     | Assistant   | 1122 | S161966 |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+11 rows in set (0.04 sec)
+
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> create procedure employee_count_by_dept()
+    -> select Dname,count(ssn) from employee,department where employee.Dnum=department.Dnum group by Dname;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> call employee_count_by_dept();
++------------------+------------+
+| Dname            | count(ssn) |
++------------------+------------+
+| chemical         |          1 |
+| civil            |          2 |
+| computer science |          3 |
+| Electronic       |          2 |
+| mechanical       |          3 |
++------------------+------------+
+5 rows in set (0.17 sec)
+
+Query OK, 0 rows affected (0.28 sec)
+
+
+
+mysql> create procedure in_parameter_check(in input varchar(10))
+    -> select *from employee where ssn=input;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call in_parameter_check('S161966');
++-------+----------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+| Fname | Lname    | ssn     | Age  | DOB        | Gender | salary | PHNO       | address    | designation | Dnum | sssn    |
++-------+----------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+| Pilli | Priyanka | S161966 |   19 | 2001-07-04 | F      |  46000 | 8096929526 | Srikakulam | Manager     | 1211 | S161966 |
++-------+----------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+1 row in set (0.04 sec)
+
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create procedure in_out_parameter_check(in input varchar(10),out output text)
+    -> select Fname into output from employee where ssn=input;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> call in_out_parameter_check('S161966',@output);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select @output;
++---------+
+| @output |
++---------+
+| Pilli   |
++---------+
+1 row in set (0.00 sec)
+
+ 
+mysql> create procedure inout_parameter_check(inout input_output_same varchar(10))
+    -> select Lname into input_output_same from employee where  ssn=input_output_same;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> set @input_output_same='S161966';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select @input_output_same;
++--------------------+
+| @input_output_same |
++--------------------+
+| S161966            |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> create procedure inout_parameter_check2(inout input_output_same char(20))
+    -> select Lname into input_output_same from employee where  ssn=input_output_same;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @input_output_same='S161966';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select @input_output_same;
++--------------------+
+| @input_output_same |
++--------------------+
+| S161966            |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> create procedure inout_parameter_check3(inout input_output_same1 char(20))
+    -> select Lname into input_output_same1 from employee where  ssn=input_output_same1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @input_output_same1='S161966';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select @input_output_same1;
++---------------------+
+| @input_output_same1 |
++---------------------+
+| S161966             |
++---------------------+
+1 row in set (0.00 sec)
+

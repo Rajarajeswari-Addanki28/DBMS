@@ -1,0 +1,212 @@
+mysql> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| companies          |
+| company            |
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| rgukt              |
+| sakila             |
+| sys                |
++--------------------+
+13 rows in set (0.90 sec)
+
+mysql> use companies;
+Database changed
+mysql> create table students(
+    -> SID int(10),
+    -> SNAME varchar(5),
+    -> SAGE int(3),
+    -> COURSEID int(10)
+    -> );
+Query OK, 0 rows affected (1.85 sec)
+
+mysql> insert students set values(101,'X',18,10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(101,'X',18,10)' at line 1
+mysql> insert into students  values(101,'X',18,10);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> insert into students  values(102,'Y',19,20);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into students  values(103,'Z',20,30);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from students;
++------+-------+------+----------+
+| SID  | SNAME | SAGE | COURSEID |
++------+-------+------+----------+
+|  101 | X     |   18 |       10 |
+|  102 | Y     |   19 |       20 |
+|  103 | Z     |   20 |       30 |
++------+-------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> create table course(
+    -> COURSEID int(10),
+    -> CNAME varchar(10),
+    -> CFEE int(10)
+    -> );
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> insert into course  values(10,'OS',20000);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into course  values(20,'DBMS',30000);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into course  values(40,'OOPS',40000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into course  values(50,'DAA',40000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from course;
++----------+-------+-------+
+| COURSEID | CNAME | CFEE  |
++----------+-------+-------+
+|       10 | OS    | 20000 |
+|       20 | DBMS  | 30000 |
+|       40 | OOPS  | 40000 |
+|       50 | DAA   | 40000 |
++----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students;
++------+-------+------+----------+
+| SID  | SNAME | SAGE | COURSEID |
++------+-------+------+----------+
+|  101 | X     |   18 |       10 |
+|  102 | Y     |   19 |       20 |
+|  103 | Z     |   20 |       30 |
++------+-------+------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students inner  join course on students.courseid=course.courseid;  
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
++------+-------+------+----------+----------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students left outer  join course on students.courseid=course.courseid;  
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
+|  103 | Z     |   20 |       30 |     NULL | NULL  |  NULL |
++------+-------+------+----------+----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students right outer  join course on students.courseid=course.courseid;  
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
+| NULL | NULL  | NULL |     NULL |       40 | OOPS  | 40000 |
+| NULL | NULL  | NULL |     NULL |       50 | DAA   | 40000 |
++------+-------+------+----------+----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students left outer  join course on students.courseid=course.courseid union all select * from students right outer  join course on students.courseid=course.courseid;
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
+|  103 | Z     |   20 |       30 |     NULL | NULL  |  NULL |
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
+| NULL | NULL  | NULL |     NULL |       40 | OOPS  | 40000 |
+| NULL | NULL  | NULL |     NULL |       50 | DAA   | 40000 |
++------+-------+------+----------+----------+-------+-------+
+7 rows in set (0.03 sec)
+
+mysql> select * from strudents cross join course;
+ERROR 1146 (42S02): Table 'companies.strudents' doesn't exist
+mysql> select * from students cross join course;
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       10 | OS    | 20000 |
+|  103 | Z     |   20 |       30 |       10 | OS    | 20000 |
+|  101 | X     |   18 |       10 |       20 | DBMS  | 30000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
+|  103 | Z     |   20 |       30 |       20 | DBMS  | 30000 |
+|  101 | X     |   18 |       10 |       40 | OOPS  | 40000 |
+|  102 | Y     |   19 |       20 |       40 | OOPS  | 40000 |
+|  103 | Z     |   20 |       30 |       40 | OOPS  | 40000 |
+|  101 | X     |   18 |       10 |       50 | DAA   | 40000 |
+|  102 | Y     |   19 |       20 |       50 | DAA   | 40000 |
+|  103 | Z     |   20 |       30 |       50 | DAA   | 40000 |
++------+-------+------+----------+----------+-------+-------+
+12 rows in set (0.00 sec)
+
+mysql> select * from students natural join course;
++----------+------+-------+------+-------+-------+
+| COURSEID | SID  | SNAME | SAGE | CNAME | CFEE  |
++----------+------+-------+------+-------+-------+
+|       10 |  101 | X     |   18 | OS    | 20000 |
+|       20 |  102 | Y     |   19 | DBMS  | 30000 |
++----------+------+-------+------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students ,course where students.courseid=course.courseid;
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       10 | OS    | 20000 |
+|  102 | Y     |   19 |       20 |       20 | DBMS  | 30000 |
++------+-------+------+----------+----------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students ,course where students.courseid>course.courseid;
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  102 | Y     |   19 |       20 |       10 | OS    | 20000 |
+|  103 | Z     |   20 |       30 |       10 | OS    | 20000 |
+|  103 | Z     |   20 |       30 |       20 | DBMS  | 30000 |
++------+-------+------+----------+----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students ,course where students.courseid<course.courseid;
++------+-------+------+----------+----------+-------+-------+
+| SID  | SNAME | SAGE | COURSEID | COURSEID | CNAME | CFEE  |
++------+-------+------+----------+----------+-------+-------+
+|  101 | X     |   18 |       10 |       20 | DBMS  | 30000 |
+|  101 | X     |   18 |       10 |       40 | OOPS  | 40000 |
+|  102 | Y     |   19 |       20 |       40 | OOPS  | 40000 |
+|  103 | Z     |   20 |       30 |       40 | OOPS  | 40000 |
+|  101 | X     |   18 |       10 |       50 | DAA   | 40000 |
+|  102 | Y     |   19 |       20 |       50 | DAA   | 40000 |
+|  103 | Z     |   20 |       30 |       50 | DAA   | 40000 |
++------+-------+------+----------+----------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from course c1,course c2 where c1.cfee=c2.scfee and c1.cname='os';
+ERROR 1054 (42S22): Unknown column 'c2.scfee' in 'where clause'
+mysql> select * from course c1,course c2 where c1.cfee=c2.cfee and c1.cname='os';
++----------+-------+-------+----------+-------+-------+
+| COURSEID | CNAME | CFEE  | COURSEID | CNAME | CFEE  |
++----------+-------+-------+----------+-------+-------+
+|       10 | OS    | 20000 |       10 | OS    | 20000 |
++----------+-------+-------+----------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

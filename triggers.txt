@@ -1,0 +1,358 @@
+mysql> use compines
+ERROR 1049 (42000): Unknown database 'compines'
+mysql> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| companies          |
+| company            |
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| practice           |
+| rajeswari5         |
+| rgukt              |
+| sailors            |
+| sakila             |
+| sys                |
++--------------------+
+16 rows in set (0.30 sec)
+
+mysql> use companies;
+Database changed
+mysql> create table emp_old_data(
+    -> emp_ssn varchar(10) primary key,
+    -> firstname char(10),
+    -> lastname char(10),
+    -> action varchar(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> desc employee;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Fname   | varchar(100) | NO   |     | NULL    |       |
+| Lname   | varchar(100) | NO   |     | NULL    |       |
+| SSN     | int(11)      | NO   | PRI | NULL    |       |
+| Age     | int(3)       | NO   |     | NULL    |       |
+| gender  | varchar(2)   | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
+| Address | varchar(10)  | YES  |     | NULL    |       |
+| Dno     | int(11)      | YES  | MUL | NULL    |       |
+| E_ssn   | int(11)      | YES  | MUL | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+9 rows in set (0.09 sec)
+
+mysql> create table emp_old_data(
+    -> emp_ssn int(11) primary key,
+    -> firstname varchar(100),
+    -> lastname varchar(100),
+    -> action varchar(10),
+    -> changedate date);
+Query OK, 0 rows affected (1.09 sec)
+
+mysql> desc emp_old_data;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| emp_ssn    | int(11)      | NO   | PRI | NULL    |       |
+| firstname  | varchar(100) | YES  |     | NULL    |       |
+| lastname   | varchar(100) | YES  |     | NULL    |       |
+| action     | varchar(10)  | YES  |     | NULL    |       |
+| changedate | date         | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create trigger before_emp_update
+    -> before update on employee
+    -> for each row
+    -> insert into emp_old_data
+    -> set action='update',
+    -> emp_ssn=OLD.SSN,
+    -> firstname=OLD.FNAME,
+    -> lastname=OLD.LNAME,
+    -> changedate=NOW();
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> show triggers;
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger           | Event  | Table    | Statement                                                                                                                | Timing | Created                | sql_mode                                   | Definer        | character_set_client | collation_connection | Database Collation |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| before_emp_update | UPDATE | employee | insert into emp_old_data
+set action='update',
+emp_ssn=OLD.SSN,
+firstname=OLD.FNAME,
+lastname=OLD.LNAME,
+changedate=NOW() | BEFORE | 2019-10-28 14:39:01.25 | STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+1 row in set (0.03 sec)
+
+mysql> show triggers;
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger           | Event  | Table    | Statement                                                                                                                | Timing | Created                | sql_mode                                   | Definer        | character_set_client | collation_connection | Database Collation |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| before_emp_update | UPDATE | employee | insert into emp_old_data
+set action='update',
+emp_ssn=OLD.SSN,
+firstname=OLD.FNAME,
+lastname=OLD.LNAME,
+changedate=NOW() | BEFORE | 2019-10-28 14:39:01.25 | STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.03 sec)
+
+mysql> update employee set lname='cullen' where ssn=162;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | cullen   | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from emp_old_data;
++---------+-----------+----------+--------+------------+
+| emp_ssn | firstname | lastname | action | changedate |
++---------+-----------+----------+--------+------------+
+|     162 | kalyani   | addanki  | update | 2019-10-28 |
++---------+-----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> ^C
+mysql> ^C
+mysql> ^C
+mysql> create trigger after_delete_emp
+    -> after delete om emloyee
+    -> for each row
+    -> insert into emp_old_data
+    -> set action='delete',
+    -> emp_ssn=OLD.SSN,
+    -> firstname=OLD.FNAME,
+    -> lastname=OLD.LNAME,
+    -> changedate=NOW();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'om emloyee
+for each row
+insert into emp_old_data
+set action='delete',
+emp_ssn=OL' at line 2
+mysql> create trigger after_delete_emp
+    -> after delete on employee
+    -> for each row
+    -> insert into emp_old_data
+    -> set action='delete',
+    -> emp_ssn=OLD.SSN,
+    -> firstname=OLD.FNAME,
+    -> lastname=OLD.LNAME,
+    -> changedate=NOW();
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> show triggers;
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger           | Event  | Table    | Statement                                                                                                                | Timing | Created                | sql_mode                                   | Definer        | character_set_client | collation_connection | Database Collation |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| before_emp_update | UPDATE | employee | insert into emp_old_data
+set action='update',
+emp_ssn=OLD.SSN,
+firstname=OLD.FNAME,
+lastname=OLD.LNAME,
+changedate=NOW() | BEFORE | 2019-10-28 14:39:01.25 | STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| after_delete_emp  | DELETE | employee | insert into emp_old_data
+set action='delete',
+emp_ssn=OLD.SSN,
+firstname=OLD.FNAME,
+lastname=OLD.LNAME,
+changedate=NOW() | AFTER  | 2019-10-28 15:11:06.84 | STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION | root@localhost | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
++-------------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+--------+------------------------+--------------------------------------------+----------------+----------------------+----------------------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from emp_old_data;
++---------+-----------+----------+--------+------------+
+| emp_ssn | firstname | lastname | action | changedate |
++---------+-----------+----------+--------+------------+
+|     162 | kalyani   | addanki  | update | 2019-10-28 |
++---------+-----------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> delete from employee where ssn=162;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`companies`.`department`, CONSTRAINT `department_ibfk_1` FOREIGN KEY (`manager_ssn`) REFERENCES `employee` (`SSN`))
+mysql> select * from  employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | cullen   | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> delete from employee where ssn=166;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`companies`.`dependent`, CONSTRAINT `dependent_ibfk_1` FOREIGN KEY (`employee_ssn`) REFERENCES `employee` (`SSN`))
+mysql> delete from employee where ssn=167;
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from emp_old_data;
++---------+-----------+----------+--------+------------+
+| emp_ssn | firstname | lastname | action | changedate |
++---------+-----------+----------+--------+------------+
+|     162 | kalyani   | addanki  | update | 2019-10-28 |
+|     167 | Arjun     | BASINA   | delete | 2019-10-28 |
++---------+-----------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> create table emp_count
+    -> (count int(11));
+Query OK, 0 rows affected (0.55 sec)
+
+mysql> select * from  employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | cullen   | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> insert into emp_count values(9);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from emp_count;
++-------+
+| count |
++-------+
+|     9 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> create trigger emp_count_on_insert
+    -> after insert on employee 
+    -> for each row 
+    -> update emp_count set count=count+1;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> desc employee;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Fname   | varchar(100) | NO   |     | NULL    |       |
+| Lname   | varchar(100) | NO   |     | NULL    |       |
+| SSN     | int(11)      | NO   | PRI | NULL    |       |
+| Age     | int(3)       | NO   |     | NULL    |       |
+| gender  | varchar(2)   | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
+| Address | varchar(10)  | YES  |     | NULL    |       |
+| Dno     | int(11)      | YES  | MUL | NULL    |       |
+| E_ssn   | int(11)      | YES  | MUL | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+9 rows in set (0.03 sec)
+
+mysql> insert into employee values('Arjun','malhotra',167,'m',1000000,'mumbai',4,161);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values('Arjun','malhotra',167,22,'m',1000000,'mumbai',4,161);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from emp_count;
++-------+
+| count |
++-------+
+|    10 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> create trigger emp_count_on_delete
+    -> before delete on employee
+    -> for each row
+    -> update emp_count set count=count-1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> delete from employee where ssn=167;
+ERROR 1062 (23000): Duplicate entry '167' for key 'PRIMARY'
+mysql> select * from employee;
++---------+----------+-----+-----+--------+---------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary  | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+---------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      |  230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |   18000 | BIMILI     |    5 |   161 |
+| kalyani | cullen   | 162 |  20 | F      |   10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |   50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |   70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |   80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |   90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | malhotra | 167 |  22 | m      | 1000000 | mumbai     |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |   46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |   60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+---------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> delete from employee where address='mumbai';
+ERROR 1062 (23000): Duplicate entry '167' for key 'PRIMARY'
+mysql> select * from emp_count;
++-------+
+| count |
++-------+
+|    10 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> delete from employee where ssn=167;
+ERROR 1062 (23000): Duplicate entry '167' for key 'PRIMARY'
+mysql> delete from employee where ssn=168;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from emp_count;
++-------+
+| count |
++-------+
+|     9 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

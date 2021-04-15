@@ -1,0 +1,56 @@
+mysql> use data
+Database changed
+
+mysql> create function square_num(number int) returns int
+    -> return number*number;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select square_num(8);
++---------------+
+| square_num(8) |
++---------------+
+|            64 |
++---------------+
+1 row in set (0.03 sec)
+
+mysql> create function area_circle(radius float) returns float
+    -> return PI()*radius*radius;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select area_circle(10);
++-------------------+
+| area_circle(10)   |
++-------------------+
+| 314.1592712402344 |
++-------------------+
+1 row in set (0.04 sec)
+
+mysql> select Gender, case when Gender='M' then count(ssn) when Gender='F' then count(ssn) end as no_of_employees from employee group by Gender;
++--------+-----------------+
+| Gender | no_of_employees |
++--------+-----------------+
+| M      |               5 |
+| F      |               6 |
++--------+-----------------+
+2 rows in set (0.10 sec)
+
+
+mysql> select age,case when age%2=0 then 'even number' else 'odd number' end as even_or_odd from employee;
++------+-------------+
+| age  | even_or_odd |
++------+-------------+
+|   25 | odd number  |
+|   21 | odd number  |
+|   20 | even number |
+|   20 | even number |
+|   20 | even number |
+|   22 | even number |
+|   18 | even number |
+|   19 | odd number  |
+|   19 | odd number  |
+|   19 | odd number  |
+|   19 | odd number  |
++------+-------------+
+11 rows in set (0.11 sec)
+
+

@@ -1,0 +1,1514 @@
+mysql> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| rgukt              |
+| sakila             |
+| sys                |
++--------------------+
+11 rows in set (0.30 sec)
+
+mysql> create database company;
+Query OK, 1 row affected (0.36 sec)
+
+mysql> use rgukt;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_rgukt |
++-----------------+
+| employee        |
+| parents         |
+| students        |
++-----------------+
+3 rows in set (0.21 sec)
+
+mysql> select * into company.dbo.employees from rgukt.dbo.employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.dbo.employees from rgukt.dbo.employee' at line 1
+mysql> select * into company.dbo.employees from rgukt.dbo.employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.dbo.employees from rgukt.dbo.employee' at line 1
+mysql> use company;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table employee(
+    -> ssn int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table employee(
+    -> ssn int not null
+    -> Fname varchar(100)
+    -> Lname varchar(100)
+    -> salary int(12)
+    -> DOB varchar(100)
+    -> Gender varchar(100)
+    -> Address varchar(100)
+    -> age int(4)
+    -> Dep_name varchar(100)
+    -> D_name varchar(100)
+    -> p_name varchar(100)
+    -> mobileno varchar(16)
+    -> Designation varchar(100)
+    -> primary key (ssn),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Fname varchar(100)
+Lname varchar(100)
+salary int(12)
+DOB varchar(100)
+Gender var' at line 3
+mysql> create table employee(
+    -> ssn int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create table employee(
+    -> ssn int not null
+    -> Fname varchar(100)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Fname varchar(100)' at line 3
+mysql> create table employee(
+    -> ssn int not null,
+    -> Fname varchar(100),
+    -> Lname varchar(100),
+    -> salary int(12),
+    -> DOB varchar(100),
+    -> Gender varchar(100),
+    -> Address varchar(100),
+    -> age int(4),
+    -> Dep_name varchar(100),
+    -> p_name varchar(100),
+    -> mobileno varchar(16),
+    -> Designation varchar(100),
+    -> primary key (ssn)
+    -> );
+Query OK, 0 rows affected (1.91 sec)
+
+mysql> desc company;
+ERROR 1146 (42S02): Table 'company.company' doesn't exist
+mysql> desc employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ssn         | int(11)      | NO   | PRI | NULL    |       |
+| Fname       | varchar(100) | YES  |     | NULL    |       |
+| Lname       | varchar(100) | YES  |     | NULL    |       |
+| salary      | int(12)      | YES  |     | NULL    |       |
+| DOB         | varchar(100) | YES  |     | NULL    |       |
+| Gender      | varchar(100) | YES  |     | NULL    |       |
+| Address     | varchar(100) | YES  |     | NULL    |       |
+| age         | int(4)       | YES  |     | NULL    |       |
+| Dep_name    | varchar(100) | YES  |     | NULL    |       |
+| p_name      | varchar(100) | YES  |     | NULL    |       |
+| mobileno    | varchar(16)  | YES  |     | NULL    |       |
+| Designation | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.03 sec)
+
+mysql> insert into employee values(160001,'Prasad','Addanki',60000,'31-01_1999','vijayawada',21,'civil','amaravathi','9177953203','teamleader');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employee values(160001,'Prasad','Addanki',60000,'31-01_1999','M','vijayawada',21,'civil','amaravathi','9177953203','teamleader');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from employee;
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+| ssn    | Fname  | Lname   | salary | DOB        | Gender | Address    | age  | Dep_name | p_name     | mobileno   | Designation |
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+| 160001 | Prasad | Addanki |  60000 | 31-01_1999 | M      | vijayawada |   21 | civil    | amaravathi | 9177953203 | teamleader  |
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> use company;
+Database changed
+mysql> select * from employee;
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+| ssn    | Fname  | Lname   | salary | DOB        | Gender | Address    | age  | Dep_name | p_name     | mobileno   | Designation |
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+| 160001 | Prasad | Addanki |  60000 | 31-01_1999 | M      | vijayawada |   21 | civil    | amaravathi | 9177953203 | teamleader  |
++--------+--------+---------+--------+------------+--------+------------+------+----------+------------+------------+-------------+
+1 row in set (0.08 sec)
+
+mysql> insert into employee values(160002,'Mounika','Addanki',65000,'19-08-2001','F','Machipatnam',19,'cse','new language','7997280330','manager');
+Query OK, 1 row affected (0.30 sec)
+
+mysql> Terminal close -- exit!
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| rgukt              |
+| sakila             |
+| sys                |
++--------------------+
+12 rows in set (1.31 sec)
+
+mysql> use company
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| employee          |
++-------------------+
+1 row in set (0.23 sec)
+
+mysql> select *from employee;
++--------+---------+---------+--------+------------+--------+-------------+------+----------+--------------+------------+-------------+
+| ssn    | Fname   | Lname   | salary | DOB        | Gender | Address     | age  | Dep_name | p_name       | mobileno   | Designation |
++--------+---------+---------+--------+------------+--------+-------------+------+----------+--------------+------------+-------------+
+| 160001 | Prasad  | Addanki |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | amaravathi   | 9177953203 | teamleader  |
+| 160002 | Mounika | Addanki |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | new language | 7997280330 | manager     |
++--------+---------+---------+--------+------------+--------+-------------+------+----------+--------------+------------+-------------+
+2 rows in set (0.04 sec)
+
+mysql> desc employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ssn         | int(11)      | NO   | PRI | NULL    |       |
+| Fname       | varchar(100) | YES  |     | NULL    |       |
+| Lname       | varchar(100) | YES  |     | NULL    |       |
+| salary      | int(12)      | YES  |     | NULL    |       |
+| DOB         | varchar(100) | YES  |     | NULL    |       |
+| Gender      | varchar(100) | YES  |     | NULL    |       |
+| Address     | varchar(100) | YES  |     | NULL    |       |
+| age         | int(4)       | YES  |     | NULL    |       |
+| Dep_name    | varchar(100) | YES  |     | NULL    |       |
+| p_name      | varchar(100) | YES  |     | NULL    |       |
+| mobileno    | varchar(16)  | YES  |     | NULL    |       |
+| Designation | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.22 sec)
+
+mysql> insert into employee values(160003,'Arjun','cullen',100000,'28_08_2001','M',Amaravathi',19,'Mech','new robot','9177594851','CEO');
+    '> insert into employee values(160003,'Arjun','cullen',100000,'28_08_2001','M',Amaravathi',19,'Mech','new robot','9177594851','CEO');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '',19,'Mech','new robot','9177594851','CEO');
+insert into employee values(160003,' at line 1
+mysql> insert into employee values(160003,'Arjun','cullen',100000,'28_08_2001','M','Amaravathi',19,'Mech','new robot','9177594851','CEO');
+Query OK, 1 row affected (0.36 sec)
+
+mysql> alter table employee drop column p_name;
+Query OK, 0 rows affected (3.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++--------+---------+---------+--------+------------+--------+-------------+------+----------+------------+-------------+
+| ssn    | Fname   | Lname   | salary | DOB        | Gender | Address     | age  | Dep_name | mobileno   | Designation |
++--------+---------+---------+--------+------------+--------+-------------+------+----------+------------+-------------+
+| 160001 | Prasad  | Addanki |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | 9177953203 | teamleader  |
+| 160002 | Mounika | Addanki |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | 7997280330 | manager     |
+| 160003 | Arjun   | cullen  | 100000 | 28_08_2001 | M      | Amaravathi  |   19 | Mech     | 9177594851 | CEO         |
++--------+---------+---------+--------+------------+--------+-------------+------+----------+------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee values(160004,'Alice','cullen',65000,'2_09_2000','F','guntur',20,'Mech','9189594851','Director');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(160005,'Dharani','siddani',65000,'2_02_2000','F','vizag',20,'che','9189577654','Assisant Director');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employee values(160006,'Sirisha','karumuri',87000,'2_04_1999','F','vizag',21,'che','9966277366','teamleader');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values(160007,'Rajesh','karumuri',75000,'28_11_1998','M','palakollu',21,'che','9966277366','intern');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values(160008,'Mahesh','repaka',75000,'08_11_2001','M','narasapur',18,'EEE','8179501775','intern');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values(160009,'Srinivas','yatam',95000,'31_01_1998','M','Elluru',22,'geology','9640781950','manager');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values(160010,'Sailaja','gudapati',10000,'22_08_1998','F','Gudivada',22,'geology','9640781950','teamleader');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select *from employee;
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+| ssn    | Fname    | Lname    | salary | DOB        | Gender | Address     | age  | Dep_name | mobileno   | Designation       |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+| 160001 | Prasad   | Addanki  |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | 9177953203 | teamleader        |
+| 160002 | Mounika  | Addanki  |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | 7997280330 | manager           |
+| 160003 | Arjun    | cullen   | 100000 | 28_08_2001 | M      | Amaravathi  |   19 | Mech     | 9177594851 | CEO               |
+| 160004 | Alice    | cullen   |  65000 | 2_09_2000  | F      | guntur      |   20 | Mech     | 9189594851 | Director          |
+| 160005 | Dharani  | siddani  |  65000 | 2_02_2000  | F      | vizag       |   20 | che      | 9189577654 | Assisant Director |
+| 160006 | Sirisha  | karumuri |  87000 | 2_04_1999  | F      | vizag       |   21 | che      | 9966277366 | teamleader        |
+| 160007 | Rajesh   | karumuri |  75000 | 28_11_1998 | M      | palakollu   |   21 | che      | 9966277366 | intern            |
+| 160008 | Mahesh   | repaka   |  75000 | 08_11_2001 | M      | narasapur   |   18 | EEE      | 8179501775 | intern            |
+| 160009 | Srinivas | yatam    |  95000 | 31_01_1998 | M      | Elluru      |   22 | geology  | 9640781950 | manager           |
+| 160010 | Sailaja  | gudapati |  10000 | 22_08_1998 | F      | Gudivada    |   22 | geology  | 9640781950 | teamleader        |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> create table Department(
+    -> Dep_name varchar(100) not null,
+    -> Dep_no int(4) not null,
+    -> Dep_location varchar(100),
+    -> primary key (Dep_name),
+    -> primary key(Dep_no)
+    -> );
+ERROR 1068 (42000): Multiple primary key defined
+mysql> create table Department(
+    -> Dep_name varchar(100) not null,
+    -> Dep_no int(4) not null,
+    -> Dep_location varchar(100),
+    -> primary key (Dep_name)
+    -> );
+Query OK, 0 rows affected (0.69 sec)
+
+mysql> select * from Department;
+Empty set (0.00 sec)
+
+mysql> desc Department;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Dep_name     | varchar(100) | NO   | PRI | NULL    |       |
+| Dep_no       | int(4)       | NO   |     | NULL    |       |
+| Dep_location | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Department values('cse',1,'Hyderabad');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into Department values('MECH',2,'Vijayawada');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Department values('IT',3,'Nuzvid');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into Department values('EEE',4,'Vizag');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into Department values('ECE',5,'Gudivada');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into Department values('civil',6,'Amaravathi');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into Department values('geology',7,'Vizag');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into Department values('che',8,'srikakulam');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into Department values('MMe',9,'Vijayanagaram');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Department values('cse',10,'chittor');
+ERROR 1062 (23000): Duplicate entry 'cse' for key 'PRIMARY'
+mysql> insert into Department values('Zoology',10,'chittor');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from Department;
++----------+--------+---------------+
+| Dep_name | Dep_no | Dep_location  |
++----------+--------+---------------+
+| che      |      8 | srikakulam    |
+| civil    |      6 | Amaravathi    |
+| cse      |      1 | Hyderabad     |
+| ECE      |      5 | Gudivada      |
+| EEE      |      4 | Vizag         |
+| geology  |      7 | Vizag         |
+| IT       |      3 | Nuzvid        |
+| MECH     |      2 | Vijayawada    |
+| MMe      |      9 | Vijayanagaram |
+| Zoology  |     10 | chittor       |
++----------+--------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> create table Project(
+    -> p_name varchar(100)'
+    '> p_no varchar(5);
+    '> 
+    '> p_location'
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''
+p_no varchar(5);
+
+p_location'
+)' at line 2
+mysql> create table Project(
+    -> p_name varchar(100),
+    -> p_no varchar(5),
+    -> p_location,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+)' at line 4
+mysql> create table Project(
+    -> p_name varchar(100),
+    -> p_no varchar(5),
+    -> p_location,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+)' at line 4
+mysql> create table Project(
+    -> p_name varchar(100),
+    -> p_no varchar(5) not null,
+    -> p_location varchar(100),
+    -> Dep_name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.94 sec)
+
+mysql> alter table Project
+    -> add primary key(p_no);
+Query OK, 0 rows affected (1.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Project;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| p_name     | varchar(100) | YES  |     | NULL    |       |
+| p_no       | varchar(5)   | NO   | PRI | NULL    |       |
+| p_location | varchar(100) | YES  |     | NULL    |       |
+| Dep_name   | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> insert into Project values('Apple','p1','INDIA','cse');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into Project values('orange','p2','AMERICA','mech');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into Project values('Grapes','p3','Astrallia','civil');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Project values('mango','p4','Africa','ECE');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into Project values('pineapple','p5','italy','EeE');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Project values('Guava','p6','japan','Geology');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into Project values('pappayya','p7','southkorea','che');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Project values('pomeogranate','p8','strawberry','cse');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into Project values('strawberry','p9','india','mech');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Project values('cherry','p10','india','che');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from Project;
++--------------+------+------------+----------+
+| p_name       | p_no | p_location | Dep_name |
++--------------+------+------------+----------+
+| Apple        | p1   | INDIA      | cse      |
+| cherry       | p10  | india      | che      |
+| orange       | p2   | AMERICA    | mech     |
+| Grapes       | p3   | Astrallia  | civil    |
+| mango        | p4   | Africa     | ECE      |
+| pineapple    | p5   | italy      | EeE      |
+| Guava        | p6   | japan      | Geology  |
+| pappayya     | p7   | southkorea | che      |
+| pomeogranate | p8   | strawberry | cse      |
+| strawberry   | p9   | india      | mech     |
++--------------+------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> update Project set p_location='northkorea' where p_no='p8''
+    '> update Project set p_location='northkorea' where p_no='p8';
+    '> update Project set p_location='northkorea' where p_no='p8';
+    '> 
+    '> 
+    '> 
+    '> fygh;
+    '> select * from Project;
+    '> 
+    '> update Project set p_location='northkorea' where p_no='p8';
+    '> Terminal close -- exit!
+mysql> use company;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| department        |
+| employee          |
+| project           |
++-------------------+
+3 rows in set (0.30 sec)
+
+mysql> select * from Project;
++--------------+------+------------+----------+
+| p_name       | p_no | p_location | Dep_name |
++--------------+------+------------+----------+
+| Apple        | p1   | INDIA      | cse      |
+| cherry       | p10  | india      | che      |
+| orange       | p2   | AMERICA    | mech     |
+| Grapes       | p3   | Astrallia  | civil    |
+| mango        | p4   | Africa     | ECE      |
+| pineapple    | p5   | italy      | EeE      |
+| Guava        | p6   | japan      | Geology  |
+| pappayya     | p7   | southkorea | che      |
+| pomeogranate | p8   | strawberry | cse      |
+| strawberry   | p9   | india      | mech     |
++--------------+------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> update project set p_location='north korea' where p_no='p8';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Project;
++--------------+------+-------------+----------+
+| p_name       | p_no | p_location  | Dep_name |
++--------------+------+-------------+----------+
+| Apple        | p1   | INDIA       | cse      |
+| cherry       | p10  | india       | che      |
+| orange       | p2   | AMERICA     | mech     |
+| Grapes       | p3   | Astrallia   | civil    |
+| mango        | p4   | Africa      | ECE      |
+| pineapple    | p5   | italy       | EeE      |
+| Guava        | p6   | japan       | Geology  |
+| pappayya     | p7   | southkorea  | che      |
+| pomeogranate | p8   | north korea | cse      |
+| strawberry   | p9   | india       | mech     |
++--------------+------+-------------+----------+
+10 rows in set (0.04 sec)
+
+mysql> create table dependent(
+    -> dname varchar(10) notnull,
+    -> did int(5),
+    -> daddr varchar(100),
+    -> primary key (did)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'notnull,
+did int(5),
+daddr varchar(100),
+primary key (did)
+)' at line 2
+mysql> create table dependent(
+    -> dname varchar(10) not null,
+    -> did int(5),
+    -> daddr varchar(100),
+    -> primary key (did)
+    -> );
+Query OK, 0 rows affected (1.75 sec)
+
+mysql> insert into dependent values('raji',1,'elluru');
+Query OK, 1 row affected (0.24 sec)
+
+mysql> insert into dependent values('siri',2,'tanuku');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into dependent values('mouni',3,'guntur');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into dependent values('surya',4,'bhimavaram');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values('raji',5,'narasapur');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values('surya',6,'palakollu');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into dependent values('krupa',7,'gudiwada');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values('sravs',8,'elluru');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into dependent values('sandy',9,'guntur');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values('sailu',10,'kaikulur');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from dependent;
++-------+-----+------------+
+| dname | did | daddr      |
++-------+-----+------------+
+| raji  |   1 | elluru     |
+| siri  |   2 | tanuku     |
+| mouni |   3 | guntur     |
+| surya |   4 | bhimavaram |
+| raji  |   5 | narasapur  |
+| surya |   6 | palakollu  |
+| krupa |   7 | gudiwada   |
+| sravs |   8 | elluru     |
+| sandy |   9 | guntur     |
+| sailu |  10 | kaikulur   |
++-------+-----+------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employee
+    -> add foreign key(dep_name) references department(dep_name);
+Query OK, 10 rows affected (2.81 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ssn         | int(11)      | NO   | PRI | NULL    |       |
+| Fname       | varchar(100) | YES  |     | NULL    |       |
+| Lname       | varchar(100) | YES  |     | NULL    |       |
+| salary      | int(12)      | YES  |     | NULL    |       |
+| DOB         | varchar(100) | YES  |     | NULL    |       |
+| Gender      | varchar(100) | YES  |     | NULL    |       |
+| Address     | varchar(100) | YES  |     | NULL    |       |
+| age         | int(4)       | YES  |     | NULL    |       |
+| Dep_name    | varchar(100) | YES  | MUL | NULL    |       |
+| mobileno    | varchar(16)  | YES  |     | NULL    |       |
+| Designation | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+11 rows in set (0.10 sec)
+
+mysql> alter table project
+    -> add foreign key(dep_name) references department(dep_name);
+Query OK, 10 rows affected (1.33 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc project;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| p_name     | varchar(100) | YES  |     | NULL    |       |
+| p_no       | varchar(5)   | NO   | PRI | NULL    |       |
+| p_location | varchar(100) | YES  |     | NULL    |       |
+| Dep_name   | varchar(100) | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> create table works on(
+    -> ssn int (10) not null,
+    -> p_no varchar(10) not null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on(
+ssn int (10) not null,
+p_no varchar(10) not null
+)' at line 1
+mysql> create table works_on(
+    -> ssn int (10) not null,
+    -> p_no varchar(10) not null
+    -> );
+Query OK, 0 rows affected (0.50 sec)
+
+mysql> select * from employee;
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+| ssn    | Fname    | Lname    | salary | DOB        | Gender | Address     | age  | Dep_name | mobileno   | Designation       |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+| 160001 | Prasad   | Addanki  |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | 9177953203 | teamleader        |
+| 160002 | Mounika  | Addanki  |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | 7997280330 | manager           |
+| 160003 | Arjun    | cullen   | 100000 | 28_08_2001 | M      | Amaravathi  |   19 | Mech     | 9177594851 | CEO               |
+| 160004 | Alice    | cullen   |  65000 | 2_09_2000  | F      | guntur      |   20 | Mech     | 9189594851 | Director          |
+| 160005 | Dharani  | siddani  |  65000 | 2_02_2000  | F      | vizag       |   20 | che      | 9189577654 | Assisant Director |
+| 160006 | Sirisha  | karumuri |  87000 | 2_04_1999  | F      | vizag       |   21 | che      | 9966277366 | teamleader        |
+| 160007 | Rajesh   | karumuri |  75000 | 28_11_1998 | M      | palakollu   |   21 | che      | 9966277366 | intern            |
+| 160008 | Mahesh   | repaka   |  75000 | 08_11_2001 | M      | narasapur   |   18 | EEE      | 8179501775 | intern            |
+| 160009 | Srinivas | yatam    |  95000 | 31_01_1998 | M      | Elluru      |   22 | geology  | 9640781950 | manager           |
+| 160010 | Sailaja  | gudapati |  10000 | 22_08_1998 | F      | Gudivada    |   22 | geology  | 9640781950 | teamleader        |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++----------+--------+---------------+
+| Dep_name | Dep_no | Dep_location  |
++----------+--------+---------------+
+| che      |      8 | srikakulam    |
+| civil    |      6 | Amaravathi    |
+| cse      |      1 | Hyderabad     |
+| ECE      |      5 | Gudivada      |
+| EEE      |      4 | Vizag         |
+| geology  |      7 | Vizag         |
+| IT       |      3 | Nuzvid        |
+| MECH     |      2 | Vijayawada    |
+| MMe      |      9 | Vijayanagaram |
+| Zoology  |     10 | chittor       |
++----------+--------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from project; 
++--------------+------+-------------+----------+
+| p_name       | p_no | p_location  | Dep_name |
++--------------+------+-------------+----------+
+| Apple        | p1   | INDIA       | cse      |
+| cherry       | p10  | india       | che      |
+| orange       | p2   | AMERICA     | mech     |
+| Grapes       | p3   | Astrallia   | civil    |
+| mango        | p4   | Africa      | ECE      |
+| pineapple    | p5   | italy       | EeE      |
+| Guava        | p6   | japan       | Geology  |
+| pappayya     | p7   | southkorea  | che      |
+| pomeogranate | p8   | north korea | cse      |
+| strawberry   | p9   | india       | mech     |
++--------------+------+-------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> insert into works_on values(160001,'p1');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into works_on values(160002,'p2');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into works_on values(160003,'p3');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into works_on values(160004,'p4');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into works_on values(160005,'p5');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into works_on values(160006,'p6');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into works_on values(160007,'p7');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into works_on values(160008,'p8');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into works_on values(160009,'p9');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into works_on values(160010,'p10');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from works_on;
++--------+------+
+| ssn    | p_no |
++--------+------+
+| 160001 | p1   |
+| 160002 | p2   |
+| 160003 | p3   |
+| 160004 | p4   |
+| 160005 | p5   |
+| 160006 | p6   |
+| 160007 | p7   |
+| 160008 | p8   |
+| 160009 | p9   |
+| 160010 | p10  |
++--------+------+
+10 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> use company;
+Database changed
+mysql> select * from employee;
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+| ssn    | Fname    | Lname    | salary | DOB        | Gender | Address     | age  | Dep_name | mobileno   | Designation       | e_ssn  |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+| 160001 | Prasad   | Addanki  |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | 9177953203 | teamleader        | 160001 |
+| 160002 | Mounika  | Addanki  |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | 7997280330 | manager           | 160001 |
+| 160003 | Arjun    | cullen   | 100000 | 28_08_2001 | M      | Amaravathi  |   19 | Mech     | 9177594851 | CEO               | 160001 |
+| 160004 | Alice    | cullen   |  65000 | 2_09_2000  | F      | guntur      |   20 | Mech     | 9189594851 | Director          | 160001 |
+| 160005 | Dharani  | siddani  |  65000 | 2_02_2000  | F      | vizag       |   20 | che      | 9189577654 | Assisant Director | 160006 |
+| 160006 | Sirisha  | karumuri |  87000 | 2_04_1999  | F      | vizag       |   21 | che      | 9966277366 | teamleader        | 160006 |
+| 160007 | Rajesh   | karumuri |  75000 | 28_11_1998 | M      | palakollu   |   21 | che      | 9966277366 | intern            | 160006 |
+| 160008 | Mahesh   | repaka   |  75000 | 08_11_2001 | M      | narasapur   |   18 | EEE      | 8179501775 | intern            | 160006 |
+| 160009 | Srinivas | yatam    |  95000 | 31_01_1998 | M      | Elluru      |   22 | geology  | 9640781950 | manager           | 160006 |
+| 160010 | Sailaja  | gudapati |  10000 | 22_08_1998 | F      | Gudivada    |   22 | geology  | 9640781950 | teamleader        | 160006 |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+| ssn    | Fname    | Lname    | salary | DOB        | Gender | Address     | age  | Dep_name | mobileno   | Designation       | e_ssn  |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+| 160001 | Prasad   | Addanki  |  60000 | 31-01_1999 | M      | vijayawada  |   21 | civil    | 9177953203 | teamleader        | 160001 |
+| 160002 | Mounika  | Addanki  |  65000 | 19-08-2001 | F      | Machipatnam |   19 | cse      | 7997280330 | manager           | 160001 |
+| 160003 | Arjun    | cullen   | 100000 | 28_08_2001 | M      | Amaravathi  |   19 | Mech     | 9177594851 | CEO               | 160001 |
+| 160004 | Alice    | cullen   |  65000 | 2_09_2000  | F      | guntur      |   20 | Mech     | 9189594851 | Director          | 160001 |
+| 160005 | Dharani  | siddani  |  65000 | 2_02_2000  | F      | vizag       |   20 | che      | 9189577654 | Assisant Director | 160006 |
+| 160006 | Sirisha  | karumuri |  87000 | 2_04_1999  | F      | vizag       |   21 | che      | 9966277366 | teamleader        | 160006 |
+| 160007 | Rajesh   | karumuri |  75000 | 28_11_1998 | M      | palakollu   |   21 | che      | 9966277366 | intern            | 160006 |
+| 160008 | Mahesh   | repaka   |  75000 | 08_11_2001 | M      | narasapur   |   18 | EEE      | 8179501775 | intern            | 160006 |
+| 160009 | Srinivas | yatam    |  95000 | 31_01_1998 | M      | Elluru      |   22 | geology  | 9640781950 | manager           | 160006 |
+| 160010 | Sailaja  | gudapati |  10000 | 22_08_1998 | F      | Gudivada    |   22 | geology  | 9640781950 | teamleader        | 160006 |
++--------+----------+----------+--------+------------+--------+-------------+------+----------+------------+-------------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employee drop foreign key department;
+ERROR 1091 (42000): Can't DROP 'department'; check that column/key exists
+mysql> select * from department;
++----------+--------+---------------+---------+------------+
+| Dep_name | Dep_no | Dep_location  | emp_ssn | start_date |
++----------+--------+---------------+---------+------------+
+| che      |      8 | srikakulam    |  160006 | 12-08-1989 |
+| civil    |      6 | Amaravathi    |  160004 | 28-08-1987 |
+| cse      |      1 | Hyderabad     |  160008 | 3-11-1970  |
+| ECE      |      5 | Gudivada      |  160003 | 12-05-1990 |
+| EEE      |      4 | Vizag         |  160002 | 1-05-1890  |
+| geology  |      7 | Vizag         |  160005 | 24-09-1990 |
+| IT       |      3 | Nuzvid        |  160001 | 31-08-1899 |
+| MECH     |      2 | Vijayawada    |  160008 | 31-05-1980 |
+| MMe      |      9 | Vijayanagaram |  160007 | 12-08-1999 |
+| Zoology  |     10 | chittor       |  160009 | 12-07-1999 |
++----------+--------+---------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employee drop foreign key Dep_name;
+ERROR 1091 (42000): Can't DROP 'Dep_name'; check that column/key exists
+mysql> alter table department add primary key(Dep_name);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> desc employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ssn         | int(11)      | NO   | PRI | NULL    |       |
+| Fname       | varchar(100) | YES  |     | NULL    |       |
+| Lname       | varchar(100) | YES  |     | NULL    |       |
+| salary      | int(12)      | YES  |     | NULL    |       |
+| DOB         | varchar(100) | YES  |     | NULL    |       |
+| Gender      | varchar(100) | YES  |     | NULL    |       |
+| Address     | varchar(100) | YES  |     | NULL    |       |
+| age         | int(4)       | YES  |     | NULL    |       |
+| Dep_name    | varchar(100) | YES  | MUL | NULL    |       |
+| mobileno    | varchar(16)  | YES  |     | NULL    |       |
+| Designation | varchar(100) | YES  |     | NULL    |       |
+| e_ssn       | int(11)      | YES  | MUL | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc deparment;
+ERROR 1146 (42S02): Table 'company.deparment' doesn't exist
+mysql> desc department;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Dep_name     | varchar(100) | NO   | PRI | NULL    |       |
+| Dep_no       | int(4)       | NO   |     | NULL    |       |
+| Dep_location | varchar(100) | YES  |     | NULL    |       |
+| emp_ssn      | int(11)      | YES  | MUL | NULL    |       |
+| start_date   | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc project;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| p_name     | varchar(100) | YES  |     | NULL    |       |
+| p_no       | varchar(5)   | NO   | PRI | NULL    |       |
+| p_location | varchar(100) | YES  |     | NULL    |       |
+| Dep_name   | varchar(100) | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc dependent;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| dname  | varchar(10)  | NO   |     | NULL    |       |
+| did    | int(5)       | NO   | PRI | NULL    |       |
+| daddr  | varchar(100) | YES  |     | NULL    |       |
+| em_ssn | int(11)      | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where Fname='Alice' and Lname='cullen';
++--------+-------+--------+--------+-----------+--------+---------+------+----------+------------+-------------+--------+
+| ssn    | Fname | Lname  | salary | DOB       | Gender | Address | age  | Dep_name | mobileno   | Designation | e_ssn  |
++--------+-------+--------+--------+-----------+--------+---------+------+----------+------------+-------------+--------+
+| 160004 | Alice | cullen |  65000 | 2_09_2000 | F      | guntur  |   20 | Mech     | 9189594851 | Director    | 160001 |
++--------+-------+--------+--------+-----------+--------+---------+------+----------+------------+-------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where Lname='cullen';
++--------+-------+--------+--------+------------+--------+------------+------+----------+------------+-------------+--------+
+| ssn    | Fname | Lname  | salary | DOB        | Gender | Address    | age  | Dep_name | mobileno   | Designation | e_ssn  |
++--------+-------+--------+--------+------------+--------+------------+------+----------+------------+-------------+--------+
+| 160003 | Arjun | cullen | 100000 | 28_08_2001 | M      | Amaravathi |   19 | Mech     | 9177594851 | CEO         | 160001 |
+| 160004 | Alice | cullen |  65000 | 2_09_2000  | F      | guntur     |   20 | Mech     | 9189594851 | Director    | 160001 |
++--------+-------+--------+--------+------------+--------+------------+------+----------+------------+-------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select Fname,Address from employee where='cse'; 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='cse'' at line 1
+mysql> select Fname,Address from employee where dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'dept_name' in 'where clause'
+mysql> select Fname,Address from employee where Dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'Dept_name' in 'where clause'
+mysql> select Fname,Address from employee,department where employee.Dept_name=department.Dept_name and Dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'employee.Dept_name' in 'where clause'
+mysql> select Fname,Address from employee,department where employee.Dept_name=department.dname and Dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'employee.Dept_name' in 'where clause'
+mysql> select Fname,Address from employee,department where Dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'Dept_name' in 'where clause'
+mysql> select Fname,Address from employee where Dept_name='cse'; 
+ERROR 1054 (42S22): Unknown column 'Dept_name' in 'where clause'
+mysql> select Fname,Address from employee,department where employee.Dept_name=department.Dept_name and Dep_nmae='cse'; 
+ERROR 1054 (42S22): Unknown column 'employee.Dept_name' in 'where clause'
+mysql> select Dept_name from employee ;
+ERROR 1054 (42S22): Unknown column 'Dept_name' in 'field list'
+mysql> select Fname,Address from employee,department where employee.Dept_name=department.Dept_name and Dep_no=1; 
+ERROR 1054 (42S22): Unknown column 'employee.Dept_name' in 'where clause'
+mysql> select Fname,Address from employee,department where employee.Dept_name=department.Dept_name and Dep_no=5; 
+ERROR 1054 (42S22): Unknown column 'employee.Dept_name' in 'where clause'
+mysql> create database companies;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> create table employee
+    -> (
+    -> Fname varchar(100) not null,
+    -> Lname varchar(100) not null,
+    -> SSN int(11) primary key,
+    -> Age int(3) not null,
+    -> gender varchar(2),
+    -> salary int(11),
+    -> Address varchar(10),
+    -> Dno int(11) ,
+    -> E_ssn int(11) 
+    -> );
+ERROR 1050 (42S01): Table 'employee' already exists
+mysql> use companies;
+Database changed
+mysql> create table employee
+    -> (
+    -> Fname varchar(100) not null,
+    -> Lname varchar(100) not null,
+    -> SSN int(11) primary key,
+    -> Age int(3) not null,
+    -> gender varchar(2),
+    -> salary int(11),
+    -> Address varchar(10),
+    -> Dno int(11) ,
+    -> E_ssn int(11) 
+    -> );
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> desc employee;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Fname   | varchar(100) | NO   |     | NULL    |       |
+| Lname   | varchar(100) | NO   |     | NULL    |       |
+| SSN     | int(11)      | NO   | PRI | NULL    |       |
+| Age     | int(3)       | NO   |     | NULL    |       |
+| gender  | varchar(2)   | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
+| Address | varchar(10)  | YES  |     | NULL    |       |
+| Dno     | int(11)      | YES  |     | NULL    |       |
+| E_ssn   | int(11)      | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> insert into employee values('Alice','cullen',160,19,'M',100000,'HYD',1,165);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values('akira','addanki',160,19,'F',100000,'HYD',1,163);
+ERROR 1062 (23000): Duplicate entry '160' for key 'PRIMARY'
+mysql> update employee set gender='F' where Fname='Alice';
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into employee values('kalyani','addanki',162,20,'F',10000,'VIZAG',2,162);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> update employee set SSN=161  where Fname='akira';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> insert into employee values('Murali','Tirumani',163,22,'M',50000,'VIZAG',2,162);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values('Sravani','DONGALA',164,22,'M',70000,'NUZVID',2,163);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into employee values('Janu','BATTU',165,21,'F',80000,'VIJAYAWADA',3,164);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values('SANDHYA','BASINA',166,21,'M',90000,'VIJAYAWADA',4,165);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into employee values('Arjun','BASINA',167,21,'F',10000,'GUDIWADA',4,161);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> update employee set gender='F'  where Fname='SANDHYA';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set gender='M'  where Fname='Arjun';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | M      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update employee set gender='F'  where Fname='Sravani';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into employee values('Arjun','boddu',161,21,'M',18000,'BIMILI',5,161);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employee values('SAILu','boddu',168,21,'F',20000,'BHIMAVARAM',1,160);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employee values('Siri','boddu',169,21,'F',60000,'BHIMAVARAM',3,160);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  20000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table Department (
+    -> Dept_name varchar(100) not null,
+    -> Dept_no int(5) not null,
+    -> manager_ssn int(11) not null,
+    -> start_date varchar(100),
+    -> primary key(Dept_no)
+    -> );
+Query OK, 0 rows affected (0.63 sec)
+
+mysql> desc department;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Dept_name   | varchar(100) | NO   |     | NULL    |       |
+| Dept_no     | int(5)       | NO   | PRI | NULL    |       |
+| manager_ssn | int(11)      | NO   |     | NULL    |       |
+| start_date  | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> insert into department values('cse',1,161,'28_08_1999');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into department values('EcE',2,162,'28_11_1899');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into department values('MECH',3,163,'18_11_1898');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into department values('che',4,164,'7_03_1987');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into department values('MME',5,165,'17_09_1978');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table project
+    -> (
+    -> p_name varchar(10),
+    -> p_id int(11),
+    -> p_loc varchar(10),
+    -> dept_no int(19),
+    -> primary key(p_id)
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> desc project;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| p_name  | varchar(10) | YES  |     | NULL    |       |
+| p_id    | int(11)     | NO   | PRI | NULL    |       |
+| p_loc   | varchar(10) | YES  |     | NULL    |       |
+| dept_no | int(19)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into project values('APple',11,Hyd,'1');
+ERROR 1054 (42S22): Unknown column 'Hyd' in 'field list'
+mysql> insert into project values('APple',11,'Hyd','1');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into project values('Orange',12,'VijAyawada','1');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into project values('Grape',13,'ViZAG','2');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values('cherry',14,'NUZVID','2');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into project values('stawberry',15,'NUZVID','3');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into project values('popcorn',16,'NUZVID','3');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into project values('cake',17,'NUZVID','4');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values('juice',18,'VIZAG','4');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into project values('meow',19,'VIZAG','5');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into project values('bow',20,'hyd','5');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table dependent(
+    -> did int(10),
+    -> employee_ssn int(11),
+    -> dname varchar(100),
+    -> daddress varchar(100)
+    -> );
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> desc dependent;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| did          | int(10)      | YES  |     | NULL    |       |
+| employee_ssn | int(11)      | YES  |     | NULL    |       |
+| dname        | varchar(100) | YES  |     | NULL    |       |
+| daddress     | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into project values(21,160,janu,vijayawada);
+ERROR 1054 (42S22): Unknown column 'janu' in 'field list'
+mysql> insert into project values(21,160,'janu','vijayawada');
+ERROR 1366 (HY000): Incorrect integer value: 'vijayawada' for column 'dept_no' at row 1
+mysql> insert into dependent values(21,160,'janu','vijayawada');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values(22,161,'john','vijayawada');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dependent values(23,162,'jostna','vizag');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dependent values(24,163,'prem','vizag');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into dependent values(25,162,'priya','vizag');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(26,163,'priya','hyd');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into dependent values(27,160,'prakash','hyd');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values(28,165,'kalyani','NUZVID');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into dependent values(29,165,'raju','NUZVID');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values(30,166,'rani','gudiwada');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from dependent;
++------+--------------+---------+------------+
+| did  | employee_ssn | dname   | daddress   |
++------+--------------+---------+------------+
+|   21 |          160 | janu    | vijayawada |
+|   22 |          161 | john    | vijayawada |
+|   23 |          162 | jostna  | vizag      |
+|   24 |          163 | prem    | vizag      |
+|   25 |          162 | priya   | vizag      |
+|   26 |          163 | priya   | hyd        |
+|   27 |          160 | prakash | hyd        |
+|   28 |          165 | kalyani | NUZVID     |
+|   29 |          165 | raju    | NUZVID     |
+|   30 |          166 | rani    | gudiwada   |
++------+--------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> desc employee;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Fname   | varchar(100) | NO   |     | NULL    |       |
+| Lname   | varchar(100) | NO   |     | NULL    |       |
+| SSN     | int(11)      | NO   | PRI | NULL    |       |
+| Age     | int(3)       | NO   |     | NULL    |       |
+| gender  | varchar(2)   | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
+| Address | varchar(10)  | YES  |     | NULL    |       |
+| Dno     | int(11)      | YES  |     | NULL    |       |
+| E_ssn   | int(11)      | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> alter table employee add foreign key(Dno) references Department(Dept_no);
+Query OK, 10 rows affected (1.41 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add foreign key(E_ssn) references employee(ssn);
+Query OK, 10 rows affected (1.18 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table department add foreign key(manager_ssn) references employee(ssn);
+Query OK, 5 rows affected (2.09 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc project;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| p_name  | varchar(10) | YES  |     | NULL    |       |
+| p_id    | int(11)     | NO   | PRI | NULL    |       |
+| p_loc   | varchar(10) | YES  |     | NULL    |       |
+| dept_no | int(19)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.06 sec)
+
+mysql> alter table project add foreign key(dept_no) references department(Dept_no);
+Query OK, 10 rows affected (1.33 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table dependent add foreign key(employee_ssn) references employee(ssn);
+Query OK, 10 rows affected (0.99 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| Fname   | varchar(100) | NO   |     | NULL    |       |
+| Lname   | varchar(100) | NO   |     | NULL    |       |
+| SSN     | int(11)      | NO   | PRI | NULL    |       |
+| Age     | int(3)       | NO   |     | NULL    |       |
+| gender  | varchar(2)   | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
+| Address | varchar(10)  | YES  |     | NULL    |       |
+| Dno     | int(11)      | YES  | MUL | NULL    |       |
+| E_ssn   | int(11)      | YES  | MUL | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+9 rows in set (0.03 sec)
+
+mysql> desc department;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Dept_name   | varchar(100) | NO   |     | NULL    |       |
+| Dept_no     | int(5)       | NO   | PRI | NULL    |       |
+| manager_ssn | int(11)      | NO   | MUL | NULL    |       |
+| start_date  | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc project;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| p_name  | varchar(10) | YES  |     | NULL    |       |
+| p_id    | int(11)     | NO   | PRI | NULL    |       |
+| p_loc   | varchar(10) | YES  |     | NULL    |       |
+| dept_no | int(19)     | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc dependent;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| did          | int(10)      | YES  |     | NULL    |       |
+| employee_ssn | int(11)      | YES  | MUL | NULL    |       |
+| dname        | varchar(100) | YES  |     | NULL    |       |
+| daddress     | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where Fname='Alice' and Lname='cellen';
+Empty set (0.00 sec)
+
+mysql> select * from employee where Fname='Alice' and Lname='cullen';
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Fname | Lname  | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Alice | cullen | 160 |  19 | F      | 100000 | HYD     |    1 |   165 |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select Fname,Lname,Address from employee,department where employee.Dept_no=dependent,Dept_no and Dept_name='cse';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',Dept_no and Dept_name='cse'' at line 1
+mysql> select Fname,Lname,Address from employee,department where employee.Dept_no=dependent.Dept_no and Dept_name='cse';
+ERROR 1054 (42S22): Unknown column 'employee.Dept_no' in 'where clause'
+mysql> select Fname,Lname,Address from employee,department where employee.Dno=dependent.Dept_no and Dept_name='cse';
+ERROR 1054 (42S22): Unknown column 'dependent.Dept_no' in 'where clause'
+mysql> select Fname,Lname,Address from employee,department where employee.Dno=department.Dept_no and Dept_name='cse';
++-------+--------+------------+
+| Fname | Lname  | Address    |
++-------+--------+------------+
+| Alice | cullen | HYD        |
+| SAILu | boddu  | BHIMAVARAM |
++-------+--------+------------+
+2 rows in set (0.03 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  20000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select P.p_id,P.p_name,P.p_loc,D.Dept_name,D.manager_ssn,E.Fname,E.Lname from employee E,department D,project P where p_loc='NUZVID' and D.Dept_no=P.p_id and E.ssn=D.manager_ssn;
+Empty set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  20000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select P.p_id,P.p_name,P.p_loc,D.Dept_name,D.manager_ssn,E.Fname,E.Lname from employee E,department D,project P where p_loc='NUZVID' and D.Dept_no=P.dept_no and E.ssn=D.manager_ssn;
++------+-----------+--------+-----------+-------------+---------+----------+
+| p_id | p_name    | p_loc  | Dept_name | manager_ssn | Fname   | Lname    |
++------+-----------+--------+-----------+-------------+---------+----------+
+|   14 | cherry    | NUZVID | EcE       |         162 | kalyani | addanki  |
+|   15 | stawberry | NUZVID | MECH      |         163 | Murali  | Tirumani |
+|   16 | popcorn   | NUZVID | MECH      |         163 | Murali  | Tirumani |
+|   17 | cake      | NUZVID | che       |         164 | Sravani | DONGALA  |
++------+-----------+--------+-----------+-------------+---------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select distinct salary from employee;
++--------+
+| salary |
++--------+
+| 100000 |
+|  18000 |
+|  10000 |
+|  50000 |
+|  70000 |
+|  80000 |
+|  90000 |
+|  20000 |
+|  60000 |
++--------+
+9 rows in set (0.03 sec)
+
+mysql> select * from employee GROUPBY salary; 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary' at line 1
+mysql> select * from employee GROUP BY salary; 
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| SAILu   | boddu    | 168 |  21 | F      |  20000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 100000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  20000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from dependent;
++------+--------------+---------+------------+
+| did  | employee_ssn | dname   | daddress   |
++------+--------------+---------+------------+
+|   21 |          160 | janu    | vijayawada |
+|   22 |          161 | john    | vijayawada |
+|   23 |          162 | jostna  | vizag      |
+|   24 |          163 | prem    | vizag      |
+|   25 |          162 | priya   | vizag      |
+|   26 |          163 | priya   | hyd        |
+|   27 |          160 | prakash | hyd        |
+|   28 |          165 | kalyani | NUZVID     |
+|   29 |          165 | raju    | NUZVID     |
+|   30 |          166 | rani    | gudiwada   |
++------+--------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> use company;
+Database changed
+mysql> use companies;
+Database changed
+mysql> select * from employee where Lname LIKE "%a%"  and Fname LIKE "S%";
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Sravani | DONGALA | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| SANDHYA | BASINA  | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+2 rows in set (0.04 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where Dept_no=4 and salart BETWEEN 80000 and 100000;
+ERROR 1054 (42S22): Unknown column 'Dept_no' in 'where clause'
+mysql> select * from employee where Dno=4 and salart BETWEEN 80000 and 100000;
+ERROR 1054 (42S22): Unknown column 'salart' in 'where clause'
+mysql> select * from employee where Dno=4 and salary BETWEEN 80000 and 100000;
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname  | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+| SANDHYA | BASINA | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select Lname,Fname,salary from employee where Dno=4 and salary BETWEEN 10000 and 100000;
++--------+---------+--------+
+| Lname  | Fname   | salary |
++--------+---------+--------+
+| BASINA | SANDHYA |  90000 |
+| BASINA | Arjun   |  10000 |
++--------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select Lname,Fname,salary from employee where Dno=2 and salary BETWEEN 10000 and 100000;
++----------+---------+--------+
+| Lname    | Fname   | salary |
++----------+---------+--------+
+| addanki  | kalyani |  10000 |
+| Tirumani | Murali  |  50000 |
+| DONGALA  | Sravani |  70000 |
++----------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select Lname,Fname,salary from employee where Dno=2 and salary BETWEEN 80000 and 100000;
+Empty set (0.00 sec)
+
+mysql> update employee,department set salary=salary+(salary*0.15) where employee.Dno=department.Dept_no and Dept_name='cse';
+Query OK, 2 rows affected (0.10 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> Terminal close -- exit!

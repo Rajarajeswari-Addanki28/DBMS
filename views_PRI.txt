@@ -1,0 +1,182 @@
+mysql> use data
+Database changed
+mysql> create view highest_salary as
+    -> select *from employee where salary>50000;
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> select *from highest_salary;
++---------+-----------------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+| Fname   | Lname           | ssn     | Age  | DOB        | Gender | salary | PHNO       | address    | designation | Dnum | sssn    |
++---------+-----------------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+| Tendela | Suneetha kumari | S160001 |   25 | 1995-04-20 | F      |  63250 | 9177056721 | Srikakulam | Manager     | 1122 | S160001 |
+| Tendela | Mohan babu      | S160032 |   21 | 1999-03-02 | M      |  51750 | 9618602121 | Srikakulam | Manager     | 1211 | S160001 |
+| Pilli   | Lokesh          | S161293 |   18 | 2002-11-26 | M      |  57500 | 9618602121 | Srikakulam | Manager     | 1133 | S160911 |
++---------+-----------------+---------+------+------------+--------+--------+------------+------------+-------------+------+---------+
+3 rows in set (0.15 sec)
+
+mysql> select *from employee;
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Fname     | Lname           | ssn     | Age  | DOB        | Gender | salary | PHNO       | address       | designation | Dnum | sssn    |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Tendela   | Suneetha kumari | S160001 |   25 | 1995-04-20 | F      |  63250 | 9177056721 | Srikakulam    | Manager     | 1122 | S160001 |
+| Tendela   | Mohan babu      | S160032 |   21 | 1999-03-02 | M      |  51750 | 9618602121 | Srikakulam    | Manager     | 1211 | S160001 |
+| Palla     | Gangadhar       | S160336 |   20 | 2000-08-30 | M      |  34500 | 9705753172 | Srikakulam    | Manager     | 1133 | S160001 |
+| Sake      | Santosh         | S160543 |   20 | 1998-09-09 | M      |  25000 | 9145235675 | west godavari | assistant   | 3311 | NULL    |
+| Polisetti | Pavani          | S160894 |   20 | 2000-07-26 | F      |  40250 | 7382381171 | East godavari | Assistant   | 1211 | S160001 |
+| Tendela   | Lokesh          | S160911 |   22 | 1998-09-11 | M      |  34500 | 8096929526 | Vijayawada    | Assmanager  | 1133 | S160911 |
+| Pilli     | Lokesh          | S161293 |   18 | 2002-11-26 | M      |  57500 | 9618602121 | Srikakulam    | Manager     | 1133 | S160911 |
+| Gubbala   | Sri satya       | S161500 |   19 | 2001-06-06 | F      |  30000 | 8074489245 | East godavari | Assistant   | 3311 | S160911 |
+| Akkapolu  | Bhavani         | S161965 |   19 | 2001-03-26 | F      |  35000 | 9705753172 | Vizag         | manager     | 2233 | S160911 |
+| Pilli     | Priyanka        | S161966 |   19 | 2001-07-04 | F      |  46000 | 8096929526 | Srikakulam    | Manager     | 1211 | S161966 |
+| Annepu    | Sandhya rani    | S162056 |   19 | 2001-08-21 | F      |  28750 | 8179296404 | Hyderabad     | Assistant   | 1122 | S161966 |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+11 rows in set (0.00 sec)
+
+mysql>  create view cse_employees as
+    -> select E.* from employee E,department D where E.Dnum=D.Dnum and Dname='computer science';
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select *from cse_employee;
+ERROR 1146 (42S02): Table 'data.cse_employee' doesn't exist
+mysql> select *from cse_employees;
++-----------+------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Fname     | Lname      | ssn     | Age  | DOB        | Gender | salary | PHNO       | address       | designation | Dnum | sssn    |
++-----------+------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Tendela   | Mohan babu | S160032 |   21 | 1999-03-02 | M      |  51750 | 9618602121 | Srikakulam    | Manager     | 1211 | S160001 |
+| Polisetti | Pavani     | S160894 |   20 | 2000-07-26 | F      |  40250 | 7382381171 | East godavari | Assistant   | 1211 | S160001 |
+| Pilli     | Priyanka   | S161966 |   19 | 2001-07-04 | F      |  46000 | 8096929526 | Srikakulam    | Manager     | 1211 | S161966 |
++-----------+------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+3 rows in set (0.06 sec)
+
+mysql> create view senior as
+    -> select *from employee where Age>=20;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select *from senior;
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Fname     | Lname           | ssn     | Age  | DOB        | Gender | salary | PHNO       | address       | designation | Dnum | sssn    |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+| Tendela   | Suneetha kumari | S160001 |   25 | 1995-04-20 | F      |  63250 | 9177056721 | Srikakulam    | Manager     | 1122 | S160001 |
+| Tendela   | Mohan babu      | S160032 |   21 | 1999-03-02 | M      |  51750 | 9618602121 | Srikakulam    | Manager     | 1211 | S160001 |
+| Palla     | Gangadhar       | S160336 |   20 | 2000-08-30 | M      |  34500 | 9705753172 | Srikakulam    | Manager     | 1133 | S160001 |
+| Sake      | Santosh         | S160543 |   20 | 1998-09-09 | M      |  25000 | 9145235675 | west godavari | assistant   | 3311 | NULL    |
+| Polisetti | Pavani          | S160894 |   20 | 2000-07-26 | F      |  40250 | 7382381171 | East godavari | Assistant   | 1211 | S160001 |
+| Tendela   | Lokesh          | S160911 |   22 | 1998-09-11 | M      |  34500 | 8096929526 | Vijayawada    | Assmanager  | 1133 | S160911 |
++-----------+-----------------+---------+------+------------+--------+--------+------------+---------------+-------------+------+---------+
+6 rows in set (0.00 sec)
+
+
+
+mysql> create view employee_projects_hours as
+    -> select Fname,Lname,count(wpid) as no_of_projects,sum(hours) as total_hours_spent from employee,workson where wssn=ssn group by wssn;
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> select *from employee_projects_hours;
++-----------+-----------------+----------------+-------------------+
+| Fname     | Lname           | no_of_projects | total_hours_spent |
++-----------+-----------------+----------------+-------------------+
+| Tendela   | Suneetha kumari |              1 |                 5 |
+| Tendela   | Mohan babu      |              1 |                 3 |
+| Palla     | Gangadhar       |              1 |                 8 |
+| Polisetti | Pavani          |              2 |                10 |
+| Tendela   | Lokesh          |              2 |                14 |
+| Pilli     | Lokesh          |              1 |                 4 |
+| Gubbala   | Sri satya       |              3 |                 9 |
+| Pilli     | Priyanka        |              3 |                15 |
+| Annepu    | Sandhya rani    |              1 |                 6 |
++-----------+-----------------+----------------+-------------------+
+9 rows in set (0.01 sec)
+
+
+
+mysql> select Dname,count(ssn) from employee,department where employee.Dnum=department.Dnum group by Dname;
++------------------+------------+
+| Dname            | count(ssn) |
++------------------+------------+
+| chemical         |          1 |
+| civil            |          2 |
+| computer science |          3 |
+| Electronic       |          2 |
+| mechanical       |          3 |
++------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> drop view department_employees_projects;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create view department_employees as
+    -> select Dname,count(ssn) from employee,department where employee.Dnum=department.Dnum group by Dname;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select *from department_employees;
++------------------+------------+
+| Dname            | count(ssn) |
++------------------+------------+
+| chemical         |          1 |
+| civil            |          2 |
+| computer science |          3 |
+| Electronic       |          2 |
+| mechanical       |          3 |
++------------------+------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+mysql> create view department_projects as
+    -> select Dname,count(Pid) as no_of_projects from department,project where department.Dnum=project.Dnum group by Dname;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select *from department_projects;
++------------------+----------------+
+| Dname            | no_of_projects |
++------------------+----------------+
+| civil            |              2 |
+| computer science |              3 |
+| Electronic       |              3 |
+| mechanical       |              2 |
++------------------+----------------+
+4 rows in set (0.03 sec)
+
+
+
+
+mysql>  create view department_wise_projects as select E.*,no_of_projects from department_employees E,department_projects P where E.Dname=P.Dname;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select *from department_wise_projects;
++------------------+------------+----------------+
+| Dname            | count(ssn) | no_of_projects |
++------------------+------------+----------------+
+| civil            |          2 |              2 |
+| computer science |          3 |              3 |
+| Electronic       |          2 |              3 |
+| mechanical       |          3 |              2 |
++------------------+------------+----------------+
+4 rows in set (0.03 sec)
+
+
+mysql> SELECT *FROM department_wise_projects where no_of_projects=(select max(no_of_projects) from department_wise_projects);
++------------------+------------+----------------+
+| Dname            | count(ssn) | no_of_projects |
++------------------+------------+----------------+
+| computer science |          3 |              3 |
+| Electronic       |          2 |              3 |
++------------------+------------+----------------+
+2 rows in set (0.04 sec)
+
+mysql> create view highest_projects as
+    -> select *from department_wise_projects where no_of_projects=(select max(no_of_projects) from department_wise_projects);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> select *from highest_projects;
++------------------+------------+----------------+
+| Dname            | count(ssn) | no_of_projects |
++------------------+------------+----------------+
+| computer science |          3 |              3 |
+| Electronic       |          2 |              3 |
++------------------+------------+----------------+
+2 rows in set (0.00 sec)
+

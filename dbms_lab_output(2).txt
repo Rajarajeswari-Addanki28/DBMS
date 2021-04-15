@@ -1,0 +1,547 @@
+mysql> USE DBMS_LAB;
+Database changed
+mysql> CREATE TABLE EMPLOYEE(FNAME CHAR(20),LNAME CHAR(20),SSN INT,AGE INT,GENDER CHAR(10),SALARY INT,ADDRESS VARCHAR(50));
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> CREATE TABLE DEPARTMENT(DNAME CHAR(20),DNUM INT PRIMARY KEY,STARTING_DATE DATE);
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> CREATE TABLE PROJECT(PNAME CHAR(20),PID INT PRIMARY KEY,PLOCATION CHAR(20));
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> CREATE TABLE DEPENDENT(DEP_NAME CHAR(20),DEP_ID INT,DEP_ADDRESS CHAR(50));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> ALTER TABLE EMPLOYEE ADD PRIMARY KEY(SSN);
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| FNAME   | char(20)    | YES  |     | NULL    |       |
+| LNAME   | char(20)    | YES  |     | NULL    |       |
+| SSN     | int(11)     | NO   | PRI | 0       |       |
+| AGE     | int(11)     | YES  |     | NULL    |       |
+| GENDER  | char(10)    | YES  |     | NULL    |       |
+| SALARY  | int(11)     | YES  |     | NULL    |       |
+| ADDRESS | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.05 sec)
+
+mysql> DESC DEPARTMENT;
++---------------+----------+------+-----+---------+-------+
+| Field         | Type     | Null | Key | Default | Extra |
++---------------+----------+------+-----+---------+-------+
+| DNAME         | char(20) | YES  |     | NULL    |       |
+| DNUM          | int(11)  | NO   | PRI | NULL    |       |
+| STARTING_DATE | date     | YES  |     | NULL    |       |
++---------------+----------+------+-----+---------+-------+
+3 rows in set (0.07 sec)
+
+mysql> DESC PROJECT;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| PNAME     | char(20) | YES  |     | NULL    |       |
+| PID       | int(11)  | NO   | PRI | NULL    |       |
+| PLOCATION | char(20) | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> DESC DEPENDENT;
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| DEP_NAME    | char(20) | YES  |     | NULL    |       |
+| DEP_ID      | int(11)  | YES  |     | NULL    |       |
+| DEP_ADDRESS | char(50) | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("JHITENDRA","VANDRINKI",130696,21,"MALE",100000,"VIJAYAWADA");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("DIVYA","CHIKATI",130713,20,"FEMALE",700000,"VIJAYAWADA");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("SATYA DIVYA","PEDAPATI",130428,20,"FEMALE",700000,"EAST GODAVARI");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("LOKESH KUMAR","MORI",130394,22,"MALE",900000,"WEST GODAVARI");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("BASHEERA","SHAIK",130430,21,"FEMALE",900000,"WEST GODAVARI");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("CHINNA NAIK","MUDAVATH",130398,24,"MALE",800000,"GUNTUR");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("KALYAN CHANDU","PEKALA",130644,22,"MALE",100000,"SRIKAKULAM");
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("VIMALA KUMARI","SAHUKARI",130728,20,"FEMALE",100000,"SRIKAKULAM");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("JOHN","SAMUEL",130640,23,"MALE",600000,"MALE");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("SATISH","KUMAR",130652,23,"MALE",600000,"MALE");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES("CHANDINI","JITH",130999,23,"FEMALE",600000,"VIJAYAWADA");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> UPDATE EMPLOYEE SET ADDRESS="ELURE" WHERE SSN=130640;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE EMPLOYEE SET ADDRESS="SRIKAKULAM" WHERE SSN=130652;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++---------------+-----------+--------+------+--------+--------+---------------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       |
++---------------+-----------+--------+------+--------+--------+---------------+
+| LOKESH KUMAR  | MORI      | 130394 |   22 | MALE   | 900000 | WEST GODAVARI |
+| CHINNA NAIK   | MUDAVATH  | 130398 |   24 | MALE   | 800000 | GUNTUR        |
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 700000 | EAST GODAVARI |
+| BASHEERA      | SHAIK     | 130430 |   21 | FEMALE | 900000 | WEST GODAVARI |
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE         |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    |
+| SATISH        | KUMAR     | 130652 |   23 | MALE   | 600000 | SRIKAKULAM    |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    |
+| DIVYA         | CHIKATI   | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    |
+| CHANDINI      | JITH      | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA    |
++---------------+-----------+--------+------+--------+--------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("RESEARCH",1234,"HYDERABAD");
+ERROR 1292 (22007): Incorrect date value: 'HYDERABAD' for column 'STARTING_DATE' at row 1
+mysql> INSERT INTO DEPARTMENT VALUES("RESEARCH",1234,NOW());
+Query OK, 1 row affected, 1 warning (0.08 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("COMPUTERS",1134,NOW());
+Query OK, 1 row affected, 1 warning (0.03 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("ROBOTICS",145,NOW());
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("ENVIRONMENT SCIENCE",1454,NOW());
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("SCIENTISTS ISRO",1254,NOW());
+Query OK, 1 row affected, 1 warning (0.05 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES("TEACHING",1224,NOW());
+Query OK, 1 row affected, 1 warning (0.07 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++---------------------+------+---------------+
+| DNAME               | DNUM | STARTING_DATE |
++---------------------+------+---------------+
+| ROBOTICS            |  145 | 2017-08-13    |
+| COMPUTERS           | 1134 | 2017-08-13    |
+| TEACHING            | 1224 | 2017-08-13    |
+| RESEARCH            | 1234 | 2017-08-13    |
+| SCIENTISTS ISRO     | 1254 | 2017-08-13    |
+| ENVIRONMENT SCIENCE | 1454 | 2017-08-13    |
++---------------------+------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE SET DNUM="1456" WHERE DNAME="ROBOTICS";
+ERROR 1054 (42S22): Unknown column 'DNAME' in 'where clause'
+mysql> UPDATE DEPARTMENT SET DNUM="1456" WHERE DNAME="ROBOTICS";
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM DEPARTMENT;
++---------------------+------+---------------+
+| DNAME               | DNUM | STARTING_DATE |
++---------------------+------+---------------+
+| COMPUTERS           | 1134 | 2017-08-13    |
+| TEACHING            | 1224 | 2017-08-13    |
+| RESEARCH            | 1234 | 2017-08-13    |
+| SCIENTISTS ISRO     | 1254 | 2017-08-13    |
+| ENVIRONMENT SCIENCE | 1454 | 2017-08-13    |
+| ROBOTICS            | 1456 | 2017-08-13    |
++---------------------+------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++---------------+-----------+--------+------+--------+--------+---------------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       |
++---------------+-----------+--------+------+--------+--------+---------------+
+| LOKESH KUMAR  | MORI      | 130394 |   22 | MALE   | 900000 | WEST GODAVARI |
+| CHINNA NAIK   | MUDAVATH  | 130398 |   24 | MALE   | 800000 | GUNTUR        |
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 700000 | EAST GODAVARI |
+| BASHEERA      | SHAIK     | 130430 |   21 | FEMALE | 900000 | WEST GODAVARI |
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE         |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    |
+| SATISH        | KUMAR     | 130652 |   23 | MALE   | 600000 | SRIKAKULAM    |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    |
+| DIVYA         | CHIKATI   | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    |
+| CHANDINI      | JITH      | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA    |
++---------------+-----------+--------+------+--------+--------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++---------------------+------+---------------+
+| DNAME               | DNUM | STARTING_DATE |
++---------------------+------+---------------+
+| COMPUTERS           | 1134 | 2017-08-13    |
+| TEACHING            | 1224 | 2017-08-13    |
+| RESEARCH            | 1234 | 2017-08-13    |
+| SCIENTISTS ISRO     | 1254 | 2017-08-13    |
+| ENVIRONMENT SCIENCE | 1454 | 2017-08-13    |
+| ROBOTICS            | 1456 | 2017-08-13    |
++---------------------+------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE FNAME="JOHN" AND LNAME="SAMUEL";
++-------+--------+--------+------+--------+--------+---------+--------+------+
+| FNAME | LNAME  | SSN    | AGE  | GENDER | SALARY | ADDRESS | SSSN   | DNO  |
++-------+--------+--------+------+--------+--------+---------+--------+------+
+| JOHN  | SAMUEL | 130640 |   23 | MALE   | 600000 | ELURE   | 130696 | 1134 |
++-------+--------+--------+------+--------+--------+---------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT FNAME,LNAME,ADDRESS FROM EMPLOYEE,DEPARTMENT WHERE DNUM=DNO AND DNAME="RESEARCH";
++-------------+----------+---------------+
+| FNAME       | LNAME    | ADDRESS       |
++-------------+----------+---------------+
+| CHINNA NAIK | MUDAVATH | GUNTUR        |
+| SATYA DIVYA | PEDAPATI | EAST GODAVARI |
++-------------+----------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT P.PID,P.DNO,E.FNAME,E.LNAME,D.MGRSSN,E.ADDRESS,P.PLOCATION FROM EMPLOYEE E,DEPARTMENT D,PROJECT P WHERE D.DNUM=P.DNO AND P.PLOCATION="HYDERABAD" AND D.MGRSSN=E.SSN AND D.DNUM=E.DNO;
++------+------+---------------+-----------+--------+------------+-----------+
+| PID  | DNO  | FNAME         | LNAME     | MGRSSN | ADDRESS    | PLOCATION |
++------+------+---------------+-----------+--------+------------+-----------+
+| 1080 | 1134 | JHITENDRA     | VANDRINKI | 130696 | VIJAYAWADA | HYDERABAD |
+| 1190 | 1224 | KALYAN CHANDU | PEKALA    | 130644 | SRIKAKULAM | HYDERABAD |
+| 1290 | 1454 | SATISH        | KUMAR     | 130652 | SRIKAKULAM | HYDERABAD |
++------+------+---------------+-----------+--------+------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT A.FNAME AS SUPERVISOR_FNAME,A.LNAME AS SUPERVISOR_LNAME,B.FNAME AS EMP_FNAME,B.LNAME AS EMP_LNAME FROM EMPLOYEE A,EMPLOYEE B WHERE A.SSN=B.SSSN;
++------------------+------------------+---------------+-----------+
+| SUPERVISOR_FNAME | SUPERVISOR_LNAME | EMP_FNAME     | EMP_LNAME |
++------------------+------------------+---------------+-----------+
+| LOKESH KUMAR     | MORI             | CHINNA NAIK   | MUDAVATH  |
+| LOKESH KUMAR     | MORI             | BASHEERA      | SHAIK     |
+| KALYAN CHANDU    | PEKALA           | LOKESH KUMAR  | MORI      |
+| KALYAN CHANDU    | PEKALA           | KALYAN CHANDU | PEKALA    |
+| JHITENDRA        | VANDRINKI        | SATYA DIVYA   | PEDAPATI  |
+| JHITENDRA        | VANDRINKI        | JOHN          | SAMUEL    |
+| JHITENDRA        | VANDRINKI        | SATISH        | KUMAR     |
+| JHITENDRA        | VANDRINKI        | JHITENDRA     | VANDRINKI |
+| JHITENDRA        | VANDRINKI        | DIVYA         | CHIKATI   |
+| JHITENDRA        | VANDRINKI        | VIMALA KUMARI | SAHUKARI  |
+| JHITENDRA        | VANDRINKI        | CHANDINI      | JITH      |
++------------------+------------------+---------------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT SALARY FROM EMPLOYEE;
++--------+
+| SALARY |
++--------+
+| 900000 |
+| 800000 |
+| 700000 |
+| 600000 |
+| 100000 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT A.* FROM EMPLOYEE A,EMPLOYEE B WHERE A.SALARY<>B.SALARY GROUP BY SALARY;
++---------------+----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME         | LNAME    | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++---------------+----------+--------+------+--------+--------+---------------+--------+------+
+| KALYAN CHANDU | PEKALA   | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 |
+| JOHN          | SAMUEL   | 130640 |   23 | MALE   | 600000 | ELURE         | 130696 | 1134 |
+| SATYA DIVYA   | PEDAPATI | 130428 |   20 | FEMALE | 700000 | EAST GODAVARI | 130696 | 1234 |
+| CHINNA NAIK   | MUDAVATH | 130398 |   24 | MALE   | 800000 | GUNTUR        | 130394 | 1234 |
+| LOKESH KUMAR  | MORI     | 130394 |   22 | MALE   | 900000 | WEST GODAVARI | 130644 | 1456 |
++---------------+----------+--------+------+--------+--------+---------------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT PRID,FNAME,LNAME,P.DNO FROM EMPLOYEE E,WORKSON,DEPARTMENT D,PROJECT P WHERE FNAME LIKE "%DIVYA%" AND (SSN=ESSN OR MGRSSN=ESSN) AND P.DNO=D.DNUM AND PID=PRID;
++------+-------------+----------+------+
+| PRID | FNAME       | LNAME    | DNO  |
++------+-------------+----------+------+
+| 1680 | SATYA DIVYA | PEDAPATI | 1454 |
+| 1080 | SATYA DIVYA | PEDAPATI | 1134 |
+| 1180 | DIVYA       | CHIKATI  | 1234 |
+| 1280 | DIVYA       | CHIKATI  | 1254 |
+| 1680 | DIVYA       | CHIKATI  | 1454 |
++------+-------------+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE LNAME LIKE "%IK%" AND FNAME LIKE "D%";
++-------+---------+--------+------+--------+--------+------------+--------+------+
+| FNAME | LNAME   | SSN    | AGE  | GENDER | SALARY | ADDRESS    | SSSN   | DNO  |
++-------+---------+--------+------+--------+--------+------------+--------+------+
+| DIVYA | CHIKATI | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA | 130696 | 1134 |
++-------+---------+--------+------+--------+--------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE DNO=1134 AND SALARY BETWEEN 600000 AND 1000000;
++----------+---------+--------+------+--------+--------+------------+--------+------+
+| FNAME    | LNAME   | SSN    | AGE  | GENDER | SALARY | ADDRESS    | SSSN   | DNO  |
++----------+---------+--------+------+--------+--------+------------+--------+------+
+| JOHN     | SAMUEL  | 130640 |   23 | MALE   | 600000 | ELURE      | 130696 | 1134 |
+| DIVYA    | CHIKATI | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA | 130696 | 1134 |
+| CHANDINI | JITH    | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA | 130696 | 1134 |
++----------+---------+--------+------+--------+--------+------------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE,DEPARTMENT SET SALARY=SALARY+(SALARY*0.15) WHERE DNO=DNUM AND DNAME="RESEARCH";
+Query OK, 2 rows affected (0.10 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPARTMENT WHERE DNUM=DNO ORDER BY DNAME;
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+---------------------+------+---------------+--------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  | DNAME               | DNUM | STARTING_DATE | MGRSSN |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+---------------------+------+---------------+--------+
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE         | 130696 | 1134 | COMPUTERS           | 1134 | 2017-08-13    | 130696 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 | COMPUTERS           | 1134 | 2017-08-13    | 130696 |
+| DIVYA         | CHIKATI   | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    | 130696 | 1134 | COMPUTERS           | 1134 | 2017-08-13    | 130696 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    | 130696 | 1134 | COMPUTERS           | 1134 | 2017-08-13    | 130696 |
+| CHANDINI      | JITH      | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA    | 130696 | 1134 | COMPUTERS           | 1134 | 2017-08-13    | 130696 |
+| SATISH        | KUMAR     | 130652 |   23 | MALE   | 600000 | SRIKAKULAM    | 130696 | 1454 | ENVIRONMENT SCIENCE | 1454 | 2017-08-13    | 130652 |
+| CHINNA NAIK   | MUDAVATH  | 130398 |   24 | MALE   | 920000 | GUNTUR        | 130394 | 1234 | RESEARCH            | 1234 | 2017-08-13    | 130428 |
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 | RESEARCH            | 1234 | 2017-08-13    | 130428 |
+| LOKESH KUMAR  | MORI      | 130394 |   22 | MALE   | 900000 | WEST GODAVARI | 130644 | 1456 | ROBOTICS            | 1456 | 2017-08-13    | 130394 |
+| BASHEERA      | SHAIK     | 130430 |   21 | FEMALE | 900000 | WEST GODAVARI | 130394 | 1254 | SCIENTISTS ISRO     | 1254 | 2017-08-13    | 130430 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 | TEACHING            | 1224 | 2017-08-13    | 130644 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+---------------------+------+---------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT E.*,P.PID FROM EMPLOYEE E,PROJECT P,DEPARTMENT D WHERE E.DNO=P.DNO AND E.DNO=1134 AND P.DNO=D.DNUM;
++---------------+-----------+--------+------+--------+--------+------------+--------+------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS    | SSSN   | DNO  | PID  |
++---------------+-----------+--------+------+--------+--------+------------+--------+------+------+
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE      | 130696 | 1134 | 1080 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA | 130696 | 1134 | 1080 |
+| DIVYA         | CHIKATI   | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA | 130696 | 1134 | 1080 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM | 130696 | 1134 | 1080 |
+| CHANDINI      | JITH      | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA | 130696 | 1134 | 1080 |
++---------------+-----------+--------+------+--------+--------+------------+--------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPENDENT WHERE ESSN=SSN;
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE         | 130696 | 1134 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    | 130696 | 1134 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPENDENT,DEPARTMENT WHERE ESSN=MGRSSN AND SSN=MGRSSN;
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPENDENT,DEPARTMENT WHERE ESSN=MGRSSN AND SSN=ESSN;
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT E.*,PRID FROM EMPLOYEE E,WORKSON W WHERE PRID IN (1080,1180,1290) AND ESSN=SSN; 
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  | PRID |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+------+
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 | 1290 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    | 130696 | 1134 | 1180 |
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 | 1080 |
+| DIVYA         | CHIKATI   | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    | 130696 | 1134 | 1180 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 | 1180 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPENDENT WHERE ESSN=SSN GROUP BY SSN HAVING COUNT(ESSN) >1;
++-----------+-----------+--------+------+--------+--------+------------+--------+------+
+| FNAME     | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS    | SSSN   | DNO  |
++-----------+-----------+--------+------+--------+--------+------------+--------+------+
+| JHITENDRA | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA | 130696 | 1134 |
++-----------+-----------+--------+------+--------+--------+------------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPENDENT WHERE EXISTS(SELECT ESSN FROM DEPENDENT WHERE SSN=ESSN) AND SSN=ESSN;
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME         | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+| SATYA DIVYA   | PEDAPATI  | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| JOHN          | SAMUEL    | 130640 |   23 | MALE   | 600000 | ELURE         | 130696 | 1134 |
+| KALYAN CHANDU | PEKALA    | 130644 |   22 | MALE   | 100000 | SRIKAKULAM    | 130644 | 1224 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| JHITENDRA     | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA    | 130696 | 1134 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |   20 | FEMALE | 100000 | SRIKAKULAM    | 130696 | 1134 |
++---------------+-----------+--------+------+--------+--------+---------------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DNAME,COUNT(SSN) AS NO_OF_EMPLOYEES FROM EMPLOYEE E,DEPARTMENT D WHERE DNUM=DNO GROUP BY DNAME;
++---------------------+-----------------+
+| DNAME               | NO_OF_EMPLOYEES |
++---------------------+-----------------+
+| COMPUTERS           |               5 |
+| ENVIRONMENT SCIENCE |               1 |
+| RESEARCH            |               2 |
+| ROBOTICS            |               1 |
+| SCIENTISTS ISRO     |               1 |
+| TEACHING            |               1 |
++---------------------+-----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT FNAME,LNAME,SSN,COUNT(DEP_ID) AS NO_OF_DEPENDENTS FROM EMPLOYEE,DEPENDENT WHERE ESSN=SSN GROUP BY SSN;
++---------------+-----------+--------+------------------+
+| FNAME         | LNAME     | SSN    | NO_OF_DEPENDENTS |
++---------------+-----------+--------+------------------+
+| SATYA DIVYA   | PEDAPATI  | 130428 |                1 |
+| JOHN          | SAMUEL    | 130640 |                1 |
+| KALYAN CHANDU | PEKALA    | 130644 |                1 |
+| JHITENDRA     | VANDRINKI | 130696 |                2 |
+| VIMALA KUMARI | SAHUKARI  | 130728 |                1 |
++---------------+-----------+--------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE SALARY > (SELECT MAX(SALARY) FROM EMPLOYEE,DEPARTMENT WHERE DNO=DNUM AND DNUM=1454);
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME        | LNAME    | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+| LOKESH KUMAR | MORI     | 130394 |   22 | MALE   | 900000 | WEST GODAVARI | 130644 | 1456 |
+| CHINNA NAIK  | MUDAVATH | 130398 |   24 | MALE   | 920000 | GUNTUR        | 130394 | 1234 |
+| SATYA DIVYA  | PEDAPATI | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| BASHEERA     | SHAIK    | 130430 |   21 | FEMALE | 900000 | WEST GODAVARI | 130394 | 1254 |
+| DIVYA        | CHIKATI  | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    | 130696 | 1134 |
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT E.* FROM EMPLOYEE E,DEPARTMENT WHERE DNO=DNUM AND DNAME="RESEARCH" AND LNAME LIKE "%DA%";
++-------------+----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME       | LNAME    | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++-------------+----------+--------+------+--------+--------+---------------+--------+------+
+| CHINNA NAIK | MUDAVATH | 130398 |   24 | MALE   | 920000 | GUNTUR        | 130394 | 1234 |
+| SATYA DIVYA | PEDAPATI | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
++-------------+----------+--------+------+--------+--------+---------------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT FNAME,LNAME,SSN,PRID,SUM(HOURS) AS NO_OF_HOURS_SPENT FROM EMPLOYEE E,WORKSON W,PROJECT P WHERE SSN=ESSN AND E.DNO=P.DNO GROUP BY ESSN; 
++---------------+-----------+--------+------+-------------------+
+| FNAME         | LNAME     | SSN    | PRID | NO_OF_HOURS_SPENT |
++---------------+-----------+--------+------+-------------------+
+| SATYA DIVYA   | PEDAPATI  | 130428 | 1680 |                28 |
+| JOHN          | SAMUEL    | 130640 | 1680 |                18 |
+| KALYAN CHANDU | PEKALA    | 130644 | 1280 |                28 |
+| JHITENDRA     | VANDRINKI | 130696 | 1280 |                36 |
+| DIVYA         | CHIKATI   | 130713 | 1180 |                42 |
+| VIMALA KUMARI | SAHUKARI  | 130728 | 1180 |                30 |
++---------------+-----------+--------+------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(DISTINCT SSSN) AS NO_OF_SUPERVISORS FROM EMPLOYEE;
++-------------------+
+| NO_OF_SUPERVISORS |
++-------------------+
+|                 3 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT GENDER,COUNT(SSN) FROM EMPLOYEE GROUP BY GENDER;
++--------+------------+
+| GENDER | COUNT(SSN) |
++--------+------------+
+| FEMALE |          5 |
+| MALE   |          6 |
++--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE SALARY > (SELECT AVG(SALARY) FROM EMPLOYEE);
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+| FNAME        | LNAME    | SSN    | AGE  | GENDER | SALARY | ADDRESS       | SSSN   | DNO  |
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+| LOKESH KUMAR | MORI     | 130394 |   22 | MALE   | 900000 | WEST GODAVARI | 130644 | 1456 |
+| CHINNA NAIK  | MUDAVATH | 130398 |   24 | MALE   | 920000 | GUNTUR        | 130394 | 1234 |
+| SATYA DIVYA  | PEDAPATI | 130428 |   20 | FEMALE | 805000 | EAST GODAVARI | 130696 | 1234 |
+| BASHEERA     | SHAIK    | 130430 |   21 | FEMALE | 900000 | WEST GODAVARI | 130394 | 1254 |
+| JOHN         | SAMUEL   | 130640 |   23 | MALE   | 600000 | ELURE         | 130696 | 1134 |
+| SATISH       | KUMAR    | 130652 |   23 | MALE   | 600000 | SRIKAKULAM    | 130696 | 1454 |
+| DIVYA        | CHIKATI  | 130713 |   20 | FEMALE | 700000 | VIJAYAWADA    | 130696 | 1134 |
+| CHANDINI     | JITH     | 130999 |   23 | FEMALE | 600000 | VIJAYAWADA    | 130696 | 1134 |
++--------------+----------+--------+------+--------+--------+---------------+--------+------+
+8 rows in set (0.03 sec)
+
+mysql> SELECT MAX(SALARY),MIN(SALARY),AVG(SALARY),SUM(SALARY) FROM EMPLOYEE;
++-------------+-------------+-------------+-------------+
+| MAX(SALARY) | MIN(SALARY) | AVG(SALARY) | SUM(SALARY) |
++-------------+-------------+-------------+-------------+
+|      920000 |      100000 | 575000.0000 |     6325000 |
++-------------+-------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE SSSN IS NULL;
++-----------+-----------+--------+------+--------+--------+------------+------+------+
+| FNAME     | LNAME     | SSN    | AGE  | GENDER | SALARY | ADDRESS    | SSSN | DNO  |
++-----------+-----------+--------+------+--------+--------+------------+------+------+
+| JHITENDRA | VANDRINKI | 130696 |   21 | MALE   | 100000 | VIJAYAWADA | NULL | 1134 |
++-----------+-----------+--------+------+--------+--------+------------+------+------+
+1 row in set (0.03 sec)
+
+mysql> SELECT UPPER(FNAME) AS FNAME_UPPER , LOWER(LNAME) AS LNAME_LOWER FROM EMPLOYEE;
++---------------+-------------+
+| FNAME_UPPER   | LNAME_LOWER |
++---------------+-------------+
+| LOKESH KUMAR  | mori        |
+| CHINNA NAIK   | mudavath    |
+| SATYA DIVYA   | pedapati    |
+| BASHEERA      | shaik       |
+| JOHN          | samuel      |
+| KALYAN CHANDU | pekala      |
+| SATISH        | kumar       |
+| JHITENDRA     | vandrinki   |
+| DIVYA         | chikati     |
+| VIMALA KUMARI | sahukari    |
+| CHANDINI      | jith        |
++---------------+-------------+
+11 rows in set (0.05 sec)
+
+mysql> SELECT SUBSTRING(FNAME,1,3) FROM EMPLOYEE;
++----------------------+
+| SUBSTRING(FNAME,1,3) |
++----------------------+
+| LOK                  |
+| CHI                  |
+| SAT                  |
+| BAS                  |
+| JOH                  |
+| KAL                  |
+| SAT                  |
+| JHI                  |
+| DIV                  |
+| VIM                  |
+| CHA                  |
++----------------------+

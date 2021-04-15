@@ -1,0 +1,465 @@
+mysql> select *from students;
++-----+----------+-----------------+------+
+| id  | LastNAme | FirstName       | Age  |
++-----+----------+-----------------+------+
+| 545 | KOLLI    | SWATHI          |   18 |
+| 570 | MUNGARA  | SURYA PRASANTHI |   18 |
+| 743 | ULAVALA  | GOPIKA          |   18 |
+| 814 | ADDANK   | RAJARAJESWARI   |   18 |
+| 879 | T        | SAI DURGA       |   18 |
+| 929 | BEZAWADA | DIVYA           |   18 |
++-----+----------+-----------------+------+
+6 rows in set (0.00 sec)
+
+mysql> use iiitsklm
+Database changed
+mysql> select *from students;
+ERROR 1146 (42S02): Table 'iiitsklm.students' doesn't exist
+mysql> select *from student;
++---------+--------+------+
+| sid     | sname  | cgpa |
++---------+--------+------+
+| s160545 | swathi |  9.8 |
+| s160570 | surya  |  9.7 |
+| s160743 | gopika |  9.6 |
+| s160897 | sai    |  9.4 |
+| s160929 | divya  |  9.3 |
++---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> add primary key(cgpa);
+Query OK, 0 rows affected (1.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++---------+--------+------+
+| sid     | sname  | cgpa |
++---------+--------+------+
+| s160929 | divya  |  9.3 |
+| s160897 | sai    |  9.4 |
+| s160743 | gopika |  9.6 |
+| s160570 | surya  |  9.7 |
+| s160545 | swathi |  9.8 |
++---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | varchar(10) | YES  |     | NULL    |       |
+| sname | varchar(10) | YES  |     | NULL    |       |
+| cgpa  | float       | NO   | PRI | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> drop primary key;
+Query OK, 5 rows affected (1.46 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++---------+--------+------+
+| sid     | sname  | cgpa |
++---------+--------+------+
+| s160929 | divya  |  9.3 |
+| s160897 | sai    |  9.4 |
+| s160743 | gopika |  9.6 |
+| s160570 | surya  |  9.7 |
+| s160545 | swathi |  9.8 |
++---------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | varchar(10) | YES  |     | NULL    |       |
+| sname | varchar(10) | YES  |     | NULL    |       |
+| cgpa  | float       | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> modify sid varchar not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null' at line 2
+mysql> alter table student
+    -> modify sid varchar[20] not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[20] not null' at line 2
+mysql> alter table student
+    -> modify sid varchar[20] not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[20] not null' at line 2
+mysql> use rgukt
+Database changed
+mysql> select *from students
+    -> select *from students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select *from students' at line 2
+mysql> select *from students;
++-----+----------+-----------------+------+
+| id  | LastNAme | FirstName       | Age  |
++-----+----------+-----------------+------+
+| 545 | KOLLI    | SWATHI          |   18 |
+| 570 | MUNGARA  | SURYA PRASANTHI |   18 |
+| 743 | ULAVALA  | GOPIKA          |   18 |
+| 814 | ADDANK   | RAJARAJESWARI   |   18 |
+| 879 | T        | SAI DURGA       |   18 |
+| 929 | BEZAWADA | DIVYA           |   18 |
++-----+----------+-----------------+------+
+6 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> modify Age int not null;
+Query OK, 0 rows affected (1.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table students
+    -> modify LastName varchar[20] not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[20] not null' at line 2
+mysql> alter table students
+    -> modify LastName varchar  not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null' at line 2
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastNAme  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | YES  |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> modify LastName varchar(100)  not null;
+Query OK, 0 rows affected (0.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | YES  |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> modify FirstName varchar  not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null' at line 2
+mysql> alter table students
+    -> modify FirstName varcha(100) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varcha(100) not null' at line 2
+mysql> alter table students
+    -> modify FirstName varchar(100)  not null;
+Query OK, 0 rows affected (1.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | NO   |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> add unique(id);
+Query OK, 0 rows affected (0.50 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  18 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  18 |
+| 743 | ULAVALA  | GOPIKA          |  18 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  18 |
+| 929 | BEZAWADA | DIVYA           |  18 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> update students set id=" "where Lastname='T';
+ERROR 1366 (HY000): Incorrect integer value: ' ' for column 'id' at row 1
+mysql> update students set id=" " where Lastname='T';  
+ERROR 1366 (HY000): Incorrect integer value: ' ' for column 'id' at row 1
+mysql> update students set Age=19 where id=879;  
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  18 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  18 |
+| 743 | ULAVALA  | GOPIKA          |  18 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  18 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> upade students set id=NULL where Age=19;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'upade students set id=NULL where Age=19' at line 1
+mysql> upade students set id='NULL' where Age=19;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'upade students set id='NULL' where Age=19' at line 1
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | NO   |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update students set Age=20 where id=545;  
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update students set Age=21 where id=570;  
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update students set Age=22 where id=929;  
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update students set Age=32 where id=743;  
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> add unique(Age);
+Query OK, 0 rows affected (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> update students set Age=" " where id=743;  
+ERROR 1366 (HY000): Incorrect integer value: ' ' for column 'Age' at row 1
+mysql> update students set Age="NULL " where id=743;  
+ERROR 1366 (HY000): Incorrect integer value: 'NULL ' for column 'Age' at row 1
+mysql> update students set Age="NULL" where id=743;   
+ERROR 1366 (HY000): Incorrect integer value: 'NULL' for column 'Age' at row 1
+mysql> update students set Age=  where id=743;   
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id=743' at line 1
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | NO   |     | NULL    |       |
+| Age       | int(11)      | NO   | UNI | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table parents
+    -> (
+    -> pid int not null,
+    -> Lastname varchar(100) not null,
+    -> Firstname varchar(100),
+    -> Age int,
+    -> unique(pid)
+    -> );
+Query OK, 0 rows affected (0.51 sec)
+
+mysql> insert into parents( ,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents(  ,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents(NULL,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL,'DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents('DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents(23,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents(23,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'DURGA','ADDANKI',30)' at line 1
+mysql> alter table parents
+    -> add unique(Age);
+Query OK, 0 rows affected (0.37 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into parents(23,'DURGA','ADDANKI');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'DURGA','ADDANKI')' at line 1
+mysql> insert into parents(23,'DURGA','ADDANKI',);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'DURGA','ADDANKI',)' at line 1
+mysql> insert into parents(23,'DURGA','ADDANKI'," ");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '23,'DURGA','ADDANKI'," ")' at line 1
+mysql> desc parents;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int(11)      | NO   | PRI | NULL    |       |
+| Lastname  | varchar(100) | NO   |     | NULL    |       |
+| Firstname | varchar(100) | YES  |     | NULL    |       |
+| Age       | int(11)      | YES  | UNI | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table persons 
+    -> drop index Age;
+ERROR 1146 (42S02): Table 'rgukt.persons' doesn't exist
+mysql> alter table students
+    -> drop index Age;
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | NO   |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.03 sec)
+
+mysql> insert into parents(1,'DURGA','ADDANKI',30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'DURGA','ADDANKI',30)' at line 1
+mysql> insert into parents values(1,'DURGA','ADDANKI',30);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into parents values(1,'DURGA','ADDANKI');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into parents values(1,'DURGA','ADDANKI',);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into parents values(1,'DURGA','ADDANKI'," ");
+ERROR 1366 (HY000): Incorrect integer value: ' ' for column 'Age' at row 1
+mysql> insert into parents values(2,'BHAVANI','BASAVANI,31);
+    '> 
+    '> insert into parents values(2,'BHAVANI','BASAVANI,31);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BHAVANI','BASAVANI,31)' at line 3
+mysql> insert into parents values(2,'BHAVANI','BASAVANI',31);
+Query OK, 1 row affected (0.19 sec)
+
+mysql> insert into parents values(3,'BHargavi','BASIna',32);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 | ADDANK   | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastName  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | NO   |     | NULL    |       |
+| Age       | int(11)      | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update students set name='null' where Age=18;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> update students set LastName='null' where Age=18;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 | null     | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> update students set LastName=' ' where Age=18;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 |          | RAJARAJESWARI   |  18 |
+| 879 | T        | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> update students set LastName=' ' where Age=19;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from students;
++-----+----------+-----------------+-----+
+| id  | LastName | FirstName       | Age |
++-----+----------+-----------------+-----+
+| 545 | KOLLI    | SWATHI          |  20 |
+| 570 | MUNGARA  | SURYA PRASANTHI |  21 |
+| 743 | ULAVALA  | GOPIKA          |  32 |
+| 814 |          | RAJARAJESWARI   |  18 |
+| 879 |          | SAI DURGA       |  19 |
+| 929 | BEZAWADA | DIVYA           |  22 |
++-----+----------+-----------------+-----+
+6 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

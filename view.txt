@@ -1,0 +1,66 @@
+mysql> create view emp_projects as select E.fname,E.lname,count(P.p_id) as no_of_projects,sum(hours) as hours_spent from employee E,project P,workson where E.ssn=wssn and prid=P.p_id group by ssn;
+ERROR 1050 (42S01): Table 'emp_projects' already exists
+mysql> drop emp_projects;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_projects' at line 1
+mysql> drop table emp_projects;
+ERROR 1051 (42S02): Unknown table 'companies.emp_projects'
+mysql> drop view emp_projects;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> drop view dept_projects;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop view projects;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> create view emp_projects as select E.fname,E.lname,count(P.p_id) as no_of_projects,sum(hours) as hours_spent from employee E,project P,workson where E.ssn=wssn and prid=P.p_id group by ssn;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from emp_projects;
++---------+---------+----------------+-------------+
+| fname   | lname   | no_of_projects | hours_spent |
++---------+---------+----------------+-------------+
+| Alice   | cullen  |              2 |          18 |
+| Arjun   | boddu   |              1 |           7 |
+| kalyani | addanki |              1 |           7 |
+| Siri    | boddu   |              2 |          18 |
+| SAILu   | boddu   |              1 |          12 |
+| Arjun   | BASINA  |              1 |           5 |
+| Janu    | BATTU   |              1 |           9 |
+| Sravani | DONGALA |              1 |           9 |
++---------+---------+----------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> create view dept_projects as select Dept_name,count(distinct ssn) as no_of_employee,count(distinct P.p_id) as no_of_projects from employee E,department D,project P where D.Dept_no=Dno and D.Dept_no=P.Dept_no group by D.Dept_no;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from dept_projects;
++-----------+----------------+----------------+
+| Dept_name | no_of_employee | no_of_projects |
++-----------+----------------+----------------+
+| cse       |              2 |              2 |
+| EcE       |              3 |              2 |
+| MECH      |              2 |              2 |
+| che       |              2 |              2 |
+| MME       |              1 |              2 |
++-----------+----------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> create view emp_projects as select E.fname,E.lname,count(P.p_id) as no_of_projects,sum(hours) as hours_spent from employee E,project P,workson where E.ssn=wssn and prid=P.p_id group by ssn;
+ERROR 1050 (42S01): Table 'emp_projects' already exists
+mysql> create view projects as select D.dept_no,Dept_name,count(p_id) as no_of_projects from department D,project P where D.dept_no=P.Dept_no group by D.Dept_no;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> select * from projects;
++---------+-----------+----------------+
+| dept_no | Dept_name | no_of_projects |
++---------+-----------+----------------+
+|       1 | cse       |              2 |
+|       2 | EcE       |              2 |
+|       3 | MECH      |              2 |
+|       4 | che       |              2 |
+|       5 | MME       |              2 |
++---------+-----------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

@@ -1,0 +1,806 @@
+mysql> select * from employee where fname='Alice' and lname='cullen';
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Fname | Lname  | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Alice | cullen | 160 |  19 | F      | 115000 | HYD     |    1 |   165 |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee,department where Dno=D_num and dname='cse';
+ERROR 1054 (42S22): Unknown column 'D_num' in 'where clause'
+mysql> select * from employee,department where Dno=Dept_no and Dept_name='cse';
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+| Fname | Lname  | SSN | Age | gender | salary | Address    | Dno  | E_ssn | Dept_name | Dept_no | manager_ssn | start_date |
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+| Alice | cullen | 160 |  19 | F      | 115000 | HYD        |    1 |   165 | cse       |       1 |         161 | 28_08_1999 |
+| SAILu | boddu  | 168 |  21 | F      |  23000 | BHIMAVARAM |    1 |   160 | cse       |       1 |         161 | 28_08_1999 |
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct(P.p_id),P.p_name,D.Dept_name,D.Dept_no,E.fname,E.lname,P.p_loc from employee E,department D,project P where P.p_loc='HYD'and D.manager_ssn=E.ssn and D.Dept_no and P.dept_no;
++------+--------+-----------+---------+---------+----------+-------+
+| p_id | p_name | Dept_name | Dept_no | fname   | lname    | p_loc |
++------+--------+-----------+---------+---------+----------+-------+
+|   11 | APple  | cse       |       1 | Arjun   | boddu    | Hyd   |
+|   20 | bow    | cse       |       1 | Arjun   | boddu    | hyd   |
+|   11 | APple  | EcE       |       2 | kalyani | addanki  | Hyd   |
+|   20 | bow    | EcE       |       2 | kalyani | addanki  | hyd   |
+|   11 | APple  | MECH      |       3 | Murali  | Tirumani | Hyd   |
+|   20 | bow    | MECH      |       3 | Murali  | Tirumani | hyd   |
+|   11 | APple  | che       |       4 | Sravani | DONGALA  | Hyd   |
+|   20 | bow    | che       |       4 | Sravani | DONGALA  | hyd   |
+|   11 | APple  | MME       |       5 | Janu    | BATTU    | Hyd   |
+|   20 | bow    | MME       |       5 | Janu    | BATTU    | hyd   |
++------+--------+-----------+---------+---------+----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select A.Fname as sup_fname,A.lname  as sup_lname ,B.Fname as emp_fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.ssn;
++-----------+-----------+-----------+-----------+
+| sup_fname | sup_lname | emp_fname | emp_lname |
++-----------+-----------+-----------+-----------+
+| Alice     | cullen    | Alice     | cullen    |
+| Arjun     | boddu     | Arjun     | boddu     |
+| kalyani   | addanki   | kalyani   | addanki   |
+| Murali    | Tirumani  | Murali    | Tirumani  |
+| Sravani   | DONGALA   | Sravani   | DONGALA   |
+| Janu      | BATTU     | Janu      | BATTU     |
+| SANDHYA   | BASINA    | SANDHYA   | BASINA    |
+| Arjun     | BASINA    | Arjun     | BASINA    |
+| SAILu     | boddu     | SAILu     | boddu     |
+| Siri      | boddu     | Siri      | boddu     |
++-----------+-----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 115000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  23000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select A.Fname as sup_fname,A.lname  as sup_lname ,B.Fname as emp_fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.E_ssn;
++-----------+-----------+-----------+-----------+
+| sup_fname | sup_lname | emp_fname | emp_lname |
++-----------+-----------+-----------+-----------+
+| Janu      | BATTU     | Alice     | cullen    |
+| Arjun     | boddu     | Arjun     | boddu     |
+| kalyani   | addanki   | kalyani   | addanki   |
+| kalyani   | addanki   | Murali    | Tirumani  |
+| Murali    | Tirumani  | Sravani   | DONGALA   |
+| Sravani   | DONGALA   | Janu      | BATTU     |
+| Janu      | BATTU     | SANDHYA   | BASINA    |
+| Arjun     | boddu     | Arjun     | BASINA    |
+| Alice     | cullen    | SAILu     | boddu     |
+| Alice     | cullen    | Siri      | boddu     |
++-----------+-----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select Distinct(salary) from employee; 
++--------+
+| salary |
++--------+
+| 115000 |
+|  18000 |
+|  10000 |
+|  50000 |
+|  70000 |
+|  80000 |
+|  90000 |
+|  23000 |
+|  60000 |
++--------+
+9 rows in set (0.03 sec)
+
+mysql> select * from employee group by salary ;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 115000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| SAILu   | boddu    | 168 |  21 | F      |  23000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 115000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  23000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee A,employee B where A.salary<>B.salary group by salary;
+ERROR 1052 (23000): Column 'salary' in group statement is ambiguous
+mysql> select A.* from employee A,employee B where A.salary<>B.salary group by salary;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| SAILu   | boddu    | 168 |  21 | F      |  23000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
+| Alice   | cullen   | 160 |  19 | F      | 115000 | HYD        |    1 |   165 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+9 rows in set (0.03 sec)
+
+mysql> select  P.p_id,P.p_name,E.fname,E.lname,E.ssn from employee E,project P,workson where lname="cullen" and wssn=ssn and prid=p_id;
++------+--------+-------+--------+-----+
+| p_id | p_name | fname | lname  | ssn |
++------+--------+-------+--------+-----+
+|   11 | APple  | Alice | cullen | 160 |
+|   12 | Orange | Alice | cullen | 160 |
++------+--------+-------+--------+-----+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where lname like "%cullen%" and fname like "a%";
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Fname | Lname  | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Alice | cullen | 160 |  19 | F      | 115000 | HYD     |    1 |   165 |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.04 sec)
+
+mysql> select  fname,lname,salary from employee where Dnum=160 and salary between 80000 and 100000; 
+ERROR 1054 (42S22): Unknown column 'Dnum' in 'where clause'
+mysql> select  fname,lname,salary from employee where Dno=160 and salary between 80000 and 100000; 
+Empty set (0.00 sec)
+
+mysql> select  fname,lname,salary from employee where Dno=2 and salary between 80000 and 100000; 
+Empty set (0.00 sec)
+
+mysql> select  fname,lname,salary from employee where Dno=2 and salary between 50000 and 100000; 
++---------+----------+--------+
+| fname   | lname    | salary |
++---------+----------+--------+
+| Murali  | Tirumani |  50000 |
+| Sravani | DONGALA  |  70000 |
++---------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update employee,department set salary=salary+(salary+0.15) where Dno=Dept_no and Dept_name='cse';
+Query OK, 2 rows affected (0.14 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department where Dno=dept_no  order by dept_name;
++---------+----------+------------+-----------+
+| fname   | lname    | address    | dept_name |
++---------+----------+------------+-----------+
+| SANDHYA | BASINA   | VIJAYAWADA | che       |
+| Arjun   | BASINA   | GUDIWADA   | che       |
+| Alice   | cullen   | HYD        | cse       |
+| SAILu   | boddu    | BHIMAVARAM | cse       |
+| kalyani | addanki  | VIZAG      | EcE       |
+| Murali  | Tirumani | VIZAG      | EcE       |
+| Sravani | DONGALA  | NUZVID     | EcE       |
+| Janu    | BATTU    | VIJAYAWADA | MECH      |
+| Siri    | boddu    | BHIMAVARAM | MECH      |
+| Arjun   | boddu    | BIMILI     | MME       |
++---------+----------+------------+-----------+
+10 rows in set (0.03 sec)
+
+mysql> select * from employee E,dependent where Essn=ssn order by ssn;
+ERROR 1054 (42S22): Unknown column 'Essn' in 'where clause'
+mysql> select * from dependent;
++------+--------------+---------+------------+
+| did  | employee_ssn | dname   | daddress   |
++------+--------------+---------+------------+
+|   21 |          160 | janu    | vijayawada |
+|   22 |          161 | john    | vijayawada |
+|   23 |          162 | jostna  | vizag      |
+|   24 |          163 | prem    | vizag      |
+|   25 |          162 | priya   | vizag      |
+|   26 |          163 | priya   | hyd        |
+|   27 |          160 | prakash | hyd        |
+|   28 |          165 | kalyani | NUZVID     |
+|   29 |          165 | raju    | NUZVID     |
+|   30 |          166 | rani    | gudiwada   |
++------+--------------+---------+------------+
+10 rows in set (0.04 sec)
+
+mysql> select * from employee E,dependent where employee_ssn=ssn order by ssn;
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+---------+------------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn | did  | employee_ssn | dname   | daddress   |
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+---------+------------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |   21 |          160 | janu    | vijayawada |
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |   27 |          160 | prakash | hyd        |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |   22 |          161 | john    | vijayawada |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |   23 |          162 | jostna  | vizag      |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |   25 |          162 | priya   | vizag      |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |   24 |          163 | prem    | vizag      |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |   26 |          163 | priya   | hyd        |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |   29 |          165 | raju    | NUZVID     |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |   28 |          165 | kalyani | NUZVID     |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |   30 |          166 | rani    | gudiwada   |
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,dependent where employee_ssn=ssn order by ssn;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select  fname,lname,ssn,dname,did from employee,dependent,department where manager_ssn=ssn and ssn=employee_ssn;
++---------+----------+-----+---------+------+
+| fname   | lname    | ssn | dname   | did  |
++---------+----------+-----+---------+------+
+| Arjun   | boddu    | 161 | john    |   22 |
+| kalyani | addanki  | 162 | jostna  |   23 |
+| kalyani | addanki  | 162 | priya   |   25 |
+| Murali  | Tirumani | 163 | prem    |   24 |
+| Murali  | Tirumani | 163 | priya   |   26 |
+| Janu    | BATTU    | 165 | kalyani |   28 |
+| Janu    | BATTU    | 165 | raju    |   29 |
++---------+----------+-----+---------+------+
+7 rows in set (0.02 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select E.* from employee,workson where  prid in(11,12,13) and wssn=ssn;
+ERROR 1051 (42S02): Unknown table 'E'
+mysql> select E.* from employee E,workson where  prid in(11,12,13) and wssn=ssn;
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu   | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| Janu    | BATTU   | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| Sravani | DONGALA | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select E.*,prid from employee E,workson where  prid in(11,12,13) and wssn=ssn;
++---------+---------+-----+-----+--------+--------+------------+------+-------+------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address    | Dno  | E_ssn | prid |
++---------+---------+-----+-----+--------+--------+------------+------+-------+------+
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |   11 |
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |   12 |
+| Arjun   | boddu   | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |   12 |
+| Janu    | BATTU   | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |   13 |
+| Sravani | DONGALA | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |   11 |
++---------+---------+-----+-----+--------+--------+------------+------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select  fname,lname,ssn from employee,department,dependent where manger_ssn=ssn and employee_ssn=ssn group by ssn having count(ssn)>=1; 
+ERROR 1054 (42S22): Unknown column 'manger_ssn' in 'where clause'
+mysql> select  fname,lname,ssn from employee,department,dependent where manager_ssn=ssn and employee_ssn=ssn group by ssn having count(ssn)>=1; 
++---------+----------+-----+
+| fname   | lname    | ssn |
++---------+----------+-----+
+| Arjun   | boddu    | 161 |
+| kalyani | addanki  | 162 |
+| Murali  | Tirumani | 163 |
+| Janu    | BATTU    | 165 |
++---------+----------+-----+
+4 rows in set (0.03 sec)
+
+mysql> select E.* from employee E,dependent where exists(select employee_ssn from dependent where employee_ssn=ssn) and employee_ssn group by ssn;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee E,dependent where exists(select employee_ssn from dependent where employee_ssn=ssn) and employee_ssn group by ssn;
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+-------+------------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn | did  | employee_ssn | dname | daddress   |
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+-------+------------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |   21 |          160 | janu  | vijayawada |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |   21 |          160 | janu  | vijayawada |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |   21 |          160 | janu  | vijayawada |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |   21 |          160 | janu  | vijayawada |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |   21 |          160 | janu  | vijayawada |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |   21 |          160 | janu  | vijayawada |
++---------+----------+-----+-----+--------+--------+------------+------+-------+------+--------------+-------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select employee_ssn from dependent where employee_ssn=ssn;
+ERROR 1054 (42S22): Unknown column 'ssn' in 'where clause'
+mysql> select employee_ssn from employee,dependent where employee_ssn=ssn;
++--------------+
+| employee_ssn |
++--------------+
+|          160 |
+|          160 |
+|          161 |
+|          162 |
+|          162 |
+|          163 |
+|          163 |
+|          165 |
+|          165 |
+|          166 |
++--------------+
+10 rows in set (0.00 sec)
+
+mysql> select Dept_name,Dept_no,count(ssn) as no_of_employee from employee ,department where Dno=Dept_no group by Dept_name;
++-----------+---------+----------------+
+| Dept_name | Dept_no | no_of_employee |
++-----------+---------+----------------+
+| cse       |       1 |              2 |
+| EcE       |       2 |              3 |
+| MECH      |       3 |              2 |
+| che       |       4 |              2 |
+| MME       |       5 |              1 |
++-----------+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname,ssn,count(did) as no_of_dependents from employee,dependent where employee_ssn=ssn group by ssn;
++---------+----------+-----+------------------+
+| fname   | lname    | ssn | no_of_dependents |
++---------+----------+-----+------------------+
+| Alice   | cullen   | 160 |                2 |
+| Arjun   | boddu    | 161 |                1 |
+| kalyani | addanki  | 162 |                2 |
+| Murali  | Tirumani | 163 |                2 |
+| Janu    | BATTU    | 165 |                2 |
+| SANDHYA | BASINA   | 166 |                1 |
++---------+----------+-----+------------------+
+6 rows in set (0.00 sec)
+
+mysql> select  E.* from employee E where  salary>(select max(salary) from employee,department where Dno=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select  E.* from employee E where  salary>(select max(salary) from employee,department where Dno=2);
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname  | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Janu    | BATTU  | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+--------+-----+-----+--------+--------+------------+------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select * from employee where ssn is null;
+Empty set (0.00 sec)
+
+mysql> select * from employee where ssn is not null;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,department where Dno=Dept_no and Dept_name='cse' and lname like "%ll%";
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Fname | Lname  | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Alice | cullen | 160 |  19 | F      | 230000 | HYD     |    1 |   165 |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select E.* from employee E,department where Dno=Dept_no and Dept_name='cse' and lname like "%a%";
+Empty set (0.00 sec)
+
+mysql> select E.* from employee E,department where Dno=Dept_no and Dept_name='cse' and lname like "%l%";
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Fname | Lname  | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+| Alice | cullen | 160 |  19 | F      | 230000 | HYD     |    1 |   165 |
++-------+--------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,department where Dno=Dept_no and Dept_name='cse' and lname like "%i%";
+Empty set (0.00 sec)
+
+mysql> select fname,lname,ssn from employee where exists(select manager_ssn from department where manager_ssn=ssn) and exists(select employee_ssn from dependent where employee_ssn=ssn); 
++---------+----------+-----+
+| fname   | lname    | ssn |
++---------+----------+-----+
+| Arjun   | boddu    | 161 |
+| kalyani | addanki  | 162 |
+| Murali  | Tirumani | 163 |
+| Janu    | BATTU    | 165 |
++---------+----------+-----+
+4 rows in set (0.00 sec)
+
+mysql> select fname,lname,ssn,sum(hours) as no_of_hours_spent from employee ,workson where wssn=ssn group by ssn;
++---------+---------+-----+-------------------+
+| fname   | lname   | ssn | no_of_hours_spent |
++---------+---------+-----+-------------------+
+| Alice   | cullen  | 160 |                18 |
+| Arjun   | boddu   | 161 |                 7 |
+| kalyani | addanki | 162 |                 7 |
+| Siri    | boddu   | 169 |                18 |
+| SAILu   | boddu   | 168 |                12 |
+| Arjun   | BASINA  | 167 |                 5 |
+| Janu    | BATTU   | 165 |                 9 |
+| Sravani | DONGALA | 164 |                 9 |
++---------+---------+-----+-------------------+
+8 rows in set (0.00 sec)
+
+mysql> select count(Distinct Essn) as no_of_supervisors from employee;
+ERROR 1054 (42S22): Unknown column 'Essn' in 'field list'
+mysql> select count(Distinct E_ssn) as no_of_supervisors from employee;
++-------------------+
+| no_of_supervisors |
++-------------------+
+|                 6 |
++-------------------+
+1 row in set (0.03 sec)
+
+mysql> select gender count(ssn) from employee group by gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count(ssn) from employee group by gender' at line 1
+mysql> select gender count(SSN) from employee group by gender;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'count(SSN) from employee group by gender' at line 1
+mysql> select gender, count(SSN) from employee group by gender;
++--------+------------+
+| gender | count(SSN) |
++--------+------------+
+| F      |          7 |
+| M      |          3 |
++--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where salary>(select avg(salary) from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from employee where salary>(select avg(salary) from employee);
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Sravani | DONGALA | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU   | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA  | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where E_ssn is null;
+Empty set (0.00 sec)
+
+mysql> select upper(fname) as FNAME_UPPER ,lower(lname) as LNAME_LOWER from employee;
++-------------+-------------+
+| FNAME_UPPER | LNAME_LOWER |
++-------------+-------------+
+| ALICE       | cullen      |
+| ARJUN       | boddu       |
+| KALYANI     | addanki     |
+| MURALI      | tirumani    |
+| SRAVANI     | dongala     |
+| JANU        | battu       |
+| SANDHYA     | basina      |
+| ARJUN       | basina      |
+| SAILU       | boddu       |
+| SIRI        | boddu       |
++-------------+-------------+
+10 rows in set (0.02 sec)
+
+mysql> select substring(fname,1,3) from employee;
++----------------------+
+| substring(fname,1,3) |
++----------------------+
+| Ali                  |
+| Arj                  |
+| kal                  |
+| Mur                  |
+| Sra                  |
+| Jan                  |
+| SAN                  |
+| Arj                  |
+| SAI                  |
+| Sir                  |
++----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select * length(fname) from employee where length(lname)>5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'length(fname) from employee where length(lname)>5' at line 1
+mysql> select * Length(fname) from employee where Length(lname)>5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Length(fname) from employee where Length(lname)>5' at line 1
+mysql> select * Length(Fname) from employee where Length(Lname)>5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Length(Fname) from employee where Length(Lname)>5' at line 1
+mysql> select  Length(Fname) from employee where Length(Lname)>5;
++---------------+
+| Length(Fname) |
++---------------+
+|             5 |
+|             7 |
+|             6 |
+|             7 |
+|             7 |
+|             5 |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> select *, Length(Fname) from employee where Length(Lname)>5;
++---------+----------+-----+-----+--------+--------+------------+------+-------+---------------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn | Length(Fname) |
++---------+----------+-----+-----+--------+--------+------------+------+-------+---------------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |             5 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |             7 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |             6 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |             7 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |             7 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |             5 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select concat(fname,'.',lname) as first_last_name from employee;
++-----------------+
+| first_last_name |
++-----------------+
+| Alice.cullen    |
+| Arjun.boddu     |
+| kalyani.addanki |
+| Murali.Tirumani |
+| Sravani.DONGALA |
+| Janu.BATTU      |
+| SANDHYA.BASINA  |
+| Arjun.BASINA    |
+| SAILu.boddu     |
+| Siri.boddu      |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update department,employee set start_date=date add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lname like "ll";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lna' at line 1
+mysql> update department,employee set start_date=date add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lna' at line 1
+mysql> update department,employee set start_date=date_add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update department,employee set start_date=date_add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lname like "%a%";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update department,employee set start_date=date_add(start_date,interval 25 day)where Dept_name='cse' and manager_ssn=ssn and lname like "%d%";
+ERROR 1292 (22007): Incorrect datetime value: '28_08_1999'
+mysql> select Dept_name,max(salary) as max_salary,min(salary) as min_salary,avg(salary) as avg_salary,sum(salary) as sum_salary from employee, department where Dno=Dept_no group by Dept_name;
++-----------+------------+------------+-------------+------------+
+| Dept_name | max_salary | min_salary | avg_salary  | sum_salary |
++-----------+------------+------------+-------------+------------+
+| cse       |     230000 |      46000 | 138000.0000 |     276000 |
+| EcE       |      70000 |      10000 |  43333.3333 |     130000 |
+| MECH      |      80000 |      60000 |  70000.0000 |     140000 |
+| che       |      90000 |      10000 |  50000.0000 |     100000 |
+| MME       |      18000 |      18000 |  18000.0000 |      18000 |
++-----------+------------+------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select Dept_name,count(p_id) as controlling_projects from department D,project P where D.Dept_no=P.Dept_no group by Dept_name;
++-----------+----------------------+
+| Dept_name | controlling_projects |
++-----------+----------------------+
+| cse       |                    2 |
+| EcE       |                    2 |
+| MECH      |                    2 |
+| che       |                    2 |
+| MME       |                    2 |
++-----------+----------------------+
+5 rows in set (0.03 sec)
+
+mysql> select Fname,Lname,count(ssn) from employee,dependent where employee_ssn=ssn group by ssn;
++---------+----------+------------+
+| Fname   | Lname    | count(ssn) |
++---------+----------+------------+
+| Alice   | cullen   |          2 |
+| Arjun   | boddu    |          1 |
+| kalyani | addanki  |          2 |
+| Murali  | Tirumani |          2 |
+| Janu    | BATTU    |          2 |
+| SANDHYA | BASINA   |          1 |
++---------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select E.* from employee E where E.ssn in(select manager_ssn from employee, department where Dno=Dept_no group by Dept_name having count(ssn)>3);
+Empty set (0.00 sec)
+
+mysql> select E.* from employee E where E.ssn in(select manager_ssn from employee, department where Dno=Dept_no group by Dept_name having count(ssn)>1);
++---------+----------+-----+-----+--------+--------+---------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+---------+------+-------+
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI  |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG   |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG   |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID  |    2 |   163 |
++---------+----------+-----+-----+--------+--------+---------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select E.* from employee E where E.ssn in(select manager_ssn from employee, department where Dno=Dept_no group by Dept_name having count(ssn)>2);
++---------+---------+-----+-----+--------+--------+---------+------+-------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address | Dno  | E_ssn |
++---------+---------+-----+-----+--------+--------+---------+------+-------+
+| kalyani | addanki | 162 |  20 | F      |  10000 | VIZAG   |    2 |   162 |
++---------+---------+-----+-----+--------+--------+---------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> select  fname,lname,address,salary,ssn from employee order by ssn DESC;
++---------+----------+------------+--------+-----+
+| fname   | lname    | address    | salary | ssn |
++---------+----------+------------+--------+-----+
+| Siri    | boddu    | BHIMAVARAM |  60000 | 169 |
+| SAILu   | boddu    | BHIMAVARAM |  46000 | 168 |
+| Arjun   | BASINA   | GUDIWADA   |  10000 | 167 |
+| SANDHYA | BASINA   | VIJAYAWADA |  90000 | 166 |
+| Janu    | BATTU    | VIJAYAWADA |  80000 | 165 |
+| Sravani | DONGALA  | NUZVID     |  70000 | 164 |
+| Murali  | Tirumani | VIZAG      |  50000 | 163 |
+| kalyani | addanki  | VIZAG      |  10000 | 162 |
+| Arjun   | boddu    | BIMILI     |  18000 | 161 |
+| Alice   | cullen   | HYD        | 230000 | 160 |
++---------+----------+------------+--------+-----+
+10 rows in set (0.00 sec)
+
+mysql> select Fname,lname,address,ssn from employee order by ssn DESC limit 5;
++---------+--------+------------+-----+
+| Fname   | lname  | address    | ssn |
++---------+--------+------------+-----+
+| Siri    | boddu  | BHIMAVARAM | 169 |
+| SAILu   | boddu  | BHIMAVARAM | 168 |
+| Arjun   | BASINA | GUDIWADA   | 167 |
+| SANDHYA | BASINA | VIJAYAWADA | 166 |
+| Janu    | BATTU  | VIJAYAWADA | 165 |
++---------+--------+------------+-----+
+5 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

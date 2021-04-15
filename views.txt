@@ -1,0 +1,766 @@
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.05 sec)
+
+mysql> select * department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'department' at line 1
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.04 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.03 sec)
+
+mysql> select * from dependent;
++------+--------------+---------+------------+
+| did  | employee_ssn | dname   | daddress   |
++------+--------------+---------+------------+
+|   21 |          160 | janu    | vijayawada |
+|   22 |          161 | john    | vijayawada |
+|   23 |          162 | jostna  | vizag      |
+|   24 |          163 | prem    | vizag      |
+|   25 |          162 | priya   | vizag      |
+|   26 |          163 | priya   | hyd        |
+|   27 |          160 | prakash | hyd        |
+|   28 |          165 | kalyani | NUZVID     |
+|   29 |          165 | raju    | NUZVID     |
+|   30 |          166 | rani    | gudiwada   |
++------+--------------+---------+------------+
+10 rows in set (0.03 sec)
+
+mysql> select * from workson;
++------+------+-------+
+| wssn | prid | hours |
++------+------+-------+
+|  160 |   11 |     8 |
+|  160 |   12 |    10 |
+|  161 |   12 |     7 |
+|  162 |   16 |     7 |
+|  169 |   18 |     9 |
+|  169 |   17 |     9 |
+|  168 |   15 |    12 |
+|  167 |   14 |     5 |
+|  165 |   13 |     9 |
+|  164 |   11 |     9 |
++------+------+-------+
+10 rows in set (0.03 sec)
+
+mysql> create view highsalary as
+    -> select * from employee where salary>50000;
+Query OK, 0 rows affected (0.81 sec)
+
+mysql> select * from highsalary;
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname   | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen  | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Sravani | DONGALA | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU   | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA  | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Siri    | boddu   | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+---------+-----+-----+--------+--------+------------+------+-------+
+5 rows in set (0.07 sec)
+
+mysql> create view cseemployee as select * employee,department where Dno=Dept_no and Dept_name='cse';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'employee,department where Dno=Dept_no and Dept_name='cse'' at line 1
+mysql> create view cseemployee as select * from  employee,department where Dno=Dept_no and Dept_name='cse';
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from cseemployee;
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+| Fname | Lname  | SSN | Age | gender | salary | Address    | Dno  | E_ssn | Dept_name | Dept_no | manager_ssn | start_date |
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+| Alice | cullen | 160 |  19 | F      | 230000 | HYD        |    1 |   165 | cse       |       1 |         161 | 28_08_1999 |
+| SAILu | boddu  | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 | cse       |       1 |         161 | 28_08_1999 |
++-------+--------+-----+-----+--------+--------+------------+------+-------+-----------+---------+-------------+------------+
+2 rows in set (0.03 sec)
+
+mysql> create view cseemployee as select fname.lname from  employee,department where Dno=Dept_no and Dept_name='cse';
+ERROR 1054 (42S22): Unknown column 'fname.lname' in 'field list'
+mysql> create view cseemployee as select fname,lname from  employee,department where Dno=Dept_no and Dept_name='cse';
+ERROR 1050 (42S01): Table 'cseemployee' already exists
+mysql> drop table cseemployee;
+ERROR 1051 (42S02): Unknown table 'companies.cseemployee'
+mysql> create view cseemployeenames as select fname,lname from  employee,department where Dno=Dept_no and Dept_name='cse';
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from cseemployeenames;
++-------+--------+
+| fname | lname  |
++-------+--------+
+| Alice | cullen |
+| SAILu | boddu  |
++-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> create view senioremployee as select * from employee where age>=28;
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> select * from senioremployee;
+Empty set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create view hoursspent as select name,count(p_id) as no_OF_projects,sum(hours) as hours_spent from employee,project,workson  where ssn=wssn ;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> create view hoursspent as select lname,fname ,count(p_id) as no_OF_projects,sum(hours) as hours_spent from employee,project,workson  where ssn=wssn ;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from hoursspent;
++--------+-------+----------------+-------------+
+| lname  | fname | no_OF_projects | hours_spent |
++--------+-------+----------------+-------------+
+| cullen | Alice |            100 |         850 |
++--------+-------+----------------+-------------+
+1 row in set (0.04 sec)
+
+mysql> create view hoursspent as select lname,fname,hours from employee,project,workson  where ssn=wssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> create view hoursspents as select lname,fname,hours from employee,project,workson  where ssn=wssn ;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from hoursspents;
++---------+---------+-------+
+| lname   | fname   | hours |
++---------+---------+-------+
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
+| cullen  | Alice   |     8 |
+| cullen  | Alice   |    10 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
++---------+---------+-------+
+100 rows in set (0.00 sec)
+
+mysql> create view hoursspentss as select lname,fname,hours from employee,project,workson  where ssn=wssn  groupby ssn ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'groupby ssn' at line 1
+mysql> select * from hoursspents group by ssn;
+ERROR 1054 (42S22): Unknown column 'ssn' in 'group statement'
+mysql> create view hoursspentss as select lname,fname,hours from employee,project,workson  where ssn=wssn  group by ssn ;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from hoursspentss;
++---------+---------+-------+
+| lname   | fname   | hours |
++---------+---------+-------+
+| cullen  | Alice   |     8 |
+| boddu   | Arjun   |     7 |
+| addanki | kalyani |     7 |
+| boddu   | Siri    |     9 |
+| boddu   | SAILu   |    12 |
+| BASINA  | Arjun   |     5 |
+| BATTU   | Janu    |     9 |
+| DONGALA | Sravani |     9 |
++---------+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson  where ssn=wssn group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspents' already exists
+mysql> drop table hoursspents;
+ERROR 1051 (42S02): Unknown table 'companies.hoursspents'
+mysql> drop view hoursspents;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> drop view hoursspentss;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson  where ssn=wssn group by ssn ;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from hoursspents;
++---------+---------+-------+----------------+
+| lname   | fname   | hours | no_of_projects |
++---------+---------+-------+----------------+
+| cullen  | Alice   |     8 |             20 |
+| boddu   | Arjun   |     7 |             10 |
+| addanki | kalyani |     7 |             10 |
+| boddu   | Siri    |     9 |             20 |
+| boddu   | SAILu   |    12 |             10 |
+| BASINA  | Arjun   |     5 |             10 |
+| BATTU   | Janu    |     9 |             10 |
+| DONGALA | Sravani |     9 |             10 |
++---------+---------+-------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from projects;
+ERROR 1146 (42S02): Table 'companies.projects' doesn't exist
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create view hoursspent as select lname,fname,hours,p_id as no_of_projects from employee,project,workson  where ssn=wssn group by ssn ;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from hoursspent;
++---------+---------+-------+----------------+
+| lname   | fname   | hours | no_of_projects |
++---------+---------+-------+----------------+
+| cullen  | Alice   |     8 |             11 |
+| boddu   | Arjun   |     7 |             11 |
+| addanki | kalyani |     7 |             11 |
+| boddu   | Siri    |     9 |             11 |
+| boddu   | SAILu   |    12 |             11 |
+| BASINA  | Arjun   |     5 |             11 |
+| BATTU   | Janu    |     9 |             11 |
+| DONGALA | Sravani |     9 |             11 |
++---------+---------+-------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> drop view hoursspents;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> create view hoursspent as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson  where ssn=wssn group by ssn ;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from hoursspent;
++---------+---------+-------+----------------+
+| lname   | fname   | hours | no_of_projects |
++---------+---------+-------+----------------+
+| cullen  | Alice   |     8 |             20 |
+| boddu   | Arjun   |     7 |             10 |
+| addanki | kalyani |     7 |             10 |
+| boddu   | Siri    |     9 |             20 |
+| boddu   | SAILu   |    12 |             10 |
+| BASINA  | Arjun   |     5 |             10 |
+| BATTU   | Janu    |     9 |             10 |
+| DONGALA | Sravani |     9 |             10 |
++---------+---------+-------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> create view hoursspent as select lname,fname,hours,p_id as no_of_projects from employee,project,workson  where ssn=wssn group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and Dno=Dept_no and department.Dept_no=project.dept_no group by ssn ;
+ERROR 1052 (23000): Column 'Dept_no' in where clause is ambiguous
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and employee.Dno=deparment.Dept_no and department.Dept_no=project.dept_no group by ssn ;
+ERROR 1054 (42S22): Unknown column 'deparment.Dept_no' in 'where clause'
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and employee.Dno=department.Dept_no and department.Dept_no=project.dept_no group by ssn ;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from hoursspents;
++---------+---------+-------+----------------+
+| lname   | fname   | hours | no_of_projects |
++---------+---------+-------+----------------+
+| cullen  | Alice   |     8 |              4 |
+| boddu   | Arjun   |     7 |              2 |
+| addanki | kalyani |     7 |              2 |
+| boddu   | Siri    |     9 |              4 |
+| boddu   | SAILu   |    12 |              2 |
+| BASINA  | Arjun   |     5 |              2 |
+| BATTU   | Janu    |     9 |              2 |
+| DONGALA | Sravani |     9 |              2 |
++---------+---------+-------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> create view hoursspents as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspents' already exists
+mysql> create view hoursspent as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> drop view hoursspents;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> create view hoursspent as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> select * from hoursspent;
++---------+---------+-------+----------------+
+| lname   | fname   | hours | no_of_projects |
++---------+---------+-------+----------------+
+| cullen  | Alice   |     8 |             10 |
+| boddu   | Arjun   |     7 |              5 |
+| addanki | kalyani |     7 |              5 |
+| boddu   | Siri    |     9 |             10 |
+| boddu   | SAILu   |    12 |              5 |
+| BASINA  | Arjun   |     5 |              5 |
+| BATTU   | Janu    |     9 |              5 |
+| DONGALA | Sravani |     9 |              5 |
++---------+---------+-------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours),count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from hoursspent;
++---------+---------+------------+----------------+
+| lname   | fname   | sum(hours) | no_of_projects |
++---------+---------+------------+----------------+
+| cullen  | Alice   |         90 |             10 |
+| boddu   | Arjun   |         35 |              5 |
+| addanki | kalyani |         35 |              5 |
+| boddu   | Siri    |         90 |             10 |
+| boddu   | SAILu   |         60 |              5 |
+| BASINA  | Arjun   |         25 |              5 |
+| BATTU   | Janu    |         45 |              5 |
+| DONGALA | Sravani |         45 |              5 |
++---------+---------+------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from workson;
++------+------+-------+
+| wssn | prid | hours |
++------+------+-------+
+|  160 |   11 |     8 |
+|  160 |   12 |    10 |
+|  161 |   12 |     7 |
+|  162 |   16 |     7 |
+|  169 |   18 |     9 |
+|  169 |   17 |     9 |
+|  168 |   15 |    12 |
+|  167 |   14 |     5 |
+|  165 |   13 |     9 |
+|  164 |   11 |     9 |
++------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee;
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Fname   | Lname    | SSN | Age | gender | salary | Address    | Dno  | E_ssn |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+| Alice   | cullen   | 160 |  19 | F      | 230000 | HYD        |    1 |   165 |
+| Arjun   | boddu    | 161 |  21 | M      |  18000 | BIMILI     |    5 |   161 |
+| kalyani | addanki  | 162 |  20 | F      |  10000 | VIZAG      |    2 |   162 |
+| Murali  | Tirumani | 163 |  22 | M      |  50000 | VIZAG      |    2 |   162 |
+| Sravani | DONGALA  | 164 |  22 | F      |  70000 | NUZVID     |    2 |   163 |
+| Janu    | BATTU    | 165 |  21 | F      |  80000 | VIJAYAWADA |    3 |   164 |
+| SANDHYA | BASINA   | 166 |  21 | F      |  90000 | VIJAYAWADA |    4 |   165 |
+| Arjun   | BASINA   | 167 |  21 | M      |  10000 | GUDIWADA   |    4 |   161 |
+| SAILu   | boddu    | 168 |  21 | F      |  46000 | BHIMAVARAM |    1 |   160 |
+| Siri    | boddu    | 169 |  21 | F      |  60000 | BHIMAVARAM |    3 |   160 |
++---------+----------+-----+-----+--------+--------+------------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours),count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and project.p_id=workson.prid group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours),count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> select * from hoursspent;
+ERROR 1146 (42S02): Table 'companies.hoursspent' doesn't exist
+mysql> create view hoursspent as select lname,fname,hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and p_id=prid group by ssn ;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours),count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and project.p_id=workson.prid group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours),count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and project.p_id=workson.prid group by ssn ;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from hoursspent;
++---------+---------+------------+----------------+
+| lname   | fname   | sum(hours) | no_of_projects |
++---------+---------+------------+----------------+
+| cullen  | Alice   |         90 |             10 |
+| boddu   | Arjun   |         35 |              5 |
+| addanki | kalyani |         35 |              5 |
+| boddu   | Siri    |         90 |             10 |
+| boddu   | SAILu   |         60 |              5 |
+| BASINA  | Arjun   |         25 |              5 |
+| BATTU   | Janu    |         45 |              5 |
+| DONGALA | Sravani |         45 |              5 |
++---------+---------+------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> create view hoursspent as select lname,fname,sum(hours) as no_of_hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and project.p_id=workson.prid group by ssn ;
+ERROR 1050 (42S01): Table 'hoursspent' already exists
+mysql> create view hourspent as select lname,fname,sum(hours) as no_of_hours,count(p_id) as no_of_projects from employee,project,workson ,department where ssn=wssn and project.p_id=workson.prid group by ssn ;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> select * from hourspent;
++---------+---------+-------------+----------------+
+| lname   | fname   | no_of_hours | no_of_projects |
++---------+---------+-------------+----------------+
+| cullen  | Alice   |          90 |             10 |
+| boddu   | Arjun   |          35 |              5 |
+| addanki | kalyani |          35 |              5 |
+| boddu   | Siri    |          90 |             10 |
+| boddu   | SAILu   |          60 |              5 |
+| BASINA  | Arjun   |          25 |              5 |
+| BATTU   | Janu    |          45 |              5 |
+| DONGALA | Sravani |          45 |              5 |
++---------+---------+-------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> create view horsspent as select lname,fname,sum(hours) as no_of_hours,count(p_id) as no_of_projects from employee,project,workson where ssn=wssn and project.p_id=workson.prid group by ssn ;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from horspent;
+ERROR 1146 (42S02): Table 'companies.horspent' doesn't exist
+mysql> select * from horsspent;
++---------+---------+-------------+----------------+
+| lname   | fname   | no_of_hours | no_of_projects |
++---------+---------+-------------+----------------+
+| cullen  | Alice   |          18 |              2 |
+| boddu   | Arjun   |           7 |              1 |
+| addanki | kalyani |           7 |              1 |
+| boddu   | Siri    |          18 |              2 |
+| boddu   | SAILu   |          12 |              1 |
+| BASINA  | Arjun   |           5 |              1 |
+| BATTU   | Janu    |           9 |              1 |
+| DONGALA | Sravani |           9 |              1 |
++---------+---------+-------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> drop view hoursspent;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> drop view hourspent;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> select * from horsspent;
++---------+---------+-------------+----------------+
+| lname   | fname   | no_of_hours | no_of_projects |
++---------+---------+-------------+----------------+
+| cullen  | Alice   |          18 |              2 |
+| boddu   | Arjun   |           7 |              1 |
+| addanki | kalyani |           7 |              1 |
+| boddu   | Siri    |          18 |              2 |
+| boddu   | SAILu   |          12 |              1 |
+| BASINA  | Arjun   |           5 |              1 |
+| BATTU   | Janu    |           9 |              1 |
+| DONGALA | Sravani |           9 |              1 |
++---------+---------+-------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> create view deptprojects as select Dept_name,count(Dept_no),count(p_id) from  department,project where departement.Dept_no=project.Dept_no; 
+ERROR 1052 (23000): Column 'Dept_no' in field list is ambiguous
+mysql> create view deptprojects as select Dept_name,count(Dept_no),count(p_id) from  department,project where departement.Dept_no=project.dept_no; 
+ERROR 1052 (23000): Column 'Dept_no' in field list is ambiguous
+mysql> create view deptprojects as select Dept_name,count(D.Dept_no),count(p_id) from  department D,project P where D.Dept_no=P.dept_no; 
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from deptprojects;
++-----------+------------------+-------------+
+| Dept_name | count(D.Dept_no) | count(p_id) |
++-----------+------------------+-------------+
+| cse       |               10 |          10 |
++-----------+------------------+-------------+
+1 row in set (0.01 sec)
+
+mysql> create view deptprojects as select Dept_name,count(ssn) as no_of_employee,count(p_id) from  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no group by Dept_name; 
+ERROR 1054 (42S22): Unknown column 'ssn' in 'field list'
+mysql> create view deptprojects as select Dept_name,count(ssn) as no_of_employee,count(p_id) from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no group by Dept_name; 
+ERROR 1050 (42S01): Table 'deptprojects' already exists
+mysql> drop view deptprojects;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> create view deptprojects as select Dept_name,count(ssn) as no_of_employee,count(p_id) from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no group by Dept_name; 
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from deptprojects;
++-----------+----------------+-------------+
+| Dept_name | no_of_employee | count(p_id) |
++-----------+----------------+-------------+
+| cse       |              4 |           4 |
+| EcE       |              6 |           6 |
+| MECH      |              4 |           4 |
+| che       |              4 |           4 |
+| MME       |              2 |           2 |
++-----------+----------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----------+------+------------+---------+
+| p_name    | p_id | p_loc      | dept_no |
++-----------+------+------------+---------+
+| APple     |   11 | Hyd        |       1 |
+| Orange    |   12 | VijAyawada |       1 |
+| Grape     |   13 | ViZAG      |       2 |
+| cherry    |   14 | NUZVID     |       2 |
+| stawberry |   15 | NUZVID     |       3 |
+| popcorn   |   16 | NUZVID     |       3 |
+| cake      |   17 | NUZVID     |       4 |
+| juice     |   18 | VIZAG      |       4 |
+| meow      |   19 | VIZAG      |       5 |
+| bow       |   20 | hyd        |       5 |
++-----------+------+------------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++-----------+---------+-------------+------------+
+| Dept_name | Dept_no | manager_ssn | start_date |
++-----------+---------+-------------+------------+
+| cse       |       1 |         161 | 28_08_1999 |
+| EcE       |       2 |         162 | 28_11_1899 |
+| MECH      |       3 |         163 | 18_11_1898 |
+| che       |       4 |         164 | 7_03_1987  |
+| MME       |       5 |         165 | 17_09_1978 |
++-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create view deptprojects as select Dept_name,count(manager_ssn) as no_of_employee,count(p_id) as no_of_projects from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no manager_ssn=ssn group by Dept_name; 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'manager_ssn=ssn group by Dept_name' at line 1
+mysql> create view deptprojects as select Dept_name,count(manager_ssn) as no_of_employee,count(p_id) as no_of_projects from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no manager_ssn=SSN group by Dept_name; 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'manager_ssn=SSN group by Dept_name' at line 1
+mysql> create view deptprojects as select Dept_name,count(manager_ssn) as no_of_employee,count(p_id) as no_of_projects from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no and manager_ssn=SSN group by Dept_name; 
+ERROR 1050 (42S01): Table 'deptprojects' already exists
+mysql> drop view deptprojects;
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> create view deptprojects as select Dept_name,count(manager_ssn) as no_of_employee,count(p_id) as no_of_projects from employee,  department D,project P where D.Dept_no=P.dept_no and Dno=D.Dept_no and manager_ssn=SSN group by Dept_name; 
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select * from deptprojects;
++-----------+----------------+----------------+
+| Dept_name | no_of_employee | no_of_projects |
++-----------+----------------+----------------+
+| EcE       |              2 |              2 |
++-----------+----------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

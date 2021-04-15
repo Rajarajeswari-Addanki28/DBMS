@@ -1,0 +1,2208 @@
+mysql> tee C:\Users\Raji Aunty\Desktop\practice40.txt;
+ERROR: 
+Unknown command '\U'.
+PROMPT set to 'Aunty\Desktop\practice40.txt;'
+    -> tee C:\Users\Raji Aunty\Desktop\practice40.txt
+ERROR: 
+Unknown command '\U'.
+PROMPT set to 'Aunty\Desktop\practice40.txt'
+    -> 
+    -> Terminal close -- exit!
+mysql> create database practice;
+Query OK, 1 row affected (0.22 sec)
+
+mysql> use practice;
+Database changed
+mysql> create table employee(
+    -> ssn int(10) not null,
+    -> Fname varchar(10) not null,
+    -> Lname varchar(10) not null,
+    -> Address varchar(10),
+    -> gender varchar(6),
+    -> salary int(10),
+    -> Age int(10),
+    -> Deptno int(10),
+    -> SSSN int(10),
+    -> primary key(ssn)
+    -> );
+Query OK, 0 rows affected (1.18 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ssn     | int(10)     | NO   | PRI | NULL    |       |
+| Fname   | varchar(10) | NO   |     | NULL    |       |
+| Lname   | varchar(10) | NO   |     | NULL    |       |
+| Address | varchar(10) | YES  |     | NULL    |       |
+| gender  | varchar(6)  | YES  |     | NULL    |       |
+| salary  | int(10)     | YES  |     | NULL    |       |
+| Age     | int(10)     | YES  |     | NULL    |       |
+| Deptno  | int(10)     | YES  |     | NULL    |       |
+| SSSN    | int(10)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+9 rows in set (0.01 sec)
+
+mysql> insert into employee values(160,'Alice','cullen','hyd','f',109870,20,1,165);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into employee values(161,'Edward','cullen','hyd','M',119000,22,2,161);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into employee values(162,'Harry','potter','jaipur','M',189000,19,3,162);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employee values(163,'Arjun','Allu','chennai','M',199000,24,4,167);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employee values(164,'Bella','swan','vijayawada','f',109000,21,4,167);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(165,'lancy','meon','vijayawada','f',109870,21,5,166);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employee values(166,'emma','watson','sklm','m',189870,25,5,164);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employee values(167,'misty','argarwal','begurule','f',169870,25,1,164);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employee values(168,'abir','rajvansh','begurule','m',169870,25,1,163);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employee values(169,'shahier','sheik','delhi','m',179870,25,2,161);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 109870 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | m      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 169870 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 169870 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> update table employee set gender='f' where ssn=166;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table employee set gender='f' where ssn=166' at line 1
+mysql> update  employee set gender='f' where ssn=166;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 109870 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 169870 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 169870 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> create table department(
+    -> dept_no int(10) not null,
+    -> dept_name varchar(10) not null,
+    -> manager_ssn int(10) ,
+    -> starting_date varchar(10),
+    -> primary key(dept_no)
+    -> );
+Query OK, 0 rows affected (0.68 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| dept_no       | int(10)     | NO   | PRI | NULL    |       |
+| dept_name     | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  |     | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into table department values(1,'cse',165,'28_08_1998'); 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table department values(1,'cse',165,'28_08_1998')' at line 1
+mysql> insert into  department values(1,'cse',165,'28_08_1998'); 
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into  department values(2,'ece',161,'8_11_1998'); 
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into  department values(3,'mech',162,'18_06_1998'); 
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into  department values(4,'che',163,'11_07_1998'); 
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into  department values(5,'mme',166,'15_01_1998'); 
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> create table project(
+    -> pid int(10) not null,
+    -> pname varchar(10),
+    -> ploc varchar(10),
+    -> deptno int(10),
+    -> primary key(pid)
+    -> );
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> desc project;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| pid    | int(10)     | NO   | PRI | NULL    |       |
+| pname  | varchar(10) | YES  |     | NULL    |       |
+| ploc   | varchar(10) | YES  |     | NULL    |       |
+| deptno | int(10)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into project(11,'Bigdata','delhi',1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,'Bigdata','delhi',1)' at line 1
+mysql> insert into project values(11,'Bigdata','delhi',1);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into project values(12,'AI','MuMbai',1);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into project values(13,'machine learning','hyd',2);
+ERROR 1406 (22001): Data too long for column 'pname' at row 1
+mysql> insert into project values(13,'robotics','hyd',2);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into project values(14,'NLP','hyd',2);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into project values(15,'medicine','kochi',3);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values(16,'cynide','pune',3);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into project values(17,'robo','pune',4);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into project values(18,'warter','pune',4);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into project values(19,'earth','assan',4);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into project values(20,'earno','nepal',5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from project;
++-----+----------+--------+--------+
+| pid | pname    | ploc   | deptno |
++-----+----------+--------+--------+
+|  11 | Bigdata  | delhi  |      1 |
+|  12 | AI       | MuMbai |      1 |
+|  13 | robotics | hyd    |      2 |
+|  14 | NLP      | hyd    |      2 |
+|  15 | medicine | kochi  |      3 |
+|  16 | cynide   | pune   |      3 |
+|  17 | robo     | pune   |      4 |
+|  18 | warter   | pune   |      4 |
+|  19 | earth    | assan  |      4 |
+|  20 | earno    | nepal  |      5 |
++-----+----------+--------+--------+
+10 rows in set (0.00 sec)
+
+mysql> create table dependent(
+    -> did int(10),
+    -> dname varchar(10),
+    -> address varchar(20),
+    -> emp_ssn int(10),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 6
+mysql> create table dependent(
+    -> did int(10),
+    -> dname varchar(10),
+    -> address varchar(20),
+    -> emp_ssn int(10)
+    -> );
+Query OK, 0 rows affected (0.90 sec)
+
+mysql> desc dependent;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| did     | int(10)     | YES  |     | NULL    |       |
+| dname   | varchar(10) | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| emp_ssn | int(10)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> insert into dependent values(40,'jacob','nuzvid',162);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dependent values(41,'jessy','araku',169);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into dependent values(42,'janu','hyd',167);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(43,'mounski','eluru',166);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dependent values(44,'sasi','eluru',164);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into dependent values(45,'sailu','JRG',163);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into dependent values(46,'lucy','JRG',168);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values(47,'lovely','JRG',168);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into dependent values(48,'lokesh','gudivda',163);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into dependent values(49,'rajesh','gudivda',162);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from dependent;
++------+---------+---------+---------+
+| did  | dname   | address | emp_ssn |
++------+---------+---------+---------+
+|   40 | jacob   | nuzvid  |     162 |
+|   41 | jessy   | araku   |     169 |
+|   42 | janu    | hyd     |     167 |
+|   43 | mounski | eluru   |     166 |
+|   44 | sasi    | eluru   |     164 |
+|   45 | sailu   | JRG     |     163 |
+|   46 | lucy    | JRG     |     168 |
+|   47 | lovely  | JRG     |     168 |
+|   48 | lokesh  | gudivda |     163 |
+|   49 | rajesh  | gudivda |     162 |
++------+---------+---------+---------+
+10 rows in set (0.00 sec)
+
+mysql> create table workson(
+    -> wssn int(10) not null,
+    -> prid int(10) not null,
+    -> hours int(10)
+    -> );
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> desc workson;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| wssn  | int(10) | NO   |     | NULL    |       |
+| prid  | int(10) | NO   |     | NULL    |       |
+| hours | int(10) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into works values(160,11,8);
+ERROR 1146 (42S02): Table 'practice.works' doesn't exist
+mysql> insert into workson values(160,11,8);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into workson values(168,19,9);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into workson values(166,16,10);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into workson values(164,12,14);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into workson values(163,13,5);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into workson values(164,13,6);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into workson values(161,17,7);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into workson values(161,18,7);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into workson values(166,11,13);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into workson values(168,12,8);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from workson;
++------+------+-------+
+| wssn | prid | hours |
++------+------+-------+
+|  160 |   11 |     8 |
+|  168 |   19 |     9 |
+|  166 |   16 |    10 |
+|  164 |   12 |    14 |
+|  163 |   13 |     5 |
+|  164 |   13 |     6 |
+|  161 |   17 |     7 |
+|  161 |   18 |     7 |
+|  166 |   11 |    13 |
+|  168 |   12 |     8 |
++------+------+-------+
+10 rows in set (0.00 sec)
+
+mysql> alter table employee add foreign key(sssn) references employee(ssn);
+Query OK, 10 rows affected (1.61 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add foreign key(deptno) references department(deptnno);
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'deptnno' for constraint 'employee_ibfk_2' in the referenced table 'department'
+mysql> alter table employee add foreign key(deptno) references department(deptno);
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'deptno' for constraint 'employee_ibfk_2' in the referenced table 'department'
+mysql> alter table employee add foreign key(deptno) references department(dept_no);
+Query OK, 10 rows affected (1.46 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table department add foreign key(manager_ssn) references employee(ssn);
+Query OK, 5 rows affected (1.21 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> alter table project add foreign key(deptno) references department(dept_no);
+Query OK, 10 rows affected (1.93 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table dependent add foreign key(emp_ssn) references employee(ssn);
+Query OK, 10 rows affected (1.11 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table workson add foreign key(wssn) references employee(ssn);
+Query OK, 10 rows affected (0.87 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> alter table workson add foreign key(prid) references project(pid);
+Query OK, 10 rows affected (1.77 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ssn     | int(10)     | NO   | PRI | NULL    |       |
+| Fname   | varchar(10) | NO   |     | NULL    |       |
+| Lname   | varchar(10) | NO   |     | NULL    |       |
+| Address | varchar(10) | YES  |     | NULL    |       |
+| gender  | varchar(6)  | YES  |     | NULL    |       |
+| salary  | int(10)     | YES  |     | NULL    |       |
+| Age     | int(10)     | YES  |     | NULL    |       |
+| Deptno  | int(10)     | YES  | MUL | NULL    |       |
+| SSSN    | int(10)     | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+9 rows in set (0.04 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| dept_no       | int(10)     | NO   | PRI | NULL    |       |
+| dept_name     | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  | MUL | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc project;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| pid    | int(10)     | NO   | PRI | NULL    |       |
+| pname  | varchar(10) | YES  |     | NULL    |       |
+| ploc   | varchar(10) | YES  |     | NULL    |       |
+| deptno | int(10)     | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc dependent;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| did     | int(10)     | YES  |     | NULL    |       |
+| dname   | varchar(10) | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| emp_ssn | int(10)     | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc workson;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| wssn  | int(10) | NO   | MUL | NULL    |       |
+| prid  | int(10) | NO   | MUL | NULL    |       |
+| hours | int(10) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where fname='alice' and lname='cullen';
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd     | f      | 109870 |   20 |      1 |  165 |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,address from employee,department where deptno=dept_no;
++---------+----------+------------+
+| fname   | lname    | address    |
++---------+----------+------------+
+| Edward  | cullen   | hyd        |
+| shahier | sheik    | delhi      |
+| Harry   | potter   | jaipur     |
+| Arjun   | Allu     | chennai    |
+| Bella   | swan     | vijayawada |
+| Alice   | cullen   | hyd        |
+| misty   | argarwal | begurule   |
+| abir    | rajvansh | begurule   |
+| lancy   | meon     | vijayawada |
+| emma    | watson   | sklm       |
++---------+----------+------------+
+10 rows in set (0.04 sec)
+
+mysql> select fname,lname,address from employee,department where deptno=dept_no and dept_no='cse';
+Empty set, 1 warning (0.06 sec)
+
+mysql> select fname,lname,address from employee,department where deptno=dept_no and dept_no='ece';
+Empty set, 1 warning (0.00 sec)
+
+mysql> select fname,lname,address from employee,department where deptno=dept_no and dept_name='ece';
++---------+--------+---------+
+| fname   | lname  | address |
++---------+--------+---------+
+| Edward  | cullen | hyd     |
+| shahier | sheik  | delhi   |
++---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 109870 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 169870 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 169870 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| dept_no       | int(10)     | NO   | PRI | NULL    |       |
+| dept_name     | varchar(10) | NO   |     | NULL    |       |
+| manager_ssn   | int(10)     | YES  | MUL | NULL    |       |
+| starting_date | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select P.pid,P.ploc,D.dept_name,fname as manager,address from employee,workson,project P,department D where ssn=manager_ssn and D.dept_no=P.deptno and ploc='Hyd'; 
++-----+------+-----------+---------+---------+
+| pid | ploc | dept_name | manager | address |
++-----+------+-----------+---------+---------+
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
++-----+------+-----------+---------+---------+
+20 rows in set (0.00 sec)
+
+mysql> select P.pid,P.ploc,D.dept_name,fname as manager,address from employee,project P,department D where ssn=manager_ssn and D.dept_no=P.deptno and ploc='Hyd'; 
++-----+------+-----------+---------+---------+
+| pid | ploc | dept_name | manager | address |
++-----+------+-----------+---------+---------+
+|  13 | hyd  | ece       | Edward  | hyd     |
+|  14 | hyd  | ece       | Edward  | hyd     |
++-----+------+-----------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----+----------+--------+--------+
+| pid | pname    | ploc   | deptno |
++-----+----------+--------+--------+
+|  11 | Bigdata  | delhi  |      1 |
+|  12 | AI       | MuMbai |      1 |
+|  13 | robotics | hyd    |      2 |
+|  14 | NLP      | hyd    |      2 |
+|  15 | medicine | kochi  |      3 |
+|  16 | cynide   | pune   |      3 |
+|  17 | robo     | pune   |      4 |
+|  18 | warter   | pune   |      4 |
+|  19 | earth    | assan  |      4 |
+|  20 | earno    | nepal  |      5 |
++-----+----------+--------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select A.fname as sup_fname,A.lname as sup_lname,B.fname as emp-fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.ssn;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.ssn' at line 1
+mysql> select A.fname as sup_fname,A.lname as sup_lname,B.fname as emp_fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.ssn;
++-----------+-----------+-----------+-----------+
+| sup_fname | sup_lname | emp_fname | emp_lname |
++-----------+-----------+-----------+-----------+
+| Alice     | cullen    | Alice     | cullen    |
+| Edward    | cullen    | Edward    | cullen    |
+| Harry     | potter    | Harry     | potter    |
+| Arjun     | Allu      | Arjun     | Allu      |
+| Bella     | swan      | Bella     | swan      |
+| lancy     | meon      | lancy     | meon      |
+| emma      | watson    | emma      | watson    |
+| misty     | argarwal  | misty     | argarwal  |
+| abir      | rajvansh  | abir      | rajvansh  |
+| shahier   | sheik     | shahier   | sheik     |
++-----------+-----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select A.fname as sup_fname,A.lname as sup_lname,B.fname as emp_fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.sssn;
++-----------+-----------+-----------+-----------+
+| sup_fname | sup_lname | emp_fname | emp_lname |
++-----------+-----------+-----------+-----------+
+| lancy     | meon      | Alice     | cullen    |
+| Edward    | cullen    | Edward    | cullen    |
+| Harry     | potter    | Harry     | potter    |
+| misty     | argarwal  | Arjun     | Allu      |
+| misty     | argarwal  | Bella     | swan      |
+| emma      | watson    | lancy     | meon      |
+| Bella     | swan      | emma      | watson    |
+| Bella     | swan      | misty     | argarwal  |
+| Arjun     | Allu      | abir      | rajvansh  |
+| Edward    | cullen    | shahier   | sheik     |
++-----------+-----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select distinct(salary) from employee;
++--------+
+| salary |
++--------+
+| 109870 |
+| 119000 |
+| 189000 |
+| 199000 |
+| 109000 |
+| 189870 |
+| 169870 |
+| 179870 |
++--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee group by salary;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 109870 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 169870 |   25 |      1 |  164 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> select P.pid,P.name,E.fname,E.lname.E.ssn from employee E,project P,workson where fname='alice' and E.ssn=wssn and pid=prid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.ssn from employee E,project P,workson where fname='alice' and E.ssn=wssn and pi' at line 1
+mysql> select P.pid,P.name,E.fname,E.lname,E.ssn from employee E,project P,workson where fname='alice' and E.ssn=wssn and pid=prid;
+ERROR 1054 (42S22): Unknown column 'P.name' in 'field list'
+mysql> select P.pid,P.pname,E.fname,E.lname,E.ssn from employee E,project P,workson where fname='alice' and E.ssn=wssn and pid=prid;
++-----+---------+-------+--------+-----+
+| pid | pname   | fname | lname  | ssn |
++-----+---------+-------+--------+-----+
+|  11 | Bigdata | Alice | cullen | 160 |
++-----+---------+-------+--------+-----+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where lname as '%ll%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as '%ll%'' at line 1
+mysql> select * from employee where lname like '%ll%';
++-----+--------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname  | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+--------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice  | cullen | hyd     | f      | 109870 |   20 |      1 |  165 |
+| 161 | Edward | cullen | hyd     | M      | 119000 |   22 |      2 |  161 |
+| 163 | Arjun  | Allu   | chennai | M      | 199000 |   24 |      4 |  167 |
++-----+--------+--------+---------+--------+--------+------+--------+------+
+3 rows in set (0.04 sec)
+
+mysql> select fname,lname,salary from employee where deptno='2' and salary between 100000 and 180000;
++---------+--------+--------+
+| fname   | lname  | salary |
++---------+--------+--------+
+| Edward  | cullen | 119000 |
+| shahier | sheik  | 179870 |
++---------+--------+--------+
+2 rows in set (0.05 sec)
+
+mysql> update employee,department set salary=salary+(salary*0.15) where deptno=dept_no and dept_name='cse';
+Query OK, 3 rows affected (0.14 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 126351 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department group by dept_name;
++-------+--------+---------+-----------+
+| fname | lname  | address | dept_name |
++-------+--------+---------+-----------+
+| Alice | cullen | hyd     | cse       |
+| Alice | cullen | hyd     | ece       |
+| Alice | cullen | hyd     | mech      |
+| Alice | cullen | hyd     | che       |
+| Alice | cullen | hyd     | mme       |
++-------+--------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department where deptno=dept_no group by dept_name;
++--------+--------+------------+-----------+
+| fname  | lname  | address    | dept_name |
++--------+--------+------------+-----------+
+| Alice  | cullen | hyd        | cse       |
+| Edward | cullen | hyd        | ece       |
+| Harry  | potter | jaipur     | mech      |
+| Arjun  | Allu   | chennai    | che       |
+| lancy  | meon   | vijayawada | mme       |
++--------+--------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department where deptno=dept_no order by dept_name;
++---------+----------+------------+-----------+
+| fname   | lname    | address    | dept_name |
++---------+----------+------------+-----------+
+| Arjun   | Allu     | chennai    | che       |
+| Bella   | swan     | vijayawada | che       |
+| Alice   | cullen   | hyd        | cse       |
+| misty   | argarwal | begurule   | cse       |
+| abir    | rajvansh | begurule   | cse       |
+| Edward  | cullen   | hyd        | ece       |
+| shahier | sheik    | delhi      | ece       |
+| Harry   | potter   | jaipur     | mech      |
+| lancy   | meon     | vijayawada | mme       |
+| emma    | watson   | sklm       | mme       |
++---------+----------+------------+-----------+
+10 rows in set (0.03 sec)
+
+mysql> select E.* from employee E,dependent where ssn=emp_ssn;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.03 sec)
+
+mysql> select E.* from employee E,dependent where ssn=emp_ssn group by ssn;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> select fname,dname from employee,dependent,department where ssn=manager_ssn and ssn=emp_ssn;
++-------+---------+
+| fname | dname   |
++-------+---------+
+| Harry | jacob   |
+| Harry | rajesh  |
+| Arjun | sailu   |
+| Arjun | lokesh  |
+| emma  | mounski |
++-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select E.* from employee,workson where ssn=wssn and in(11,14,16);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in(11,14,16)' at line 1
+mysql> select E.* from employee,workson where ssn=wssn and In(11,14,16);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'In(11,14,16)' at line 1
+mysql> select E.* from employee,workson where ssn=wssn and prid In(11,14,16);
+ERROR 1051 (42S02): Unknown table 'E'
+mysql> select E.* from employee E,workson where ssn=wssn and prid In(11,14,16);
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd     | f      | 126351 |   20 |      1 |  165 |
+| 166 | emma  | watson | sklm    | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma  | watson | sklm    | f      | 189870 |   25 |      5 |  164 |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee E,workson where ssn=wssn and prid In(11,14,16);
++-----+-------+--------+---------+--------+--------+------+--------+------+------+------+-------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN | wssn | prid | hours |
++-----+-------+--------+---------+--------+--------+------+--------+------+------+------+-------+
+| 160 | Alice | cullen | hyd     | f      | 126351 |   20 |      1 |  165 |  160 |   11 |     8 |
+| 166 | emma  | watson | sklm    | f      | 189870 |   25 |      5 |  164 |  166 |   11 |    13 |
+| 166 | emma  | watson | sklm    | f      | 189870 |   25 |      5 |  164 |  166 |   16 |    10 |
++-----+-------+--------+---------+--------+--------+------+--------+------+------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select fname from employee,depemdent,deoartment where ssn=emp_ssn and ssn=manager_ssn group by ssn having count(emp_ssn)>=1;
+ERROR 1146 (42S02): Table 'practice.depemdent' doesn't exist
+mysql> select fname from employee,dependent,department where ssn=emp_ssn and ssn=manager_ssn group by ssn having count(emp_ssn)>=1;
++-------+
+| fname |
++-------+
+| Harry |
+| Arjun |
+| emma  |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,dependent where (select emp_ssn from dependent where emp_ssn=ssn) and  ssn=emp_ssn group by ssn; 
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select E.* from employee E,dependent where exists(select emp_ssn from dependent where emp_ssn=ssn) and  ssn=emp_ssn group by ssn; 
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+7 rows in set (0.03 sec)
+
+mysql> select dept_name,dept_no,count(ssn) as no_of_employee from department ,employee where deptno=dept_no group by dept_nmae;
+ERROR 1054 (42S22): Unknown column 'dept_nmae' in 'group statement'
+mysql> select dept_name,dept_no,count(ssn) as no_of_employee from department ,employee where deptno=dept_no group by dept_name;
++-----------+---------+----------------+
+| dept_name | dept_no | no_of_employee |
++-----------+---------+----------------+
+| cse       |       1 |              3 |
+| ece       |       2 |              2 |
+| mech      |       3 |              1 |
+| che       |       4 |              2 |
+| mme       |       5 |              2 |
++-----------+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,count(did) as no_of_dependent from employee,dependent where emp_ssn=ssn group by ssn;
++---------+-----------------+
+| fname   | no_of_dependent |
++---------+-----------------+
+| Harry   |               2 |
+| shahier |               1 |
+| misty   |               1 |
+| emma    |               1 |
+| Bella   |               1 |
+| Arjun   |               2 |
+| abir    |               2 |
++---------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from department where dept_name='cse');
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from department where dept_name='mme');
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from department where dept_name='ece');
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from employee, department where dept_name='ece');
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from employee, department where dept_no=1);
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from employee, department where dept_no=2);
+Empty set (0.00 sec)
+
+mysql> select fname from employee where salary>( select max(salary) from employee, department where deptno=2);
++-------+
+| fname |
++-------+
+| Harry |
+| Arjun |
+| emma  |
+| misty |
+| abir  |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where sssn is null;
+Empty set (0.07 sec)
+
+mysql> select E.* from employee E,department where deptno=dept_no and dept_name='cse' and lname like %ll%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%ll%' at line 1
+mysql> select E.* from employee E,department where deptno=dept_no and dept_name='cse' and lname like "%ll%";
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd     | f      | 126351 |   20 |      1 |  165 |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select fname from employee where exists(select manager_ssn from employee,department where ssn=manager_ssn) and exists(select didfrom employee,dependent where ssn=emp_ssn);
+ERROR 1054 (42S22): Unknown column 'didfrom' in 'field list'
+mysql> select fname from employee where exists(select manager_ssn from employee,department where ssn=manager_ssn) and exists(select did from employee,dependent where ssn=emp_ssn);
++---------+
+| fname   |
++---------+
+| Alice   |
+| Edward  |
+| Harry   |
+| Arjun   |
+| Bella   |
+| lancy   |
+| emma    |
+| misty   |
+| abir    |
+| shahier |
++---------+
+10 rows in set (0.04 sec)
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 126351 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select fname ,count(hours) as no_of_hours from employee,workson where  ssn=wssn group by ssn;
++--------+-------------+
+| fname  | no_of_hours |
++--------+-------------+
+| Alice  |           1 |
+| Edward |           2 |
+| Arjun  |           1 |
+| Bella  |           2 |
+| emma   |           2 |
+| abir   |           2 |
++--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select fname ,sum(hours) as no_of_hours from employee,workson where  ssn=wssn group by ssn;
++--------+-------------+
+| fname  | no_of_hours |
++--------+-------------+
+| Alice  |           8 |
+| Edward |          14 |
+| Arjun  |           5 |
+| Bella  |          20 |
+| emma   |          23 |
+| abir   |          17 |
++--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select count(distinct ssn) as no_of_supervisor from employee ;
++------------------+
+| no_of_supervisor |
++------------------+
+|               10 |
++------------------+
+1 row in set (0.04 sec)
+
+mysql> select count(distinct sssn) as no_of_supervisor from employee ;
++------------------+
+| no_of_supervisor |
++------------------+
+|                7 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select gender,count(ssn) from employee group by gender;
++--------+------------+
+| gender | count(ssn) |
++--------+------------+
+| f      |          5 |
+| M      |          5 |
++--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select fname from employee where salary>avg(salary);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select fname from employee where salary>( select avg(salary) from employee );
++---------+
+| fname   |
++---------+
+| Harry   |
+| Arjun   |
+| emma    |
+| misty   |
+| abir    |
+| shahier |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select * form employee where ssn is null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form employee where ssn is null' at line 1
+mysql> select * from employee where ssn is null;
+Empty set (0.00 sec)
+
+mysql> select upper(fname) as FNAME_UPPER ,lower(lname) as LNAME_LOWER from employee;
++-------------+-------------+
+| FNAME_UPPER | LNAME_LOWER |
++-------------+-------------+
+| ALICE       | cullen      |
+| EDWARD      | cullen      |
+| HARRY       | potter      |
+| ARJUN       | allu        |
+| BELLA       | swan        |
+| LANCY       | meon        |
+| EMMA        | watson      |
+| MISTY       | argarwal    |
+| ABIR        | rajvansh    |
+| SHAHIER     | sheik       |
++-------------+-------------+
+10 rows in set (0.06 sec)
+
+mysql> select  substring(1,3) from employee;
++----------------+
+| substring(1,3) |
++----------------+
+|                |
+|                |
+|                |
+|                |
+|                |
+|                |
+|                |
+|                |
+|                |
+|                |
++----------------+
+10 rows in set (0.03 sec)
+
+mysql> select  substring(fname,1,3) from employee;
++----------------------+
+| substring(fname,1,3) |
++----------------------+
+| Ali                  |
+| Edw                  |
+| Har                  |
+| Arj                  |
+| Bel                  |
+| lan                  |
+| emm                  |
+| mis                  |
+| abi                  |
+| sha                  |
++----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,locate('c',fname) from employee where fname='Alice';
++-------+-------------------+
+| fname | locate('c',fname) |
++-------+-------------------+
+| Alice |                 4 |
++-------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * ,length(fname) from employee where length(lname)>5;
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+| ssn | Fname  | Lname    | Address  | gender | salary | Age  | Deptno | SSSN | length(fname) |
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+| 160 | Alice  | cullen   | hyd      | f      | 126351 |   20 |      1 |  165 |             5 |
+| 161 | Edward | cullen   | hyd      | M      | 119000 |   22 |      2 |  161 |             6 |
+| 162 | Harry  | potter   | jaipur   | M      | 189000 |   19 |      3 |  162 |             5 |
+| 166 | emma   | watson   | sklm     | f      | 189870 |   25 |      5 |  164 |             4 |
+| 167 | misty  | argarwal | begurule | f      | 195351 |   25 |      1 |  164 |             5 |
+| 168 | abir   | rajvansh | begurule | m      | 195351 |   25 |      1 |  163 |             4 |
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select concat(fname,'.',lname) as first_last_name from employee;
++-----------------+
+| first_last_name |
++-----------------+
+| Alice.cullen    |
+| Edward.cullen   |
+| Harry.potter    |
+| Arjun.Allu      |
+| Bella.swan      |
+| lancy.meon      |
+| emma.watson     |
+| misty.argarwal  |
+| abir.rajvansh   |
+| shahier.sheik   |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> update department,employee set starting_date=date add(starting_date,internal 25 day) where dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(starting_date,internal 25 day) where dept_name='cse' and manager_ssn=ssn and' at line 1
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update department,employee set starting_date=date add(starting_date,interval 25 day) where dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(starting_date,interval 25 day) where dept_name='cse' and manager_ssn=ssn and' at line 1
+mysql> update department,employee set starting_date=date_add(starting_date,interval 25 day) where dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update department,employee set starting_date=date_add(starting_date,interval 1 day) where dept_name='cse' and manager_ssn=ssn and lname like "%ll%";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept_name,max(salary) as max_salary,min(salary) as min_salary,avg(salary) as avg_salary ,sum(salary) as sum_salary from employee,department where deptno=dept_no group by dept_name;
++-----------+------------+------------+-------------+------------+
+| dept_name | max_salary | min_salary | avg_salary  | sum_salary |
++-----------+------------+------------+-------------+------------+
+| cse       |     195351 |     126351 | 172351.0000 |     517053 |
+| ece       |     179870 |     119000 | 149435.0000 |     298870 |
+| mech      |     189000 |     189000 | 189000.0000 |     189000 |
+| che       |     199000 |     109000 | 154000.0000 |     308000 |
+| mme       |     189870 |     109870 | 149870.0000 |     299740 |
++-----------+------------+------------+-------------+------------+
+5 rows in set (0.04 sec)
+
+mysql> select Dept_name ,count(pid) as controlling_projects from department,project where deptno=dept_no  group by dept_name;
++-----------+----------------------+
+| Dept_name | controlling_projects |
++-----------+----------------------+
+| cse       |                    2 |
+| ece       |                    2 |
+| mech      |                    2 |
+| che       |                    3 |
+| mme       |                    1 |
++-----------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,count(ssn) from employee,dependent where ssn=emp_ssn;
++-------+------------+
+| fname | count(ssn) |
++-------+------------+
+| Harry |         10 |
++-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select fname,count(ssn) from employee,dependent where ssn=emp_ssn group by ssn;
++---------+------------+
+| fname   | count(ssn) |
++---------+------------+
+| Harry   |          2 |
+| Arjun   |          2 |
+| Bella   |          1 |
+| emma    |          1 |
+| misty   |          1 |
+| abir    |          2 |
+| shahier |          1 |
++---------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee where ssn In(select manager_ssn from employee,department where deptno=dept_no group by dept_name having count(ssn)>2);
++-----+-------+-------+------------+--------+--------+------+--------+------+
+| ssn | Fname | Lname | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+-------+-------+------------+--------+--------+------+--------+------+
+| 165 | lancy | meon  | vijayawada | f      | 109870 |   21 |      5 |  166 |
++-----+-------+-------+------------+--------+--------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,address,salary from employee order by ssn desc;
++---------+----------+------------+--------+
+| fname   | lname    | address    | salary |
++---------+----------+------------+--------+
+| shahier | sheik    | delhi      | 179870 |
+| abir    | rajvansh | begurule   | 195351 |
+| misty   | argarwal | begurule   | 195351 |
+| emma    | watson   | sklm       | 189870 |
+| lancy   | meon     | vijayawada | 109870 |
+| Bella   | swan     | vijayawada | 109000 |
+| Arjun   | Allu     | chennai    | 199000 |
+| Harry   | potter   | jaipur     | 189000 |
+| Edward  | cullen   | hyd        | 119000 |
+| Alice   | cullen   | hyd        | 126351 |
++---------+----------+------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,salary from employee order by ssn desc limt 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'limt 5' at line 1
+mysql> select fname,lname,address,salary from employee order by ssn desc limit 5;
++---------+----------+------------+--------+
+| fname   | lname    | address    | salary |
++---------+----------+------------+--------+
+| shahier | sheik    | delhi      | 179870 |
+| abir    | rajvansh | begurule   | 195351 |
+| misty   | argarwal | begurule   | 195351 |
+| emma    | watson   | sklm       | 189870 |
+| lancy   | meon     | vijayawada | 109870 |
++---------+----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where fname='alice' and lname='cullen';
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd     | f      | 126351 |   20 |      1 |  165 |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,address from employee,department where deptno=dept_no and dept_name='cse';
++-------+----------+----------+
+| fname | lname    | address  |
++-------+----------+----------+
+| Alice | cullen   | hyd      |
+| misty | argarwal | begurule |
+| abir  | rajvansh | begurule |
++-------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select fname,lname,address from employee E,department,project P where E.deptno=dept_no and P.deptno=dept_no and dept_name='cse';
++-------+----------+----------+
+| fname | lname    | address  |
++-------+----------+----------+
+| Alice | cullen   | hyd      |
+| Alice | cullen   | hyd      |
+| misty | argarwal | begurule |
+| misty | argarwal | begurule |
+| abir  | rajvansh | begurule |
+| abir  | rajvansh | begurule |
++-------+----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select fname,lname,address from employee E,department,project P where E.deptno=dept_no and P.deptno=dept_no and dept_name='cse' group by dept_name;
++-------+--------+---------+
+| fname | lname  | address |
++-------+--------+---------+
+| Alice | cullen | hyd     |
++-------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,address from employee E,department,project P where E.deptno=dept_no and P.deptno=dept_no and dept_name='cse' group by ssn;
++-------+----------+----------+
+| fname | lname    | address  |
++-------+----------+----------+
+| Alice | cullen   | hyd      |
+| misty | argarwal | begurule |
+| abir  | rajvansh | begurule |
++-------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select fname,lname,address from employee E,department,project P where E.deptno=dept_no and P.deptno=dept_no and ploc='hyd' and manager_ssn=ssn;
++--------+--------+---------+
+| fname  | lname  | address |
++--------+--------+---------+
+| Edward | cullen | hyd     |
+| Edward | cullen | hyd     |
++--------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select fname,lname,address from employee E,department,project P where  P.deptno=dept_no and ploc='hyd' and manager_ssn=ssn;
++--------+--------+---------+
+| fname  | lname  | address |
++--------+--------+---------+
+| Edward | cullen | hyd     |
+| Edward | cullen | hyd     |
++--------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from project;
++-----+----------+--------+--------+
+| pid | pname    | ploc   | deptno |
++-----+----------+--------+--------+
+|  11 | Bigdata  | delhi  |      1 |
+|  12 | AI       | MuMbai |      1 |
+|  13 | robotics | hyd    |      2 |
+|  14 | NLP      | hyd    |      2 |
+|  15 | medicine | kochi  |      3 |
+|  16 | cynide   | pune   |      3 |
+|  17 | robo     | pune   |      4 |
+|  18 | warter   | pune   |      4 |
+|  19 | earth    | assan  |      4 |
+|  20 | earno    | nepal  |      5 |
++-----+----------+--------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 126351 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 195351 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select A.fname as sup_fname,A.lname as sup_lname ,B.fname as emp_fname,B.lname as emp_lname from employee where A.ssn=B.sssn
+    -> select A.fname as sup_fname,A.lname as sup_lname ,B.fname as emp_fname,B.lname as emp_lname from employee where A.ssn=B.sssn;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select A.fname as sup_fname,A.lname as sup_lname ,B.fname as emp_fname,B.lname a' at line 2
+mysql> select A.fname as sup_fname,A.lname as sup_lname ,B.fname as emp_fname,B.lname as emp_lname from employee where A.ssn=B.sssn;
+ERROR 1054 (42S22): Unknown column 'A.fname' in 'field list'
+mysql> select A.fname as sup_fname,A.lname as sup_lname ,B.fname as emp_fname,B.lname as emp_lname from employee A,employee B where A.ssn=B.sssn;
++-----------+-----------+-----------+-----------+
+| sup_fname | sup_lname | emp_fname | emp_lname |
++-----------+-----------+-----------+-----------+
+| lancy     | meon      | Alice     | cullen    |
+| Edward    | cullen    | Edward    | cullen    |
+| Harry     | potter    | Harry     | potter    |
+| misty     | argarwal  | Arjun     | Allu      |
+| misty     | argarwal  | Bella     | swan      |
+| emma      | watson    | lancy     | meon      |
+| Bella     | swan      | emma      | watson    |
+| Bella     | swan      | misty     | argarwal  |
+| Arjun     | Allu      | abir      | rajvansh  |
+| Edward    | cullen    | shahier   | sheik     |
++-----------+-----------+-----------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select distrint salary from employee;
+ERROR 1054 (42S22): Unknown column 'distrint' in 'field list'
+mysql> select distrinct salary from employee;
+ERROR 1054 (42S22): Unknown column 'distrinct' in 'field list'
+mysql> select distinct salary from employee;
++--------+
+| salary |
++--------+
+| 126351 |
+| 119000 |
+| 189000 |
+| 199000 |
+| 109000 |
+| 109870 |
+| 189870 |
+| 195351 |
+| 179870 |
++--------+
+9 rows in set (0.00 sec)
+
+mysql> select *  from employeegroup by salary;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by salary' at line 1
+mysql> select *  from employee group by salary;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 126351 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 195351 |   25 |      1 |  164 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+9 rows in set (0.00 sec)
+
+mysql> select fname,lname,pid from employee,workson where ssn=wssn and lname='allu';
+ERROR 1054 (42S22): Unknown column 'pid' in 'field list'
+mysql> select fname,lname,pid from employee,project where ssn=wssn and lname='allu';
+ERROR 1054 (42S22): Unknown column 'wssn' in 'where clause'
+mysql> select fname,lname,pid from employee,project where  lname='allu';
++-------+-------+-----+
+| fname | lname | pid |
++-------+-------+-----+
+| Arjun | Allu  |  11 |
+| Arjun | Allu  |  12 |
+| Arjun | Allu  |  13 |
+| Arjun | Allu  |  14 |
+| Arjun | Allu  |  15 |
+| Arjun | Allu  |  16 |
+| Arjun | Allu  |  17 |
+| Arjun | Allu  |  18 |
+| Arjun | Allu  |  19 |
+| Arjun | Allu  |  20 |
++-------+-------+-----+
+10 rows in set (0.00 sec)
+
+mysql> select pid,pname,fname,lname from employee,workson,project where ssn=wssn,pid=prid,fname='alice';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',pid=prid,fname='alice'' at line 1
+mysql> select pid,pname,fname,lname from employee,workson,project where ssn=wssn,pid=prid and fname='alice';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',pid=prid and fname='alice'' at line 1
+mysql> select pid,pname,fname,lname from employee,workson,project where ssn=wssn and pid=prid and fname='alice';
++-----+---------+-------+--------+
+| pid | pname   | fname | lname  |
++-----+---------+-------+--------+
+|  11 | Bigdata | Alice | cullen |
++-----+---------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where lname='cullen' and fname like "a%";
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd     | f      | 126351 |   20 |      1 |  165 |
++-----+-------+--------+---------+--------+--------+------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,salary from employee where deptnon=2 and salary between 100000 and 200000;
+ERROR 1054 (42S22): Unknown column 'deptnon' in 'where clause'
+mysql> select fname,lname,salary from employee where deptno=2 and salary between 100000 and 200000;
++---------+--------+--------+
+| fname   | lname  | salary |
++---------+--------+--------+
+| Edward  | cullen | 119000 |
+| shahier | sheik  | 179870 |
++---------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update employee, department set salary=salary+(salary*0.15) where deptno=dept_no and dept_name='cse';
+Query OK, 3 rows affected (0.09 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from employee;
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 224654 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from dept_no=deptno group by dept_name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=deptno group by dept_name' at line 1
+mysql> select fname,lname,address,dept_name from employee,department where dept_no=deptno group by dept_name;
++--------+--------+------------+-----------+
+| fname  | lname  | address    | dept_name |
++--------+--------+------------+-----------+
+| Alice  | cullen | hyd        | cse       |
+| Edward | cullen | hyd        | ece       |
+| Harry  | potter | jaipur     | mech      |
+| Arjun  | Allu   | chennai    | che       |
+| lancy  | meon   | vijayawada | mme       |
++--------+--------+------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department where dept_no=deptno order by ssn;
++---------+----------+------------+-----------+
+| fname   | lname    | address    | dept_name |
++---------+----------+------------+-----------+
+| Alice   | cullen   | hyd        | cse       |
+| Edward  | cullen   | hyd        | ece       |
+| Harry   | potter   | jaipur     | mech      |
+| Arjun   | Allu     | chennai    | che       |
+| Bella   | swan     | vijayawada | che       |
+| lancy   | meon     | vijayawada | mme       |
+| emma    | watson   | sklm       | mme       |
+| misty   | argarwal | begurule   | cse       |
+| abir    | rajvansh | begurule   | cse       |
+| shahier | sheik    | delhi      | ece       |
++---------+----------+------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,dept_name from employee,department where dept_no=deptno order by dept_name;
++---------+----------+------------+-----------+
+| fname   | lname    | address    | dept_name |
++---------+----------+------------+-----------+
+| Arjun   | Allu     | chennai    | che       |
+| Bella   | swan     | vijayawada | che       |
+| Alice   | cullen   | hyd        | cse       |
+| misty   | argarwal | begurule   | cse       |
+| abir    | rajvansh | begurule   | cse       |
+| Edward  | cullen   | hyd        | ece       |
+| shahier | sheik    | delhi      | ece       |
+| Harry   | potter   | jaipur     | mech      |
+| lancy   | meon     | vijayawada | mme       |
+| emma    | watson   | sklm       | mme       |
++---------+----------+------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname from employee,dependent where ssn=emp_ssn;
++---------+----------+
+| fname   | lname    |
++---------+----------+
+| Harry   | potter   |
+| Harry   | potter   |
+| Arjun   | Allu     |
+| Arjun   | Allu     |
+| Bella   | swan     |
+| emma    | watson   |
+| misty   | argarwal |
+| abir    | rajvansh |
+| abir    | rajvansh |
+| shahier | sheik    |
++---------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname from employee,dependent where ssn=emp_ssn group by ssn;
++---------+----------+
+| fname   | lname    |
++---------+----------+
+| Harry   | potter   |
+| Arjun   | Allu     |
+| Bella   | swan     |
+| emma    | watson   |
+| misty   | argarwal |
+| abir    | rajvansh |
+| shahier | sheik    |
++---------+----------+
+7 rows in set (0.00 sec)
+
+mysql> select fname,lname,dname from employee,department,dependent where ssn=manager_ssn and ssn=emp_ssn ;
++-------+--------+---------+
+| fname | lname  | dname   |
++-------+--------+---------+
+| Harry | potter | jacob   |
+| Harry | potter | rajesh  |
+| Arjun | Allu   | sailu   |
+| Arjun | Allu   | lokesh  |
+| emma  | watson | mounski |
++-------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,workson where pid In(11,14,13) and ssn=wssn;
+ERROR 1054 (42S22): Unknown column 'pid' in 'where clause'
+mysql> select E.* from employee E,workson,project where pid In(11,14,13) and ssn=wssn;
++-----+--------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname  | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+--------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice  | cullen   | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 160 | Alice  | cullen   | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 160 | Alice  | cullen   | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 161 | Edward | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 163 | Arjun  | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 163 | Arjun  | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 163 | Arjun  | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 164 | Bella  | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 166 | emma   | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 168 | abir   | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
++-----+--------+----------+------------+--------+--------+------+--------+------+
+30 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,workson,project where pid In(11,14,13) and ssn=wssn and pid=prid;
++-----+-------+--------+------------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+------------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 166 | emma  | watson | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 163 | Arjun | Allu   | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella | swan   | vijayawada | f      | 109000 |   21 |      4 |  167 |
++-----+-------+--------+------------+--------+--------+------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select E.* from employee E,workson where prid In(11,14,13) and ssn=wssn;
++-----+-------+--------+------------+--------+--------+------+--------+------+
+| ssn | Fname | Lname  | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+-------+--------+------------+--------+--------+------+--------+------+
+| 160 | Alice | cullen | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 163 | Arjun | Allu   | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella | swan   | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 166 | emma  | watson | sklm       | f      | 189870 |   25 |      5 |  164 |
++-----+-------+--------+------------+--------+--------+------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> select fname as manager from employee,department,dependent where ssn=manager_ssn and ssn=emp_ssn having count(ssn)>1;
++---------+
+| manager |
++---------+
+| Harry   |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select fname as manager from employee,department,dependent where ssn=manager_ssn and ssn=emp_ssn having count(emp_ssn)>1;
++---------+
+| manager |
++---------+
+| Harry   |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select fname as manager from employee,department,dependent where ssn=manager_ssn and ssn=emp_ssn group by ssn having count(emp_ssn)>1;
++---------+
+| manager |
++---------+
+| Harry   |
+| Arjun   |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where exists(select emp_ssn from employee, dependent where ssn=emp_ssn);
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+| 160 | Alice   | cullen   | hyd        | f      | 145304 |   20 |      1 |  165 |
+| 161 | Edward  | cullen   | hyd        | M      | 119000 |   22 |      2 |  161 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |
+| 165 | lancy   | meon     | vijayawada | f      | 109870 |   21 |      5 |  166 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |
+| 167 | misty   | argarwal | begurule   | f      | 224654 |   25 |      1 |  164 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |
++-----+---------+----------+------------+--------+--------+------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee where exists(select emp_ssn from dependent where ssn=emp_ssn) and emp_ssn=ssn;
+ERROR 1054 (42S22): Unknown column 'emp_ssn' in 'where clause'
+mysql> select * from employee,dependent where exists(select emp_ssn from dependent where ssn=emp_ssn) and emp_ssn=ssn;
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN | did  | dname   | address | emp_ssn |
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |   40 | jacob   | nuzvid  |     162 |
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |   49 | rajesh  | gudivda |     162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |   45 | sailu   | JRG     |     163 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |   48 | lokesh  | gudivda |     163 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |   44 | sasi    | eluru   |     164 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |   43 | mounski | eluru   |     166 |
+| 167 | misty   | argarwal | begurule   | f      | 224654 |   25 |      1 |  164 |   42 | janu    | hyd     |     167 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |   46 | lucy    | JRG     |     168 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |   47 | lovely  | JRG     |     168 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |   41 | jessy   | araku   |     169 |
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee,dependent where exists(select emp_ssn from dependent where ssn=emp_ssn) and emp_ssn=ssn group by ssn; 
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN | did  | dname   | address | emp_ssn |
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |   40 | jacob   | nuzvid  |     162 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |   45 | sailu   | JRG     |     163 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |   44 | sasi    | eluru   |     164 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |   43 | mounski | eluru   |     166 |
+| 167 | misty   | argarwal | begurule   | f      | 224654 |   25 |      1 |  164 |   42 | janu    | hyd     |     167 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |   46 | lucy    | JRG     |     168 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |   41 | jessy   | araku   |     169 |
++-----+---------+----------+------------+--------+--------+------+--------+------+------+---------+---------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select dept_name,dept_no,count(ssn) as no_of_employee where deptno=dept_no;
+ERROR 1054 (42S22): Unknown column 'dept_name' in 'field list'
+mysql> select dept_name,dept_no,count(ssn) as no_of_employee from employee,department where deptno=dept_no;
++-----------+---------+----------------+
+| dept_name | dept_no | no_of_employee |
++-----------+---------+----------------+
+| cse       |       1 |             10 |
++-----------+---------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select dept_name,dept_no,count(ssn) as no_of_employee from employee,department where deptno=dept_no group by Dept_name;
++-----------+---------+----------------+
+| dept_name | dept_no | no_of_employee |
++-----------+---------+----------------+
+| cse       |       1 |              3 |
+| ece       |       2 |              2 |
+| mech      |       3 |              1 |
+| che       |       4 |              2 |
+| mme       |       5 |              2 |
++-----------+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select E.*,count(emp_ssn) as no_of_dependent from employee,dependent where ssn=emp_ssn;
+ERROR 1051 (42S02): Unknown table 'E'
+mysql> select E.*,count(emp_ssn) as no_of_dependent from employee E,dependent where ssn=emp_ssn;
++-----+-------+--------+---------+--------+--------+------+--------+------+-----------------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN | no_of_dependent |
++-----+-------+--------+---------+--------+--------+------+--------+------+-----------------+
+| 162 | Harry | potter | jaipur  | M      | 189000 |   19 |      3 |  162 |              10 |
++-----+-------+--------+---------+--------+--------+------+--------+------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select E.*,count(emp_ssn) as no_of_dependent from employee E,dependent where ssn=emp_ssn group by ssn;
++-----+---------+----------+------------+--------+--------+------+--------+------+-----------------+
+| ssn | Fname   | Lname    | Address    | gender | salary | Age  | Deptno | SSSN | no_of_dependent |
++-----+---------+----------+------------+--------+--------+------+--------+------+-----------------+
+| 162 | Harry   | potter   | jaipur     | M      | 189000 |   19 |      3 |  162 |               2 |
+| 163 | Arjun   | Allu     | chennai    | M      | 199000 |   24 |      4 |  167 |               2 |
+| 164 | Bella   | swan     | vijayawada | f      | 109000 |   21 |      4 |  167 |               1 |
+| 166 | emma    | watson   | sklm       | f      | 189870 |   25 |      5 |  164 |               1 |
+| 167 | misty   | argarwal | begurule   | f      | 224654 |   25 |      1 |  164 |               1 |
+| 168 | abir    | rajvansh | begurule   | m      | 224654 |   25 |      1 |  163 |               2 |
+| 169 | shahier | sheik    | delhi      | m      | 179870 |   25 |      2 |  161 |               1 |
++-----+---------+----------+------------+--------+--------+------+--------+------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> select fname,lname,salary from employee,department where salary>(select max(salary) from employee,departmnet where dept_no=deptno and deptnno=3);
+ERROR 1146 (42S02): Table 'practice.departmnet' doesn't exist
+mysql> select fname,lname,salary from employee,department where salary>(select max(salary) from employee,department where dept_no=deptno and deptnno=3);
+ERROR 1054 (42S22): Unknown column 'deptnno' in 'where clause'
+mysql> select fname,lname,salary from employee,department where salary>(select max(salary) from employee,department where dept_no=deptno and deptno=3);
++-------+----------+--------+
+| fname | lname    | salary |
++-------+----------+--------+
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
++-------+----------+--------+
+20 rows in set (0.00 sec)
+
+mysql> select fname,lname,salary from employee,department where salary>(select max(salary) from employee,department where  deptno=3);
++-------+----------+--------+
+| fname | lname    | salary |
++-------+----------+--------+
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
++-------+----------+--------+
+20 rows in set (0.00 sec)
+
+mysql> select fname,lname,salary from employee where salary>(select max(salary) from employee,department where  deptno=3);
++-------+----------+--------+
+| fname | lname    | salary |
++-------+----------+--------+
+| Arjun | Allu     | 199000 |
+| emma  | watson   | 189870 |
+| misty | argarwal | 224654 |
+| abir  | rajvansh | 224654 |
++-------+----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where ssn is null;
+Empty set (0.00 sec)
+
+mysql> select * from employee ,department where dept_no=deptno and dept_name='cse' and lname like "%ll%";
++-----+-------+--------+---------+--------+--------+------+--------+------+---------+-----------+-------------+---------------+
+| ssn | Fname | Lname  | Address | gender | salary | Age  | Deptno | SSSN | dept_no | dept_name | manager_ssn | starting_date |
++-----+-------+--------+---------+--------+--------+------+--------+------+---------+-----------+-------------+---------------+
+| 160 | Alice | cullen | hyd     | f      | 145304 |   20 |      1 |  165 |       1 | cse       |         165 | 28_08_1998    |
++-----+-------+--------+---------+--------+--------+------+--------+------+---------+-----------+-------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname from employee where exists(select emp_ssn from employee,dependent where ssn=emp_ssn) and exists(select manager_ssn from departmnet where manager_ssn=ssn); 
+ERROR 1146 (42S02): Table 'practice.departmnet' doesn't exist
+mysql> select fname,lname from employee where exists(select emp_ssn from employee,dependent where ssn=emp_ssn) and exists(select manager_ssn from department where manager_ssn=ssn); 
++--------+--------+
+| fname  | lname  |
++--------+--------+
+| Edward | cullen |
+| Harry  | potter |
+| Arjun  | Allu   |
+| lancy  | meon   |
+| emma   | watson |
++--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname ,sum(hours) from employee,workson where ssn=wssn and pid=prid ;
+ERROR 1054 (42S22): Unknown column 'pid' in 'where clause'
+mysql> select fname,lname ,sum(hours) from employee,workson where ssn=wssn ;
++-------+--------+------------+
+| fname | lname  | sum(hours) |
++-------+--------+------------+
+| Alice | cullen |         87 |
++-------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname ,sum(hours) from employee,workson where ssn=wssn group by ssn ;    
++--------+----------+------------+
+| fname  | lname    | sum(hours) |
++--------+----------+------------+
+| Alice  | cullen   |          8 |
+| Edward | cullen   |         14 |
+| Arjun  | Allu     |          5 |
+| Bella  | swan     |         20 |
+| emma   | watson   |         23 |
+| abir   | rajvansh |         17 |
++--------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select fname,lname ,sum(hours) from employee,workson where ssn=wssn group by wssn ;    
++--------+----------+------------+
+| fname  | lname    | sum(hours) |
++--------+----------+------------+
+| Alice  | cullen   |          8 |
+| Edward | cullen   |         14 |
+| Arjun  | Allu     |          5 |
+| Bella  | swan     |         20 |
+| emma   | watson   |         23 |
+| abir   | rajvansh |         17 |
++--------+----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select count(sssn) as no_of_supervisors from employee where ssn=sssn;
++-------------------+
+| no_of_supervisors |
++-------------------+
+|                 2 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select count( distinct sssn) as no_of_supervisors from employee;
++-------------------+
+| no_of_supervisors |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct gender from employee group by gender;
++--------+
+| gender |
++--------+
+| f      |
+| M      |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select count(distinct gender) from employee group by gender;
++------------------------+
+| count(distinct gender) |
++------------------------+
+|                      1 |
+|                      1 |
++------------------------+
+2 rows in set (0.00 sec)
+
+mysql> select count( gender) from employee group by gender;
++----------------+
+| count( gender) |
++----------------+
+|              5 |
+|              5 |
++----------------+
+2 rows in set (0.00 sec)
+
+mysql> select gender,count( gender) from employee group by gender;
++--------+----------------+
+| gender | count( gender) |
++--------+----------------+
+| f      |              5 |
+| M      |              5 |
++--------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select gender,count( ssn) from employee group by gender;
++--------+-------------+
+| gender | count( ssn) |
++--------+-------------+
+| f      |           5 |
+| M      |           5 |
++--------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select fname,lname from employee where salary>(select avg(salary) from employee);
++---------+----------+
+| fname   | lname    |
++---------+----------+
+| Harry   | potter   |
+| Arjun   | Allu     |
+| emma    | watson   |
+| misty   | argarwal |
+| abir    | rajvansh |
+| shahier | sheik    |
++---------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee ssn is null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'is null' at line 1
+mysql> select * from employee where ssn is null;
+Empty set (0.00 sec)
+
+mysql> select upper(fname) as FNAME_UPPER ,lower(lname) as LNAME_NAME from employee;
++-------------+------------+
+| FNAME_UPPER | LNAME_NAME |
++-------------+------------+
+| ALICE       | cullen     |
+| EDWARD      | cullen     |
+| HARRY       | potter     |
+| ARJUN       | allu       |
+| BELLA       | swan       |
+| LANCY       | meon       |
+| EMMA        | watson     |
+| MISTY       | argarwal   |
+| ABIR        | rajvansh   |
+| SHAHIER     | sheik      |
++-------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select substring(fname,1,3) from employee;
++----------------------+
+| substring(fname,1,3) |
++----------------------+
+| Ali                  |
+| Edw                  |
+| Har                  |
+| Arj                  |
+| Bel                  |
+| lan                  |
+| emm                  |
+| mis                  |
+| abi                  |
+| sha                  |
++----------------------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,locate('c',fname) from employee where fname='alice';
++-------+-------------------+
+| fname | locate('c',fname) |
++-------+-------------------+
+| Alice |                 4 |
++-------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select * ,length(fname) from  employee where length(lname)>5;
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+| ssn | Fname  | Lname    | Address  | gender | salary | Age  | Deptno | SSSN | length(fname) |
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+| 160 | Alice  | cullen   | hyd      | f      | 145304 |   20 |      1 |  165 |             5 |
+| 161 | Edward | cullen   | hyd      | M      | 119000 |   22 |      2 |  161 |             6 |
+| 162 | Harry  | potter   | jaipur   | M      | 189000 |   19 |      3 |  162 |             5 |
+| 166 | emma   | watson   | sklm     | f      | 189870 |   25 |      5 |  164 |             4 |
+| 167 | misty  | argarwal | begurule | f      | 224654 |   25 |      1 |  164 |             5 |
+| 168 | abir   | rajvansh | begurule | m      | 224654 |   25 |      1 |  163 |             4 |
++-----+--------+----------+----------+--------+--------+------+--------+------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select concate(fname,'.',lname) as first_last_name  from employee;
+ERROR 1305 (42000): FUNCTION practice.concate does not exist
+mysql> select concat(fname,'.',lname) as first_last_name  from employee;
++-----------------+
+| first_last_name |
++-----------------+
+| Alice.cullen    |
+| Edward.cullen   |
+| Harry.potter    |
+| Arjun.Allu      |
+| Bella.swan      |
+| lancy.meon      |
+| emma.watson     |
+| misty.argarwal  |
+| abir.rajvansh   |
+| shahier.sheik   |
++-----------------+
+10 rows in set (0.00 sec)
+
+mysql> update employee,department set start_date=date_add(starting_date,interval 25 days) where deptno=dept_no and dept_name='cse' and lname like "%ll%"
+    -> update employee,department set start_date=date_add(starting_date,interval 25 days) where deptno=dept_no and dept_name='cse' and lname like "%ll%";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days) where deptno=dept_no and dept_name='cse' and lname like "%ll%"
+update empl' at line 1
+mysql> update employee,department set start_date=date_add(starting_date,interval 25 day) where deptno=dept_no and dept_name='cse' and lname like "%ll%";
+ERROR 1054 (42S22): Unknown column 'start_date' in 'field list'
+mysql> update employee,department set starting_date=date_add(starting_date,interval 25 day) where deptno=dept_no and dept_name='cse' and lname like "%ll%";
+ERROR 1292 (22007): Incorrect datetime value: '28_08_1998'
+mysql> update employee,department set starting_date=date_add(starting_date,interval 25 day) where deptno=dept_no and dept_name='cse' and lname like "%ll%";
+ERROR 1292 (22007): Incorrect datetime value: '28_08_1998'
+mysql> update employee,department set starting_date=date_add(starting_date,interval 25 day) where ssn=manager_ssn and dept_name='cse' and lname like "%ll%";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee,department set starting_date=date_add(starting_date,interval 25 day) where ssn=manager_ssn and dept_name='ece';
+ERROR 1292 (22007): Incorrect datetime value: '8_11_1998'
+mysql> update employee,department set starting_date=date_add(starting_date,interval 25 day) where ssn=manager_ssn and dept_name='ece' and fname like "%ll %";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from department;
++---------+-----------+-------------+---------------+
+| dept_no | dept_name | manager_ssn | starting_date |
++---------+-----------+-------------+---------------+
+|       1 | cse       |         165 | 28_08_1998    |
+|       2 | ece       |         161 | 8_11_1998     |
+|       3 | mech      |         162 | 18_06_1998    |
+|       4 | che       |         163 | 11_07_1998    |
+|       5 | mme       |         166 | 15_01_1998    |
++---------+-----------+-------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> select sum(salary) as sum_salary,max(salary) as max_salary,min as min(salary) avg(salary) as salary from employee,department where deptno=dept_no group by dept_name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'min(salary) avg(salary) as salary from employee,department where deptno=dept_no ' at line 1
+mysql> select sum(salary) as sum_salary,max(salary) as max_salary,min(salary) as min_salary, avg(salary) as avg_salary from employee,department where deptno=dept_no group by dept_name;
++------------+------------+------------+-------------+
+| sum_salary | max_salary | min_salary | avg_salary  |
++------------+------------+------------+-------------+
+|     594612 |     224654 |     145304 | 198204.0000 |
+|     298870 |     179870 |     119000 | 149435.0000 |
+|     189000 |     189000 |     189000 | 189000.0000 |
+|     308000 |     199000 |     109000 | 154000.0000 |
+|     299740 |     189870 |     109870 | 149870.0000 |
++------------+------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept_name,sum(salary) as sum_salary,max(salary) as max_salary,min(salary) as min_salary, avg(salary) as avg_salary from employee,department where deptno=dept_no group by dept_name;
++-----------+------------+------------+------------+-------------+
+| dept_name | sum_salary | max_salary | min_salary | avg_salary  |
++-----------+------------+------------+------------+-------------+
+| cse       |     594612 |     224654 |     145304 | 198204.0000 |
+| ece       |     298870 |     179870 |     119000 | 149435.0000 |
+| mech      |     189000 |     189000 |     189000 | 189000.0000 |
+| che       |     308000 |     199000 |     109000 | 154000.0000 |
+| mme       |     299740 |     189870 |     109870 | 149870.0000 |
++-----------+------------+------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept_name ,count(pid) from department,project where dept_no=deptno group by deptno;
++-----------+------------+
+| dept_name | count(pid) |
++-----------+------------+
+| cse       |          2 |
+| ece       |          2 |
+| mech      |          2 |
+| che       |          3 |
+| mme       |          1 |
++-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept_name ,count(pid) from department,project where dept_no=deptno group by dept_name;
++-----------+------------+
+| dept_name | count(pid) |
++-----------+------------+
+| cse       |          2 |
+| ece       |          2 |
+| mech      |          2 |
+| che       |          3 |
+| mme       |          1 |
++-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,dname from employee,dependent where ssn=emp_ssn group by ssn;
++---------+---------+
+| fname   | dname   |
++---------+---------+
+| Harry   | jacob   |
+| shahier | jessy   |
+| misty   | janu    |
+| emma    | mounski |
+| Bella   | sasi    |
+| Arjun   | sailu   |
+| abir    | lucy    |
++---------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select fname as manager from  employee where ssn In(select manager_ssn from  employee ,department where dept_no=deptno group by dept_name having count(ssn)>2);
++---------+
+| manager |
++---------+
+| lancy   |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select fname,lname,address,salary from employee order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select fname,lname,address,salary from employee order by decs;
+ERROR 1054 (42S22): Unknown column 'decs' in 'order clause'
+mysql> select fname,lname,address,salary from employee order by ssn desc;
++---------+----------+------------+--------+
+| fname   | lname    | address    | salary |
++---------+----------+------------+--------+
+| shahier | sheik    | delhi      | 179870 |
+| abir    | rajvansh | begurule   | 224654 |
+| misty   | argarwal | begurule   | 224654 |
+| emma    | watson   | sklm       | 189870 |
+| lancy   | meon     | vijayawada | 109870 |
+| Bella   | swan     | vijayawada | 109000 |
+| Arjun   | Allu     | chennai    | 199000 |
+| Harry   | potter   | jaipur     | 189000 |
+| Edward  | cullen   | hyd        | 119000 |
+| Alice   | cullen   | hyd        | 145304 |
++---------+----------+------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select fname,lname,address,salary from employee order by ssn desc limit 5;
++---------+----------+------------+--------+
+| fname   | lname    | address    | salary |
++---------+----------+------------+--------+
+| shahier | sheik    | delhi      | 179870 |
+| abir    | rajvansh | begurule   | 224654 |
+| misty   | argarwal | begurule   | 224654 |
+| emma    | watson   | sklm       | 189870 |
+| lancy   | meon     | vijayawada | 109870 |
++---------+----------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!

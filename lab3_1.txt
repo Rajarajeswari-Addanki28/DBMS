@@ -1,0 +1,139 @@
+mysql> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| sakila             |
+| sys                |
++--------------------+
+10 rows in set (0.73 sec)
+
+mysql> select *from iiitsklm
+    -> select *from iiitsklm;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select *from iiitsklm' at line 2
+mysql> select *from iiitsklm;
+ERROR 1046 (3D000): No database selected
+mysql> select *from food;
+ERROR 1046 (3D000): No database selected
+mysql> use iiitsklm
+Database changed
+mysql> select *from iiitsklm;
+ERROR 1146 (42S02): Table 'iiitsklm.iiitsklm' doesn't exist
+mysql> use food
+Database changed
+mysql> select *from food;
+ERROR 1146 (42S02): Table 'food.food' doesn't exist
+mysql> select *from food_items
+    -> select *from food_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select *from food_items' at line 2
+mysql> select *from food_items;
+ERROR 1146 (42S02): Table 'food.food_items' doesn't exist
+mysql> select *from students;
+ERROR 1146 (42S02): Table 'food.students' doesn't exist
+mysql> use iiitsklm;
+Database changed
+mysql> select *from students;
+ERROR 1146 (42S02): Table 'iiitsklm.students' doesn't exist
+mysql> select *from student;
++---------+--------+------+
+| sid     | sname  | cgpa |
++---------+--------+------+
+| s160545 | swathi |  9.8 |
+| s160570 | surya  |  9.7 |
+| s160743 | gopika |  9.6 |
+| s160897 | sai    |  9.4 |
+| s160929 | divya  |  9.3 |
++---------+--------+------+
+5 rows in set (0.07 sec)
+
+mysql> create database rgukt;
+Query OK, 1 row affected (0.52 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| food               |
+| iiitnuzvid         |
+| iiitrkvalley       |
+| iiitsklm           |
+| information_schema |
+| mysql              |
+| nuzvid             |
+| performance_schema |
+| rgukt              |
+| sakila             |
+| sys                |
++--------------------+
+11 rows in set (0.02 sec)
+
+mysql> use rgukt;
+Database changed
+mysql> create table students(
+    -> id int not null,
+    -> LastNAme varchar(100) not null,
+    -> FirstName varchar(100),
+    -> Age int,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (1.43 sec)
+
+mysql> desc students
+    -> desc students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc students' at line 2
+mysql> desc students;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | int(11)      | NO   | PRI | NULL    |       |
+| LastNAme  | varchar(100) | NO   |     | NULL    |       |
+| FirstName | varchar(100) | YES  |     | NULL    |       |
+| Age       | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.14 sec)
+
+mysql> insert into students values(814,'ADDANK','RAJARAJESWARI',18);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> insert into students values(570,'MUNGARA','SURYA PRASANTHI',18);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into students values(929,'BEZAWADA','DIVYA',18);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into students values(545,'KOLLI','SWATHI',18);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into students values(879,'T','SAI DURGA',18);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into students values(743,'ULAVALA','GOPIKA',18);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select *from students;
++-----+----------+-----------------+------+
+| id  | LastNAme | FirstName       | Age  |
++-----+----------+-----------------+------+
+| 545 | KOLLI    | SWATHI          |   18 |
+| 570 | MUNGARA  | SURYA PRASANTHI |   18 |
+| 743 | ULAVALA  | GOPIKA          |   18 |
+| 814 | ADDANK   | RAJARAJESWARI   |   18 |
+| 879 | T        | SAI DURGA       |   18 |
+| 929 | BEZAWADA | DIVYA           |   18 |
++-----+----------+-----------------+------+
+6 rows in set (0.00 sec)
+
+mysql> create table marks(
+    -> subid int not null,
+    -> create table marks(
+    -> Terminal close -- exit!
